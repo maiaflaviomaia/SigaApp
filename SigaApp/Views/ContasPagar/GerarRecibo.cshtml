@@ -1,0 +1,64 @@
+﻿@model SigaApp.Models.Entidades.ContaPagar
+
+@{
+    Layout = null;
+}
+
+<style type="text/css">
+    body {
+        padding-top: 60px;
+        font-size: 12px;
+        color: #444444;
+        font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+</style>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGA - Gestão Audiovisual</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    
+</head>
+<body>
+    <header class="text-right text-sm-right">
+        <h6>@Model.Empresa.RazaoSocial</h6>
+        <h6>@Model.Empresa.Endereco</h6>
+        <h6>@Model.Empresa.CNPJ</h6>
+        <h6>@Model.Empresa.TelefoneFixo</h6>
+        <hr />
+    </header>
+
+    <div class="row text-center mt-4 mb-5">
+        <div class="col">
+            <h4><b>RECIBO DE PAGAMENTO</b></h4>
+        </div>
+    </div>
+
+
+    <h6>Data: @DateTime.Now.Date.ToString("dd/MM/yyyy")</h6>
+    <h6>Recibo: @Model.ContasPagarID</h6>
+
+
+    <div class="row mt-5">
+        <div class="col-lg-12">
+            <p>
+                Declaramos para os devidos fins que recebemos de <b>@Model.Empresa.RazaoSocial</b>, inscrito no CNPJ sob o número de @Model.Empresa.CNPJ,
+                a importância de <b>R$ @Model.ValorPago</b> (@Model.ValorPorExtenso) referente à prestação de serviços de <b>@Model.Descricao</b>.
+            </p>
+            <p>Pelo qual damos plena e total quitação referente ao débito acima citado.</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-12">
+            <h6>Atenciosamente,</h6>
+            <h6>@Model.Fornecedor.RazaoSocial</h6>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

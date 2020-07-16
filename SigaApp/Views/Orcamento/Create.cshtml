@@ -1,0 +1,505 @@
+﻿@model SigaApp.Models.Entidades.Orcamento
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Cadastrar Orçamento</div>
+            <div class="panel-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <h5 class="mt-3">Dados Básicos</h5>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="TipoOrcamento" class="control-label"></label>
+                            <select asp-for="TipoOrcamento" class="form-control " id="tipoOrcamento" onchange="MontarLayout();">
+                                <option value="">-- Selecione --</option>
+                                <option value="Audio">Áudio</option>
+                                <option value="Video">Vídeo</option>
+                                <option value="Publicidade">Publicitário</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3 mb-3" id="statusOrc" style="display:none">
+                            <label asp-for="StatusOrcamento" class="control-label"></label>
+                            <input asp-for="StatusOrcamento" class="form-control " value="0" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3" id="dataOrc" style="display:none">
+                            <label asp-for="DataOrcamento" class="control-label"></label>
+                            <input asp-for="DataOrcamento" class="form-control  datepicker" />
+                            <span asp-validation-for="DataOrcamento" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3" id="dataVal" style="display:none">
+                            <label asp-for="DataValidade" class="control-label"></label>
+                            <input asp-for="DataValidade" class="form-control  datepicker" />
+                            <span asp-validation-for="DataValidade" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3" id="cliente" style="display:none">
+                            <label asp-for="ClienteID" class="control-label"></label>
+                            <div class="input-group">
+                                <select asp-for="ClienteID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaClientes, "ClienteID", "RazaoSocial"))">
+                                    <option value="">-- Selecione --</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="right" title="Adicionar Cliente" onclick="MostrarModalOrc();"> + </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3" id="solicitante" style="display:none">
+                            <label asp-for="Solicitante" class="control-label"></label>
+                            <input asp-for="Solicitante" class="form-control " />
+                            <span asp-validation-for="Solicitante" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3" id="titulo" style="display:none">
+                            <label asp-for="Titulo" class="control-label"></label>
+                            <input asp-for="Titulo" class="form-control " />
+                            <span asp-validation-for="Titulo" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3" id="nomePeca" style="display:none">
+                            <label asp-for="NomePeca" class="control-label"></label>
+                            <input asp-for="NomePeca" class="form-control " />
+                            <span asp-validation-for="NomePeca" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3" id="tipoVeiculacao" style="display:none">
+                            <label asp-for="TipoVeiculacao" class="control-label"></label>
+                            <select asp-for="TipoVeiculacao" class="form-control ">
+                                <option value="">-- Selecione --</option>
+                                <option value="Local">Local</option>
+                                <option value="Regional">Regional</option>
+                                <option value="Nacional">Nacional</option>
+                                <option value="Internacional">Internacional</option>
+                                <option value="Global">Global</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3" id="pracaVeiculacao" style="display:none">
+                            <label asp-for="PracaVeiculacao" class="control-label"></label>
+                            <input asp-for="PracaVeiculacao" class="form-control " />
+                            <span asp-validation-for="PracaVeiculacao" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3" id="duracao" style="display:none">
+                            <label asp-for="DuracaoPeca" class="control-label"></label>
+                            <select asp-for="DuracaoPeca" class="form-control ">
+                                <option value="">-- Selecione --</option>
+                                <option value="15 segundos">15 segundos</option>
+                                <option value="30 segundos">30 segundos</option>
+                                <option value="45 segundos">45 segundos</option>
+                                <option value="60 segundos">60 segundos</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                            <span asp-validation-for="DuracaoPeca" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-2" id="periodoVeiculacao" style="display:none">
+                            <label asp-for="PeriodoVeiculacao" class="control-label"></label>
+                            <select asp-for="PeriodoVeiculacao" class="form-control ">
+                                <option value="">-- Selecione --</option>
+                                <option value="30 dias">30 dias</option>
+                                <option value="60 dias">60 dias</option>
+                                <option value="90 dias">90 dias</option>
+                                <option value="120 dias">120 dias</option>
+                                <option value="Indeterminado">Indeterminado</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                            <span asp-validation-for="PeriodoVeiculacao" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-9 mb-3" id="tipoMidia" style="display:none">
+                            <label asp-for="TipoMidia" class="control-label"></label>
+                            <input asp-for="TipoMidia" class="form-control " />
+                            <span asp-validation-for="TipoMidia"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3" id="observacoes" style="display:none">
+                            <label asp-for="Observacoes" class="control-label"></label>
+                            <textarea asp-for="Observacoes" class="form-control "></textarea>
+                            <span asp-validation-for="Observacoes"></span>
+                        </div>
+                    </div>
+
+                    <hr />
+                    
+                    <div class="row" id="servico" style="display:none">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Serviços
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-9 mb-3">
+                                            <label class="control-label">Serviço Prestado</label>
+                                            <select class="form-control " id="servicoSelecionado">
+                                                <option value="">-- Selecione --</option>
+                                                @{
+                                                    foreach (var item in ViewBag.ListaServicos)
+                                                    {
+                                                        <option value="@item.ServicoPrestadoID">@item.Descricao | @item.ValorUnitario</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2 mb-3">
+                                            <label class="control-label">Quantidade</label>
+                                            <input class="form-control " value="1" type="number" id="txtQuantidade" />
+                                        </div>
+
+                                        <div class="col-md-1 mb-3" style="margin-top:18px">
+                                            <button type="button" class="btn btn-block btn-info" onclick="AdicionarServico()"><strong>+</strong></button>
+                                        </div>
+                                    </div>
+                                    <textarea asp-for="ServicosJSON" id="listaServicosJSON" style="display:none"></textarea>
+
+                                    <div class="row mb-3">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <td class="text-center"><b>ID</b></td>
+                                                    <td class="text-center"><b>Serviço</b></td>
+                                                    <td class="text-center"><b>Quantidade</b></td>
+                                                    <td class="text-center"><b>Valor Unitário</b></td>
+                                                    <td class="text-center"><b>Total</b></td>
+                                                    <td class="text-center"></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="listaServicos"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--SERVIÇOS-->
+                    <div class="panel panel-default" id="servico" style="display:none">
+                        <div class="panel-heading">
+                            <h5>Serviços - </h5>
+                            <h5 style="margin-left:5px; font-size:15px; margin-top:5px;color:red">R$ </h5>
+                            <h5 id="divTotal" style="margin-left:5px; font-size:15px; margin-top:5px;color:red">0.00</h5>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-9 mb-3">
+                                    <label class="control-label">Serviço Prestado</label>
+                                    <select class="form-control " id="servicoSelecionado">
+                                        <option value="">-- Selecione --</option>
+                                        @{
+                                            foreach (var item in ViewBag.ListaServicos)
+                                            {
+                                                <option value="@item.ServicoPrestadoID">@item.Descricao | @item.ValorUnitario</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label class="control-label">Quantidade</label>
+                                    <input class="form-control " value="1" type="number" id="txtQuantidade" />
+                                </div>
+
+                                <div class="col-md-1 mb-3" style="margin-top:28px">
+                                    <button type="button" class="btn btn-block btn-outline-info" onclick="AdicionarServico()"><strong>+</strong></button>
+                                </div>
+                            </div>
+
+                            <textarea asp-for="ServicosJSON" id="listaServicosJSON" style="display:none"></textarea>
+
+                            <div class="row mb-3">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <td class="text-center"><b>ID</b></td>
+                                            <td class="text-center"><b>Serviço</b></td>
+                                            <td class="text-center"><b>Quantidade</b></td>
+                                            <td class="text-center"><b>Valor Unitário</b></td>
+                                            <td class="text-center"><b>Total</b></td>
+                                            <td class="text-center"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listaServicos"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <!--FORNECEDORES-->
+                    <div class="card" id="fornecedor" style="display:none">
+                        <div class="card-header">
+                            <div class="row">
+                                <h5>Fornecedores - </h5>
+                                <h5 style="margin-left:5px; font-size:15px; margin-top:5px;color:red">R$ </h5>
+                                <h5 id="divTotalFornecedores" style="margin-left:5px; font-size:15px; margin-top:5px;color:red">0.00</h5>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label>Fornecedor</label>
+                                    <select class="form-control" id="fornecedorSelecionado" asp-items="@(new SelectList(ViewBag.ListaFornecedor, "FornecedorID", "RazaoSocial"))">
+                                        <option value="">-- Selecione --</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Descrição</label>
+                                    <input class="form-control" id="txtDescricaoFornecedor" />
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Quantidade</label>
+                                    <input class="form-control" id="txtQuantidadeFornecedor" type="number" value="1" />
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Valor Unitário</label>
+                                    <input class="form-control valor" id="txtValorUnitarioForncedor" />
+                                </div>
+
+                                <div class="col-md-1 mb-3" style="margin-top:28px">
+                                    <button type="button" class="btn btn-block btn-outline-info" onclick="AdicionarFornecedor()"><strong>+</strong></button>
+                                </div>
+                            </div>
+
+                            <textarea asp-for="FornecedoresJSON" id="listaFornecedoresJSON" style="display:none"></textarea>
+
+                            <div class="row mb-3">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <td class="text-center"><b>ID</b></td>
+                                            <td class="text-center"><b>Fornecedor</b></td>
+                                            <td class="text-center"><b>Descrição</b></td>
+                                            <td class="text-center"><b>Quantidade</b></td>
+                                            <td class="text-center"><b>Valor Unitário</b></td>
+                                            <td class="text-center"><b>Valor Total</b></td>
+                                            <td class="text-center"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listaFornecedores"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <!--CUSTOS DE PRODUÇÃO-->
+                    <div class="card mb-3" id="custo" style="display:none">
+                        <div class="card-header">
+                            <div class="row">
+                                <h5>Custos de Produção - </h5>
+                                <h5 style="margin-left:5px; font-size:15px; margin-top:5px;color:red">R$ </h5>
+                                <h5 id="divTotalProducao" style="margin-left:5px; font-size:15px; margin-top:5px; color:red">0.00</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <label>Descrição</label>
+                                    <input class="form-control " id="txtDescricaoCusto" />
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Quantidade</label>
+                                    <input class="form-control " id="txtQuantidadeCusto" type="number" value="1" />
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Unidade</label>
+                                    <select class="form-control " id="txtUnidadeCusto">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="Cachê">Cachê</option>
+                                        <option value="Hora">Hora</option>
+                                        <option value="Unidade">Unidade</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Valor Unitário</label>
+                                    <input class="form-control  valor" id="txtValorUnitarioCusto" />
+                                </div>
+
+                                <div class="col-md-1 mb-3" style="margin-top:28px">
+                                    <button type="button" class="btn btn-block btn-outline-info" onclick="AdicionarCustoProducao()"><strong>+</strong></button>
+                                </div>
+                            </div>
+
+                            <textarea asp-for="CustoProducaoJSON" id="listaCustoProducaoJSON" style="display:none"></textarea>
+
+                            <div class="row mb-3">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <td class="text-center"><b>Descrição</b></td>
+                                            <td class="text-center"><b>Quantidade</b></td>
+                                            <td class="text-center"><b>Valor Unitário</b></td>
+                                            <td class="text-center"><b>Unidade</b></td>
+                                            <td class="text-center"><b>Valor Total</b></td>
+                                            <td class="text-center"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listaCustosProducao"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="blocoTotal" style="display:none">
+                        <div class="row" style="margin-left:1px" id="sub1">
+                            <h6 style="color:cornflowerblue">Subtotal 1 - </h6>
+                            <h6 id="txtSubTotal" style="margin-left:5px; font-size:15px; color:cornflowerblue">0.00</h6>
+                            <h6 style="margin-left:5px; font-size:12px; color:cornflowerblue; margin-top:2px">(Serviços + Fornecedores + Custos de Produção)</h6>
+                        </div>
+
+                        <div class="form-group row" id="lucro">
+                            <label asp-for="TaxaLucro" class="col-md-2 col-form-label col-form-label-sm"></label>
+                            <div class="col-md-2">
+                                <input asp-for="TaxaLucro" class="form-control  percent" id="txtLucro" oninput="SubTotal2();" />
+                            </div>
+                            <h6 id="valorLucro" style="font-size:12px; margin-top:12px">0.00</h6>
+                        </div>
+
+                        <div class="row" style="margin-left:1px; margin-bottom:7px" id="sub2">
+                            <h6 style="color:brown">Subtotal 2 - </h6>
+                            <h6 id="txtSubTotal2" style="margin-left:5px; font-size:15px; color:brown">0.00</h6>
+                            <h6 style="margin-left:5px; font-size:12px; color:brown; margin-top:2px">(Subtotal 1 + Lucro desejado)</h6>
+                        </div>
+
+                        <div class="form-group row" id="bv">
+                            <label asp-for="BonificacaoVeiculacao" class="col-md-2 col-form-label col-form-label-sm"></label>
+                            <div class="col-md-2">
+                                <input asp-for="BonificacaoVeiculacao" class="form-control  percent" id="txtBV" oninput="SomarTaxas();" />
+                            </div>
+                            <h6 id="valorBV" style="font-size:12px; margin-top:12px">0.00</h6>
+                        </div>
+
+                        <div class="form-group row" id="imposto">
+                            <label asp-for="TaxaImposto" class="col-md-2 col-form-label col-form-label-sm"></label>
+                            <div class="col-md-2">
+                                <input asp-for="TaxaImposto" class="form-control  percent" id="txtImposto" oninput="SomarTaxas();" />
+                            </div>
+                            <h6 id="valorImposto" style="font-size:12px; margin-top:12px">0.00</h6>
+                        </div>
+
+                        <div class="form-group row" id="comissao">
+                            <label asp-for="TaxaComissao" class="col-md-2 col-form-label col-form-label-sm"></label>
+                            <div class="col-md-2">
+                                <input asp-for="TaxaComissao" class="form-control  percent" id="txtComissao" oninput="SomarTaxas()" />
+                            </div>
+                            <h6 id="valorComissao" style="font-size:12px; margin-top:12px">0.00</h6>
+                        </div>
+
+                        <div class="form-group row" id="acrescimo">
+                            <label asp-for="Acrescimo" class="col-md-2 col-form-label col-form-label-sm"></label>
+                            <div class="col-md-2">
+                                <input asp-for="Acrescimo" class="form-control  money2" id="txtAcrescimo" oninput="TotalizarOrcamento();" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row" id="desconto">
+                            <label asp-for="Desconto" class="col-md-2 col-form-label col-form-label-sm"></label>
+                            <div class="col-md-2">
+                                <input asp-for="Desconto" class="form-control  money2" id="txtDesconto" oninput="TotalizarOrcamento();" />
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row" style="margin-left:1px" id="totalOrc">
+                            <h5 style="color:blue">Total Geral - </h5>
+                            <h5 id="divTotalOrcamento" style="margin-left:5px; font-size:18px; margin-top:3px; color:blue">0.00</h5>
+                        </div>
+
+                        <input asp-for="TotalOrcamento" id="txtTotalOrcamento" type="hidden" />
+
+                        <hr />
+                        <div class="form-group" id="botoes">
+                            <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                            <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="modal fade" id="modalClienteOrc" tabindex="-1" role="dialog" aria-labelledby="modalClienteLabelOrc" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalClienteLabelOrc">Adicionar Cliente</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="txtCliente" class="col-form-label">Razão Social:</label>
+                                        <input type="text" class="form-control" id="txtCliente">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-primary" id="btnSalvarClienteOrc">Salvar</button>
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function MostrarModalOrc() {
+            $(".modal").modal();
+
+            $("#btnSalvarClienteOrc").on('click', function () {
+                var txtCliente = $("#txtCliente").val();
+
+                $.ajax({
+                    url: "/Clientes/AdicionarCliente",
+                    method: "POST",
+                    data: { txtCliente: txtCliente },
+                    success: function (data) {
+                        if (!data) {
+                            $(".modal").modal('hide');
+                            $(".modal").modal('dispose');
+                            $("#btnSalvarClienteOrc").unbind('click');
+                            $("#txtCliente").val("");
+                            alert("Cliente já cadastrado");
+                            location.reload(true);
+                        }
+                        else location.reload(true);
+                    }
+                });
+            });
+        }
+    </script>
+}

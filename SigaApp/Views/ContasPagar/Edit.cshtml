@@ -1,0 +1,169 @@
+﻿@model SigaApp.Models.Entidades.ContaPagar
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Editar Conta a Pagar</div>
+            <div class="panel-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="ContasPagarID" />
+                    <input type="hidden" asp-for="DataCadastro" />
+                    <input type="hidden" asp-for="FlagAtivo" />
+                    <input type="hidden" asp-for="DataExclusao" />
+                    <input type="hidden" asp-for="EmpresaID" />
+                    <input type="hidden" asp-for="Status" />
+                    <input type="hidden" asp-for="ValorPago" />
+                    <input type="hidden" asp-for="OrcamentoID" />
+                    <input type="hidden" asp-for="FornecedorID" />
+                    <input type="hidden" asp-for="Recorrente" />
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="DataVencimento" class="control-label"></label>
+                            <input asp-for="DataVencimento" class="form-control " />
+                            <span asp-validation-for="DataVencimento" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="Competencia" class="control-label"></label>
+                            <input asp-for="Competencia" class="form-control " />
+                            <span asp-validation-for="Competencia" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FornecedorID" class="control-label"></label>
+                            <input class="form-control " value="@Model.Fornecedor.RazaoSocial" readonly />
+                            <span asp-validation-for="FornecedorID" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="TipoDocumento" class="control-label"></label>
+                            <select asp-for="TipoDocumento" class="form-control ">
+                                <option value="">-- Selecione --</option>
+                                <option value="0">Nota Fiscal</option>
+                                <option value="1">Cupom Fiscal</option>
+                                <option value="2">Documento Fiscal</option>
+                                <option value="3">Recibo</option>
+                                <option value="4">Comprovante</option>
+                            </select>
+                            <span asp-validation-for="TipoDocumento" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="NumeroDocumento" class="control-label"></label>
+                            <input asp-for="NumeroDocumento" class="form-control " />
+                            <span asp-validation-for="NumeroDocumento" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="CentroDeCustoID" class="control-label"></label>
+                            <select asp-for="CentroDeCustoID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaCentroDeCusto, "CentroCustoID", "Nome"))">
+                                <option value="">-- Selecione --</option>
+                            </select>
+                            <span asp-validation-for="CentroDeCustoID" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="FormaPagamento" class="control-label"></label>
+                            <select asp-for="FormaPagamento" class="form-control ">
+                                <option value="">-- Selecione --</option>
+                                <option value="0">Dinheiro</option>
+                                <option value="1">Cheque</option>
+                                <option value="2">Débito em Conta</option>
+                                <option value="3">Boleto</option>
+                                <option value="4">Transferência Bancária</option>
+                                <option value="5">Cartão de Crétido</option>
+                                <option value="6">Cartão de Débito</option>
+                            </select>
+                            <span asp-validation-for="FormaPagamento" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="CategoriaID" class="control-label"></label>
+                            <select id="categoria" asp-for="CategoriaID" onchange="CarregarSubCategorias();" class="form-control " asp-items="@(new SelectList(ViewBag.ListaCategorias, "CategoriaID", "Nome"))">
+                                <option value="">-- Selecione --</option>
+                            </select>
+                            <span asp-validation-for="CategoriaID" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="SubCategoriaID" class="control-label"></label>
+                            <select id="subCategoria" asp-for="SubCategoriaID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaSubCategorias, "CategoriaID", "Nome"))"></select>
+                            <span asp-validation-for="SubCategoriaID" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @if (Model.Recorrente == false)
+                        {
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="Recorrente" class="control-label"></label>
+                                <input class="form-control " id="flagRecorrente" value="Não" readonly />
+                                <span asp-validation-for="Recorrente" class="text-danger"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="Recorrente" class="control-label"></label>
+                                <input class="form-control " id="flagRecorrente" value="Sim" readonly />
+                                <span asp-validation-for="Recorrente" class="text-danger"></span>
+                            </div>
+                        }
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="Valor" class="control-label"></label>
+                            <input asp-for="Valor" class="form-control  money2" />
+                            <span asp-validation-for="Valor" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Desconto" class="control-label"></label>
+                            <input asp-for="Desconto" class="form-control  money2" />
+                            <span asp-validation-for="Desconto" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Juros" class="control-label"></label>
+                            <input asp-for="Juros" class="form-control  money2" />
+                            <span asp-validation-for="Juros" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Multa" class="control-label"></label>
+                            <input asp-for="Multa" class="form-control  money2" />
+                            <span asp-validation-for="Multa" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="Descricao" class="control-label"></label>
+                            <input asp-for="Descricao" class="form-control " />
+                            <span asp-validation-for="Descricao" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="Observacoes" class="control-label"></label>
+                            <textarea asp-for="Observacoes" class="form-control "></textarea>
+                            <span asp-validation-for="Observacoes" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

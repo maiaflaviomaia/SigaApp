@@ -1,0 +1,66 @@
+﻿@model SigaApp.Models.Entidades.SessaoGravacao
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Sessão de Gravação</div>
+            <div class="panel-body">
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataInicio)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataInicio)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataFim)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataFim)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.HoraInicio)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.HoraInicio)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.HoraFim)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.HoraFim)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.EstudioID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Estudio.Nome)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.ClienteID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Cliente.RazaoSocial)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.FornecedorID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Fornecedor.RazaoSocial)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.ServicoPrestadoID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.servicoPrestado.Descricao)
+                        </dd>
+                    </dl>
+                </div>
+                <div>
+                    <a asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@Model.SessaoID">Editar</a>
+                    <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

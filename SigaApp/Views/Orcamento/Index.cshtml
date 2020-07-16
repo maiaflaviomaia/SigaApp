@@ -1,0 +1,174 @@
+﻿@model Paginacao<SigaApp.Models.Entidades.Orcamento>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Orçamentos</div>
+            <div class="panel-body">
+                <p style="margin-top:20px">
+                    <a asp-action="Create" class="btn btn-info btn-sm">Cadastrar Novo</a>
+                </p>
+
+                <form asp-action="Index" method="get">
+                    <div class="form-actions no-color">
+                        <p>
+                            Buscar por Cliente: <input type="text" name="filtro" value="@ViewData["FiltroAtual"]" />
+                            <input type="submit" value="Pesquisar" class="btn btn-dark btn-sm" style="margin-bottom:4px" /> |
+                            <a asp-action="Index">Voltar</a>
+                        </p>
+                    </div>
+                </form>
+
+                @if (Model.Count() >= 1)
+                {
+                    <table class="table table-sm table-hover mt-4">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Data</th>
+                                <th class="text-center">Cliente</th>
+                                <th class="text-center">Título</th>
+                                <th class="text-center">Valor Total</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.DataOrcamento)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Cliente.RazaoSocial)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Titulo)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.TotalOrcamento)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.TipoOrcamento)
+                                    </td>
+
+                                    @if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Aberto)
+                                    {
+                                        <td class="text-center"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
+                                    }
+
+                                    @if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Faturado)
+                                    {
+                                        <td class="text-center text-primary"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
+                                    }
+
+                                    @if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Aprovado)
+                                    {
+                                        <td class="text-center text-success"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
+                                    }
+
+                                    @if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Reprovado || item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Cancelado)
+                                    {
+                                        <td class="text-center text-danger"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
+                                    }
+
+                                    @if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Cancelado || item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Reprovado)
+                                    {
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@item.OrcamentoID">Detalhes</a> |
+                                            <a class="disabled">Cancelar</a> |
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGerarPdf" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>PDF</button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGerarPdf">
+                                                    <a class="dropdown-item disabled" aria-disabled="true" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a>
+                                                    <a class="dropdown-item disabled" aria-disabled="true" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    else if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Aprovado)
+                                    {
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@item.OrcamentoID">Detalhes</a> |
+                                            <a asp-action="FaturarOrcamento" asp-route-id="@item.OrcamentoID" class="btn btn-sm btn-success">Faturar</a> |
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGerarPdf" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF</button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGerarPdf">
+                                                    <a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a>
+                                                    <a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    else if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Faturado)
+                                    {
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@item.OrcamentoID">Detalhes</a> |
+                                            <a class="disabled">Cancelar</a> |
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGerarPdf" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF</button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGerarPdf">
+                                                    <a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a>
+                                                    <a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@item.OrcamentoID">Detalhes</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.OrcamentoID">Cancelar</a> |
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGerarPdf" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF</button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGerarPdf">
+                                                    <a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a>
+                                                    <a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-sm table-hover mt-4">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Data</th>
+                                <th class="text-center">Cliente</th>
+                                <th class="text-center">Título</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Valor Total</th>
+                                <th class="text-center">Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Não há registros</td></tr>
+                        </tbody>
+                    </table>
+                }
+
+                @{
+                    var prevDisabled = !Model.TemPaginaAnterior ? "disabled" : "";
+                    var nextDisabled = !Model.TemProximaPagina ? "disabled" : "";
+                }
+                <ul class="pager">
+                    <li class="@prevDisabled">
+                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex - 1)" asp-route-filtroAtual="@ViewData["FiltroAtual"]">Anterior</a>
+                    </li>
+
+                    <li class="@nextDisabled">
+                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex + 1)" asp-route-filtroAtual="@ViewData["FiltroAtual"]">Próxima</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

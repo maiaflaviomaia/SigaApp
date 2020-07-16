@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGA - Gestão Audiovisual</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/lib/font-awesome/font-awesome.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    </environment>
+    <environment exclude="Development">
+        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/lib/font-awesome/font-awesome.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span>Siga </span>Gestão Audiovisual</a>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <em class="glyphicon glyphicon-cog"></em>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li><a asp-controller="Usuario" asp-action="Details">Perfil</a></li>
+                            <li><a asp-controller="Empresas" asp-action="Index">Empresas</a></li>
+                            <li><a asp-controller="Usuario" asp-action="Index">Usuários</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--SIDEBAR-->
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <div class="profile-sidebar">
+            <div class="profile-userpic">
+                <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+            </div>
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name">@User.Identity.Name</div>
+                <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="divider"></div>
+
+        <ul class="nav menu">
+            <li><a asp-controller="Home" asp-action="Index"><em class="glyphicon glyphicon-dashboard">&nbsp;</em> Dashboard</a></li>
+            <li class="parent ">
+                <a data-toggle="collapse" href="#cadastros">
+                    <em class="glyphicon glyphicon-user">&nbsp;</em> Cadastros <span data-toggle="collapse" href="#cadastros" class="icon pull-right"><em class="glyphicon glyphicon-plus"></em></span>
+                </a>
+                <ul class="children collapse" id="cadastros">
+                    <li>
+                        <a asp-controller="Cargo" asp-action="Index"><span class="glyphicon glyphicon-menu-right">&nbsp;</span>Cargos</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Clientes" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Clientes
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Fornecedores" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Fornecedores
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Funcionarios" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Funcionários
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="ServicosPrestados" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Serviços Prestados
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent ">
+                <a data-toggle="collapse" href="#financeiro">
+                    <em class="glyphicon glyphicon-usd">&nbsp;</em> Financeiro <span data-toggle="collapse" href="#financeiro" class="icon pull-right"><em class="glyphicon glyphicon-plus"></em></span>
+                </a>
+                <ul class="children collapse" id="financeiro">
+                    <li>
+                        <a asp-controller="ContaContabil" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Conta Contábil
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="ContasPagar" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Contas a Pagar
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="ContasReceber" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Contas a receber
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Lancamentos" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Lançamentos
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Categorias" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Categorias
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="CentroDeCustos" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Centro de Custo
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent ">
+                <a data-toggle="collapse" href="#comercial">
+                    <em class="glyphicon glyphicon-list-alt">&nbsp;</em> Comercial <span data-toggle="collapse" href="#comercial" class="icon pull-right"><em class="glyphicon glyphicon-plus"></em></span>
+                </a>
+                <ul class="children collapse" id="comercial">
+                    <li>
+                        <a asp-controller="Orcamento" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Orçamentos
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent ">
+                <a data-toggle="collapse" href="#producao">
+                    <em class="glyphicon glyphicon-headphones">&nbsp;</em> Produção <span data-toggle="collapse" href="#producao" class="icon pull-right"><em class="glyphicon glyphicon-plus"></em></span>
+                </a>
+                <ul class="children collapse" id="producao">
+                    <li>
+                        <a asp-controller="Agenda" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Agenda
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Estudios" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Estúdios
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="SessaoGravacao" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Gravações
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent ">
+                <a data-toggle="collapse" href="#relatorios">
+                    <em class="glyphicon glyphicon-list-alt">&nbsp;</em> Relatórios <span data-toggle="collapse" href="#relatorios" class="icon pull-right"><em class="glyphicon glyphicon-plus"></em></span>
+                </a>
+                <ul class="children collapse" id="relatorios">
+                    <li>
+                        <a asp-controller="ContasPagar" asp-action="GerarRelatorio">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Contas a Pagar
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="ContasReceber" asp-action="GerarRelatorio">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Contas a Receber
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Lancamentos" asp-action="GerarRelatorio">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Lançamentos
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Orcamento" asp-action="GerarRelatorio">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Orçamentos
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="" asp-action="">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Gravações
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li><a asp-controller="Usuario" asp-action="Logout"><em class="glyphicon glyphicon-off">&nbsp;</em> Sair</a></li>
+        </ul>
+    </div>
+    <!--/.SIDEBAR-->
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        @RenderBody()
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery-mask-plugin/dist/jquery.mask.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+        <script src="~/js/custom.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery-mask-plugin/dist/jquery.mask.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+        <script src="~/js/custom.js"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

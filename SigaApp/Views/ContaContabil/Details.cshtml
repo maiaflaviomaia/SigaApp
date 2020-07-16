@@ -1,0 +1,85 @@
+﻿@model SigaApp.Models.Entidades.ContaContabil
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Conta Contábil</div>
+            <div class="panel-body">
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataCadastro)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataCadastro)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataAbertura)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataAbertura)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NomeConta)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.NomeConta)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Descricao)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Descricao)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.TipoConta)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TipoConta)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.SaldoInicial)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.SaldoInicial)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NomeBanco)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.NomeBanco)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NumeroAgencia)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.NumeroAgencia)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NumeroConta)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.NumeroConta)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.FlagAtivo)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.FlagAtivo)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataExclusao)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataExclusao)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="form-group">
+                    <a asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@Model.ContaContabilID">Editar</a>
+                    <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

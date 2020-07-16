@@ -1,0 +1,87 @@
+﻿@model SigaApp.Models.Entidades.SessaoGravacao
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Excluir</div>
+            <div class="panel-body">
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataCadastro)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataCadastro)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataInicio)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataInicio)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataFim)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataFim)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.HoraInicio)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.HoraInicio)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.HoraFim)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.HoraFim)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.EstudioID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.EstudioID)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.ClienteID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.ClienteID)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.FornecedorID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.FornecedorID)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.ServicoPrestadoID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.ServicoPrestadoID)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.FlagAtivo)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.FlagAtivo)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataExclusao)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataExclusao)
+                        </dd>
+                    </dl>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="SessaoID" />
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

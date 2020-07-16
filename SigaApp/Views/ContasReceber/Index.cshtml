@@ -1,0 +1,125 @@
+﻿@model Paginacao<SigaApp.Models.Entidades.ContaReceber>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Contas a Receber</div>
+            <div class="panel-body">
+                <p style="margin-top:20px">
+                    <a asp-action="Create" class="btn btn-info btn-sm">Cadastrar Novo</a>
+                </p>
+
+                <form asp-action="Index" method="get">
+                    <div class="form-actions no-color">
+                        <p>
+                            Buscar por Cliente: <input type="text" name="filtro" value="@ViewData["FiltroAtual"]" />
+                            <input type="submit" value="Pesquisar" class="btn btn-dark btn-sm" style="margin-bottom:4px" /> |
+                            <a asp-action="Index">Voltar</a>
+                        </p>
+                    </div>
+                </form>
+
+                @if (Model.Count >= 1)
+                {
+                    <table class="table table-sm table-hover mt-4">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Data Vencimento</th>
+                                <th class="text-center">Cliente</th>
+                                <th class="text-center">Descrição</th>
+                                <th class="text-center">Valor</th>
+                                <th class="text-center">Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.DataVencimento)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Cliente.RazaoSocial)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Descricao)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Valor)
+                                    </td>
+
+                                    @if (item.Status == SigaApp.Utils.Enums.StatusContaReceber.Aberto)
+                                    {
+                                        <td class="text-center"><b>@Html.DisplayFor(modelItem => item.Status)</b></td>
+                                    }
+
+                                    @if (item.Status == SigaApp.Utils.Enums.StatusContaReceber.Vencido || item.Status == SigaApp.Utils.Enums.StatusContaReceber.Protestado)
+                                    {
+                                        <td class="text-center text-danger"><b>@Html.DisplayFor(modelItem => item.Status)</b></td>
+                                    }
+
+                                    @if (item.Status == SigaApp.Utils.Enums.StatusContaReceber.Pago)
+                                    {
+                                        <td class="text-center text-success"><b>@Html.DisplayFor(modelItem => item.Status)</b></td>
+                                    }
+
+                                    @if (item.Status == SigaApp.Utils.Enums.StatusContaReceber.Pago)
+                                    {
+                                        <td>
+                                            <a style="color:gray">Editar</a> |
+                                            <a asp-action="Details" asp-route-id="@item.ContaReceberID">Detalhes</a> |
+                                            <a asp-action="GerarRecibo" class="btn btn-sm btn-primary" asp-route-id="@item.ContaReceberID">Recibo</a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.ContaReceberID">Editar</a> |
+                                            <a asp-action="Details" asp-route-id="@item.ContaReceberID">Detalhes</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.ContaReceberID">Excluir</a>
+                                        </td>
+                                    }
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-sm table-hover mt-4">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Data Vencimento</th>
+                                <th class="text-center">Cliente</th>
+                                <th class="text-center">Descrição</th>
+                                <th class="text-center">Valor</th>
+                                <th class="text-center">Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Não há registros</td></tr>
+                        </tbody>
+                    </table>
+                }
+
+
+                @{
+                    var prevDisabled = !Model.TemPaginaAnterior ? "disabled" : "";
+                    var nextDisabled = !Model.TemProximaPagina ? "disabled" : "";
+                }
+                <ul class="pager">
+                    <li class="@prevDisabled">
+                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex - 1)" asp-route-filtroAtual="@ViewData["FiltroAtual"]">Anterior</a>
+                    </li>
+
+                    <li class="@nextDisabled">
+                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex + 1)" asp-route-filtroAtual="@ViewData["FiltroAtual"]">Próxima</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

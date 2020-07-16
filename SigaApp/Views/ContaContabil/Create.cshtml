@@ -1,0 +1,88 @@
+﻿@model SigaApp.Models.Entidades.ContaContabil
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Cadastrar Conta Contábil</div>
+            <div class="panel-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="TipoConta" class="control-label"></label>
+                            <select asp-for="TipoConta" id="tipoConta" class="form-control " onchange="DefinirTipoConta();">
+                                <option value="">-- Selecione --</option>
+                                <option value="Caixa">Conta Caixa</option>
+                                <option value="Bancaria">Conta Bancária</option>
+                                <option value="Investimento">Conta Investimento</option>
+                            </select>
+                            <span asp-validation-for="TipoConta" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="DataAbertura" class="control-label"></label>
+                            <input asp-for="DataAbertura" class="form-control " />
+                            <span asp-validation-for="DataAbertura" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="SaldoInicial" class="control-label"></label>
+                            <input asp-for="SaldoInicial" class="form-control  money2" />
+                            <span asp-validation-for="SaldoInicial" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="NomeConta" class="control-label"></label>
+                            <input asp-for="NomeConta" class="form-control " />
+                            <span asp-validation-for="NomeConta" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Descricao" class="control-label"></label>
+                            <input asp-for="Descricao" class="form-control " />
+                            <span asp-validation-for="Descricao" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="NomeBanco" class="control-label"></label>
+                            <select asp-for="NomeBanco" class="form-control " id="nomeBanco" disabled>
+                                <option value="">-- Selecione --</option>
+                                <option value="Banco do Brasil">001 - Banco do Brasil</option>
+                                <option value="Bradesco">237 - Bradesco</option>
+                                <option value="Caixa Econômica">104 - Caixa Econômica</option>
+                                <option value="Citybank">745 - Citybank</option>
+                                <option value="HSBC">399 - HSBC Bank Brasil</option>
+                                <option value="Itaú">341 - Itaú</option>
+                                <option value="Santander">033 - Santander</option>
+                            </select>
+                            <span asp-validation-for="NomeBanco" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="NumeroAgencia" class="control-label"></label>
+                            <input asp-for="NumeroAgencia" class="form-control  agencia" id="numeroAgencia" disabled />
+                            <span asp-validation-for="NumeroAgencia" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="NumeroConta" class="control-label"></label>
+                            <input asp-for="NumeroConta" class="form-control  conta" id="numeroConta" disabled />
+                            <span asp-validation-for="NumeroConta" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

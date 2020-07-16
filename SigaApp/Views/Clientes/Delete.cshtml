@@ -1,0 +1,110 @@
+﻿@model SigaApp.Models.Entidades.Cliente
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Excluir</div>
+            <div class="panel-body">
+                <h3 style="font-size:1.5rem; font-weight: 300; line-height: 1.2;">Tem certeza que deseja excluir esse registro?</h3>
+                <h5 style="font-size:1.2rem; font-weight: 300; line-height: 1.2;">Esta operação não poderá ser desfeita</h5>
+
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataCadastro)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataCadastro)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.RazaoSocial)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.RazaoSocial)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NomeFantasia)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.NomeFantasia)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.TipoPessoa)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TipoPessoa)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.CPF)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.CPF)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.CNPJ)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.CNPJ)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.InscricaoEstadual)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.InscricaoEstadual)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.InscricaoMunicipal)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.InscricaoMunicipal)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.TelefoneFixo)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TelefoneFixo)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.TelefoneCelular)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TelefoneCelular)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Responsavel)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Responsavel)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.FlagAtivo)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.FlagAtivo)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataExclusao)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataExclusao)
+                        </dd>
+                    </dl>
+
+                    <div class="form-group">
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="ClienteID" />
+                            <input type="submit" value="Excluir" class="btn btn-danger btn-sm" />
+                            <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

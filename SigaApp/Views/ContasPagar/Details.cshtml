@@ -1,0 +1,144 @@
+﻿@model SigaApp.Models.Entidades.ContaPagar
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Contas a Pagar</div>
+            <div class="panel-body">
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.DataCadastro)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.DataCadastro)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.FornecedorID)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Fornecedor.RazaoSocial)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Descricao)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Descricao)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.DataVencimento)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.DataVencimento)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Status)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.TipoDocumento)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.TipoDocumento)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.NumeroDocumento)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.NumeroDocumento)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.CategoriaID)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Categoria.Nome)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.SubCategoriaID)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.SubCategoria.Nome)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Competencia)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Competencia)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Observacoes)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Observacoes)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Desconto)
+                        </dt>
+                        @if (Model.Desconto == null)
+                        {
+                            <dd class="col-sm-9">R$ 0,00</dd>
+                        }
+                        else
+                        {
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Desconto)
+                            </dd>
+                        }
+
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Juros)
+                        </dt>
+                        @if (Model.Juros == null)
+                        {
+                            <dd class="col-sm-9">R$ 0,00</dd>
+                        }
+                        else
+                        {
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Juros)
+                            </dd>
+                        }
+
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Multa)
+                        </dt>
+                        @if (Model.Multa == null)
+                        {
+                            <dd class="col-sm-9">R$ 0,00</dd>
+                        }
+                        else
+                        {
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Multa)
+                            </dd>
+                        }
+
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => model.Valor)
+                        </dt>
+
+                        <dd class="col-sm-9">
+                            <b>@Html.DisplayFor(model => model.Valor)</b>
+                        </dd>
+                    </dl>
+                </div>
+
+                @if (Model.Status == SigaApp.Utils.Enums.StatusContaPagar.Pago)
+                {
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <a asp-action="Pagar" class="btn btn-sm btn-success" asp-route-id="@Model.ContasPagarID">Pagar</a>
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

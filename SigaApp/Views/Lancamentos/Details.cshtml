@@ -1,0 +1,99 @@
+﻿@model SigaApp.Models.Entidades.Lancamento
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Lançamento</div>
+            <div class="panel-body">
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataLancamento)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataLancamento)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Descricao)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Descricao)
+                        </dd>
+
+                        @if (Model.TipoLancamento == SigaApp.Utils.Enums.TipoLancamento.Credito)
+                        {
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.TipoLancamento)
+                            </dt>
+                            <dd class="col-sm-10">
+                                Crédito
+                            </dd>
+                        }
+                        else
+                        {
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.TipoLancamento)
+                            </dt>
+                            <dd class="col-sm-10">
+                                Débito
+                            </dd>
+                        }
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NumeroDocumento)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.NumeroDocumento)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.CategoriaID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Categoria.Nome)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.SubCategoriaID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.SubCategoria.Nome)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.CentroCusto)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.CentroCusto.Descricao)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.ContaContabil)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.ContaContabil.Descricao)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Valor)
+                        </dt>
+                        <dd class="col-sm-10">
+                            <b>@Html.DisplayFor(model => model.Valor)</b>
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Observacoes)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Observacoes)
+                        </dd>
+                    </dl>
+                </div>
+                <div>
+                    <a asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@Model.LancamentoID">Editar</a>
+                    <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

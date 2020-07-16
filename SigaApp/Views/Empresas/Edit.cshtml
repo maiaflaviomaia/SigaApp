@@ -1,0 +1,93 @@
+﻿@model SigaApp.Models.Entidades.Empresa
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Editar Empresa</div>
+            <div class="panel-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="EmpresaID" />
+                    <input type="hidden" asp-for="DataCadastro" />
+                    <input type="hidden" asp-for="DataExclusao" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="RazaoSocial" class="control-label"></label>
+                            <input asp-for="RazaoSocial" class="form-control " />
+                            <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="NomeFantasia" class="control-label"></label>
+                            <input asp-for="NomeFantasia" class="form-control " />
+                            <span asp-validation-for="NomeFantasia" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CNPJ" class="control-label"></label>
+                            <input asp-for="CNPJ" class="form-control  cnpj" />
+                            <span asp-validation-for="CNPJ" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Responsavel" class="control-label"></label>
+                            <input asp-for="Responsavel" class="form-control " />
+                            <span asp-validation-for="Responsavel" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="TelefoneFixo" class="control-label"></label>
+                            <input asp-for="TelefoneFixo" class="form-control  telefone" />
+                            <span asp-validation-for="TelefoneFixo" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="TelefoneCelular" class="control-label"></label>
+                            <input asp-for="TelefoneCelular" class="form-control  celular" />
+                            <span asp-validation-for="TelefoneCelular" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control " />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Endereco" class="control-label"></label>
+                            <input asp-for="Endereco" class="form-control " />
+                            <span asp-validation-for="Endereco" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DadosBancarios" class="control-label"></label>
+                            <input asp-for="DadosBancarios" class="form-control " />
+                            <span asp-validation-for="DadosBancarios" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-check col-md-2">
+                            <label class="form-check-label ">
+                                <input class="form-check-input" asp-for="FlagAtivo" /> @Html.DisplayNameFor(model => model.FlagAtivo)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

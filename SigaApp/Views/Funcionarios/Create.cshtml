@@ -1,0 +1,330 @@
+﻿@model SigaApp.Models.Entidades.Funcionario
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Cadastrar Funcionário</div>
+            <div class="panel-body">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#nav-dados" role="tab" aria-controls="pills-home" aria-selected="true">Dados Gerais</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#nav-documentos" role="tab" aria-controls="pills-profile" aria-selected="false">Documentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#nav-contrato" role="tab" aria-controls="pills-contact" aria-selected="false">Contrato</a>
+                    </li>
+                </ul>
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="tab-content mt-4" id="nav_tabContent">
+                        <!--CONTEÚDO DA TAB DADOS GERAIS-->
+                        <div class="tab-pane fade show active" id="nav-dados" role="tabpanel" aria-labelledby="nav-dados-tab">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="NomeCompleto" class="control-label"></label>
+                                    <input asp-for="NomeCompleto" class="form-control " />
+                                    <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="EstadoCivil" class="control-label"></label>
+                                    <select asp-for="EstadoCivil" class="form-control ">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="Solteiro">Solteiro</option>
+                                        <option value="Casado">Casado</option>
+                                        <option value="Divorciado">Divorciado</option>
+                                    </select>
+                                    <span asp-validation-for="EstadoCivil"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="Sexo" class="control-label"></label>
+                                    <select asp-for="Sexo" class="form-control ">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Feminino">Feminino</option>
+                                    </select>
+                                    <span asp-validation-for="Sexo"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="DataNascimento" class="control-label"></label>
+                                    <input asp-for="DataNascimento" type="date" class="form-control " />
+                                    <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="TelefoneFixo" class="control-label"></label>
+                                    <input asp-for="TelefoneFixo" class="form-control  telefone" />
+                                    <span asp-validation-for="TelefoneFixo" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="TelefoneCelular" class="control-label"></label>
+                                    <input asp-for="TelefoneCelular" class="form-control  celular" />
+                                    <span asp-validation-for="TelefoneCelular" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control " />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label asp-for="Observacoes" class="control-label"></label>
+                                    <textarea asp-for="Observacoes" class="form-control "></textarea>
+                                    <span asp-validation-for="Observacoes"></span>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <h5 class="mt-3">Endereço</h5>
+                            <div class="row">
+                                <div class="col-md-2 mb-3">
+                                    <label asp-for="Endereco.CEP" class="control-label"></label>
+                                    <input asp-for="Endereco.CEP" class="form-control  cep" id="cep" />
+                                    <span asp-validation-for="Endereco.CEP" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-8 mb-3">
+                                    <label asp-for="Endereco.Logradouro" class="control-label"></label>
+                                    <input asp-for="Endereco.Logradouro" class="form-control " id="logradouro" />
+                                    <span asp-validation-for="Endereco.Logradouro" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label asp-for="Endereco.Numero" class="control-label"></label>
+                                    <input asp-for="Endereco.Numero" class="form-control " type="number" />
+                                    <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 mb-3">
+                                    <label asp-for="Endereco.Bairro" class="control-label"></label>
+                                    <input asp-for="Endereco.Bairro" class="form-control " id="bairro" />
+                                    <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label asp-for="Endereco.Cidade" class="control-label"></label>
+                                    <input asp-for="Endereco.Cidade" class="form-control " id="cidade" />
+                                    <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label asp-for="Endereco.UF" class="control-label"></label>
+                                    <select asp-for="Endereco.UF" class="form-control " id="uf">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="AC">Acre</option>
+                                        <option value="AL">Alagoas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="MT">Mato Grosso</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PR">Paraná</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="SE">Sergipe</option>
+                                        <option value="TO">Tocatins</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Endereco.Complemento" class="control-label"></label>
+                                    <input asp-for="Endereco.Complemento" class="form-control " />
+                                    <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <h5 class="mt-3">Dados Bancários</h5>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="DadosBancarios.NomeBanco" class="control-label"></label>
+                                    <select asp-for="DadosBancarios.NomeBanco" class="form-control ">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="Banco do Brasil">001 - Banco do Brasil</option>
+                                        <option value="Bradesco">237 - Bradesco</option>
+                                        <option value="Caixa Econômica">104 - Caixa Econômica</option>
+                                        <option value="Citybank">745 - Citybank</option>
+                                        <option value="HSBC">399 - HSBC Bank Brasil</option>
+                                        <option value="Itaú">341 - Itaú</option>
+                                        <option value="Santander">033 - Santander</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="DadosBancarios.NumeroAgencia" class="control-label"></label>
+                                    <input asp-for="DadosBancarios.NumeroAgencia" class="form-control  agencia" />
+                                    <span asp-validation-for="DadosBancarios.NumeroAgencia"></span>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label asp-for="DadosBancarios.NumeroConta" class="control-label"></label>
+                                    <input asp-for="DadosBancarios.NumeroConta" class="form-control  conta" />
+                                    <span asp-validation-for="DadosBancarios.NumeroConta"></span>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label asp-for="DadosBancarios.Operacao" class="control-label"></label>
+                                    <input asp-for="DadosBancarios.Operacao" class="form-control " />
+                                    <span asp-validation-for="DadosBancarios.Operacao"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="DadosBancarios.Favorecido" class="control-label"></label>
+                                    <input asp-for="DadosBancarios.Favorecido" class="form-control " />
+                                    <span asp-validation-for="DadosBancarios.Favorecido"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CONTEÚDO DA TAB DOCUMENTOS-->
+                        <div class="tab-pane fade" id="nav-documentos" role="tabpanel" aria-labelledby="nav-documentos-tab">
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="CPF" class="control-label"></label>
+                                    <input asp-for="CPF" class="form-control  cpf" />
+                                    <span asp-validation-for="CPF" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="RG" class="control-label"></label>
+                                    <input asp-for="RG" class="form-control " />
+                                    <span asp-validation-for="RG" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="CTPS" class="control-label"></label>
+                                    <input asp-for="CTPS" class="form-control " />
+                                    <span asp-validation-for="CTPS" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="CarteiraHabilitacao" class="control-label"></label>
+                                    <input asp-for="CarteiraHabilitacao" class="form-control " />
+                                    <span asp-validation-for="CarteiraHabilitacao" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="PisPasep" class="control-label"></label>
+                                    <input asp-for="PisPasep" class="form-control " />
+                                    <span asp-validation-for="PisPasep" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="TituloEleitor" class="control-label"></label>
+                                    <input asp-for="TituloEleitor" class="form-control " />
+                                    <span asp-validation-for="TituloEleitor" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="SessaoEleitoral" class="control-label"></label>
+                                    <input asp-for="SessaoEleitoral" class="form-control " />
+                                    <span asp-validation-for="SessaoEleitoral" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="ZonaEleitoral" class="control-label"></label>
+                                    <input asp-for="ZonaEleitoral" class="form-control " />
+                                    <span asp-validation-for="ZonaEleitoral" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CONTEÚDO DA TAB CONTRATO-->
+                        <div class="tab-pane fade" id="nav-contrato" role="tabpanel" aria-labelledby="nav-contratos-tab">
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="DataAdmissao" class="control-label"></label>
+                                    <input asp-for="DataAdmissao" type="date" class="form-control " />
+                                    <span asp-validation-for="DataAdmissao" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="DataDemissao" class="control-label"></label>
+                                    <input asp-for="DataDemissao" type="date" class="form-control " />
+                                    <span asp-validation-for="DataDemissao" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="RegimeTrabalho" class="control-label"></label>
+                                    <select asp-for="RegimeTrabalho" class="form-control ">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="Indeterminado">Prazo Indeterminado</option>
+                                        <option value="Experiência">Contrato de Experiência</option>
+                                        <option value="Estagiário">Estagiário</option>
+                                    </select>
+                                    <span asp-validation-for="RegimeTrabalho" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="JornadaTrabalho" class="control-label"></label>
+                                    <select asp-for="JornadaTrabalho" class="form-control ">
+                                        <option value="">-- Selecione --</option>
+                                        <option value="20 H/S">20 Horas Semanais</option>
+                                        <option value="36 H/S">36 Horas Semanais</option>
+                                        <option value="40 H/S">40 Horas Semanais</option>
+                                        <option value="44 H/S">44 Horas Semanais</option>
+                                    </select>
+                                    <span asp-validation-for="JornadaTrabalho" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="CargoID" class="control-label"></label>
+                                    <select asp-for="CargoID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaCargos, "CargoID", "DescricaoSumaria"))">
+                                        <option value="">-- Selecione --</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label asp-for="Salario" class="control-label"></label>
+                                    <input asp-for="Salario" class="form-control  money2" />
+                                    <span asp-validation-for="Salario" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

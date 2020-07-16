@@ -1,0 +1,134 @@
+﻿@model Paginacao<SigaApp.Models.Entidades.Lancamento>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Lançamentos</div>
+            <div class="panel-body">
+                <p style="margin-top:20px">
+                    <button class="btn btn-info btn-sm create" data-toggle="modal" data-target="modalCreate">Cadastrar Novo</button>
+                    <button class="btn btn-warning btn-sm transfer text-white" data-toggle="modal" data-target="modalTransfer">Transferir Valores</button>
+                </p>
+
+                <form asp-action="Index" method="get">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="control-label">Conta Contábil</label>
+                            <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta", ViewData["FiltroAtual"]))" name="txtConta">
+                                <option value="">-- Selecione --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="submit" value="Pesquisar" class="btn btn-sm btn-dark" style="margin-top:31px; margin-left:-22px">
+                        </div>
+                    </div>
+                </form>
+
+                @if (Model.Count() >= 1)
+                {
+                    <div class="row mt-5">
+                        <div class="col-md-3">
+                            <h6>Saldo Inicial: <span class="badge badge-warning">@ViewData["SaldoInicial"]</span></h6>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>Saldo Atual: <span class="badge badge-primary">@ViewData["SaldoAtual"]</span></h6>
+                        </div>
+                    </div>
+
+                    <table class="table table-sm table-hover mt-2">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Data</th>
+                                <th class="text-center">Número</th>
+                                <th class="text-center">Cliente/Fornecedor</th>
+                                <th class="text-center">Descrição</th>
+                                <th class="text-center">Valor</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">@DateTime.Now.Date.ToString("dd/MM/yyyy")</td>
+                                <td class="text-center"> - </td>
+                                <td class="text-center">Lançamento automático</td>
+                                <td class="text-center">Saldo Inicial</td>
+                                <td class="text-center">@ViewData["SaldoInicial"]</td>
+                                <td></td>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.DataLancamento)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.NumeroDocumento)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Descricao)
+                                    </td>
+
+                                    @if (item.TipoLancamento == SigaApp.Utils.Enums .TipoLancamento.Credito)
+                                    {
+                                        <td class="text-primary text-center">
+                                            @Html.DisplayFor(modelItem => item.Valor)
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-danger text-center">
+                                            @Html.DisplayFor(modelItem => item.Valor)
+                                        </td>
+                                    }
+
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.LancamentoID">Editar</a> |
+                                        <a asp-action="Details" asp-route-id="@item.LancamentoID">Detalhes</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.LancamentoID">Excluir</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center">
+                                    <b>@ViewData["SaldoAtual"]</b>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                }
+                else
+                {
+
+                }
+
+                @{
+                    var prevDisabled = !Model.TemPaginaAnterior ? "disabled" : "";
+                    var nextDisabled = !Model.TemProximaPagina ? "disabled" : "";
+                }
+                <ul class="pager">
+                    <li class="@prevDisabled">
+                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex - 1)" asp-route-filtroAtual="@ViewData["FiltroAtual"]">Anterior</a>
+                    </li>
+
+                    <li class="@nextDisabled">
+                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex + 1)" asp-route-filtroAtual="@ViewData["FiltroAtual"]">Próxima</a>
+                    </li>
+                </ul>
+
+                <div id="modalCreate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modalLabel"></div>
+
+                <div id="modalTransfer" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modalTransferLabel"></div>
+            </div>
+        </div>
+    </div>
+</div>

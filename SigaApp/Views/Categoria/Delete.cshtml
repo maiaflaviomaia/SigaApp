@@ -1,0 +1,49 @@
+﻿@model SigaApp.Models.Entidades.Categoria
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Excluir</div>
+            <div class="panel-body">
+                <h3 style="font-size:1.5rem; font-weight: 300; line-height: 1.2;">Tem certeza que deseja excluir esse registro?</h3>
+                <h5 style="font-size:1.2rem; font-weight: 300; line-height: 1.2;">Esta operação não poderá ser desfeita</h5>
+
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataCadastro)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataCadastro)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.FlagAtivo)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.FlagAtivo)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataExclusao)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataExclusao)
+                        </dd>
+                    </dl>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="CategoriaID" />
+                        <input type="submit" value="Excluir" class="btn btn-danger" />
+                        <a asp-action="Index" class="btn btn-dark">Voltar</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

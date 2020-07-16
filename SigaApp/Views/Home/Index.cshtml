@@ -1,0 +1,119 @@
+﻿@model SigaApp.Models.Entidades.ContasViewModel
+
+@if (User.IsInRole("Produção"))
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dashboard</div>
+            <div class="panel-body">
+                
+                <div class="row  mb-3">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Acumulado</div>
+                            <div class="panel-body">
+                                <partial name="~/Views/Shared/_GraficoReceitaXDespesaAcumulado.cshtml" />
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="panel-heading">Mensal</div>
+                                <partial name="~/Views/Shared/_GraficoReceitaXDespesaMensal.cshtml" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h6 class="mt-4">Orçamentos - <span class="label label-warning">@ViewData["QtdTotalOrcamentos"]</span></h6>
+                <div class="panel panel-container">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                            <div class="panel panel-teal panel-widget border-right">
+                                <h6 class="text-center text-success">Aprovados/Faturados</h6>
+                                <h3 class="text-center">@Html.ViewData["QtdOrcamentoAprovados"]</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                            <div class="panel panel-teal panel-widget border-right">
+                                <h6 class="text-center  text-danger">Reprovados/Cancelados</h6>
+                                <h3 class="text-center">@Html.ViewData["QtdOrcamentoReprovados"]</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                            <div class="panel panel-teal panel-widget border-right">
+                                <h6 class="text-center text-primary">Abertos</h6>
+                                <h3 class="text-center">@Html.ViewData["QtdOrcamentoAbertos"]</h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                            <div class="panel panel-teal panel-widget border-right">
+                                <h6 class="text-center text-warning">Abertos (R$)</h6>
+                                <h3 class="text-center">@Html.ViewData["ValOrcamentoAbertos"]</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                                
+                <h6>Próximas Contas a Pagar: <span class="label label-danger">@Html.ViewData["TotalContasPagar"]</span></h6>
+                <table class="table table-sm table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Data Vencimento</th>
+                            <th class="text-center">Fornecedor</th>
+                            <th class="text-center">Descrição</th>
+                            <th class="text-center">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ContasPagar)
+                        {
+                            <tr>
+                                <td class="text-center">@item.DataVencimento.ToString("dd/MM/yyyy")</td>
+                                <td class="text-center">@item.Fornecedor.RazaoSocial</td>
+                                <td class="text-center">@item.Descricao</td>
+                                <td class="text-center">@item.Valor.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                                                               
+                <h6>Próximas Contas a Receber: <span class="label label-info">@Html.ViewData["TotalContasReceber"]</span></h6>
+                <table class="table table-sm table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Data Vencimento</th>
+                            <th class="text-center">Cliente</th>
+                            <th class="text-center">Descrição</th>
+                            <th class="text-center">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ContasReceber)
+                        {
+                            <tr>
+                                <td class="text-center">@item.DataVencimento.ToString("dd/MM/yyyy")</td>
+                                <td class="text-center">@item.Cliente.RazaoSocial</td>
+                                <td class="text-center">@item.Descricao</td>
+                                <td class="text-center">@item.Valor.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+}

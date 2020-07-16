@@ -1,0 +1,63 @@
+﻿@model SigaApp.Models.Entidades.Agenda
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Agendamento</div>
+            <div class="panel-body">
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Titulo)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Titulo)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataEvento)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataEvento)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Hora)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Hora)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.ClienteID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Cliente.RazaoSocial)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.EstudioID)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Estudio.Nome)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Observacao)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @if (@Html.DisplayFor(model => model.Observacao) != null)
+                            {
+                                @Html.DisplayFor(model => model.Observacao)
+                            }
+                            else
+                            {
+                                <p> - </p>
+                            }
+                        </dd>
+                    </dl>
+                </div>
+                <div class="form-group">
+                    <a asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@Model.AgendaID">Editar</a>
+                    <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

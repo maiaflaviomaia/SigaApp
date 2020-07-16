@@ -1,0 +1,72 @@
+﻿@model SigaApp.Models.Entidades.Agenda
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Editar Agenda</div>
+            <div class="panel-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="AgendaID" />
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="Titulo" class="control-label"></label>
+                            <input asp-for="Titulo" class="form-control " />
+                            <span asp-validation-for="Titulo" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DataEvento" class="control-label"></label>
+                            <input asp-for="DataEvento" type="date" class="form-control " />
+                            <span asp-validation-for="DataEvento" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Hora" class="control-label"></label>
+                            <input asp-for="Hora" class="form-control  time" />
+                            <span asp-validation-for="Hora" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ClienteID" class="control-label"></label>
+                            <select asp-for="ClienteID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaClientes, "ClienteID", "RazaoSocial"))">
+                                <option value="">-- Selecione --</option>
+                            </select>
+                            <span asp-validation-for="ClienteID"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EstudioID" class="control-label"></label>
+                            <select asp-for="EstudioID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaEstudios, "EstudioID", "Nome"))">
+                                <option value="">-- Selecione --</option>
+                            </select>
+                            <span asp-validation-for="EstudioID"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="Observacao" class="control-label"></label>
+                            <textarea asp-for="Observacao" class="form-control "></textarea>
+                            <span asp-validation-for="Observacao"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

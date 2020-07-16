@@ -1,0 +1,62 @@
+﻿@model SigaApp.Models.Entidades.Usuario
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Editar Usuário</div>
+            <div class="panel-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="UsuarioID" />
+                    <input type="hidden" asp-for="DataCadastro" />
+                    <input type="hidden" asp-for="FlagAtivo" />
+                    <input type="hidden" asp-for="EmpresaID" />
+                    <input type="hidden" asp-for="Senha" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Nome" class="control-label"></label>
+                            <input asp-for="Nome" class="form-control " />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control " />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Perfil" class="control-label"></label>
+                            <select asp-for="Perfil" class="form-control ">
+                                <option value="">-- Selecione --</option>
+                                <option value="Master">Master</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Financeiro">Financeiro</option>
+                                <option value="Comercial">Comercial</option>
+                                <option value="Produção">Produção</option>
+                            </select>
+                            <span asp-validation-for="Perfil" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-check col-md-2 mb-3">
+                            <label class="form-check-label ">
+                                <input class="form-check-input" asp-for="FlagAtivo" /> @Html.DisplayNameFor(model => model.FlagAtivo)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

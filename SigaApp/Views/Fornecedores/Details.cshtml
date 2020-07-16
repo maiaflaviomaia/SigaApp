@@ -1,0 +1,117 @@
+﻿@model SigaApp.Models.Entidades.Fornecedor
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Fornecedores</div>
+            <div class="panel-body">
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataCadastro)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataCadastro)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.RazaoSocial)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.RazaoSocial)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NomeFantasia)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.NomeFantasia)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.TipoPessoa)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TipoPessoa)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.CPF)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.CPF)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.CNPJ)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.CNPJ)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.InscricaoEstadual)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.InscricaoEstadual)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.InscricaoMunicipal)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.InscricaoMunicipal)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.TelefoneFixo)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TelefoneFixo)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.TelefoneCelular)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TelefoneCelular)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Responsavel)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Responsavel)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.FlagAtivo)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.FlagAtivo)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataExclusao)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataExclusao)
+                        </dd>
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Endereco)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.EnderecoCompleto)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DadosBancarios)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DadosBancariosCompleto)
+                        </dd>
+                    </dl>
+                </div>
+                <div>
+                    <a asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@Model.FornecedorID">Editar</a>
+                    <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,423 @@
+﻿@model SigaApp.Models.Entidades.Orcamento
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Orçamento</div>
+            <div class="panel-body">
+                <div>
+                    <dl class="row">
+                        @if (Model.TipoOrcamento == "Audio")
+                        {
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.DataOrcamento)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.DataOrcamento)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.DataValidade)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.DataValidade)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TipoOrcamento)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.TipoOrcamento)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.StatusOrcamento)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.StatusOrcamento)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Cliente.RazaoSocial)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Cliente.RazaoSocial)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Solicitante)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Solicitante)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Titulo)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Titulo)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.BonificacaoVeiculacao)
+                            </dt>
+                            @if (Model.BonificacaoVeiculacao == null)
+                            {
+                                <dd class="col-sm-9"> - </dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.BonificacaoVeiculacao)
+                                </dd>
+                            }
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TaxaImposto)
+                            </dt>
+                            @if (Model.TaxaImposto == null)
+                            {
+                                <dd class="col-sm-9"> - </dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.TaxaImposto)
+                                </dd>
+                            }
+
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TaxaLucro)
+                            </dt>
+                            @if (Model.TaxaLucro == null)
+                            {
+                                <dd class="col-sm-9"> - </dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.TaxaLucro)
+                                </dd>
+                            }
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Acrescimo)
+                            </dt>
+                            @if (Model.Acrescimo == null)
+                            {
+                                <dd class="col-sm-9">R$ 0,00</dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.Acrescimo)
+                                </dd>
+                            }
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Desconto)
+                            </dt>
+                            @if (Model.Desconto == null)
+                            {
+                                <dd class="col-sm-9">R$ 0,00</dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.Desconto)
+                                </dd>
+                            }
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TotalOrcamento)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <b>@Html.DisplayFor(model => model.TotalOrcamento)</b>
+                            </dd>
+                        }
+                        else
+                        {
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.DataOrcamento)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.DataOrcamento)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.DataValidade)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.DataValidade)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TipoOrcamento)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.TipoOrcamento)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.StatusOrcamento)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.StatusOrcamento)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Cliente.RazaoSocial)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Cliente.RazaoSocial)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Solicitante)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Solicitante)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Titulo)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Titulo)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.NomePeca)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.NomePeca)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.DuracaoPeca)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.DuracaoPeca)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.PeriodoVeiculacao)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.PeriodoVeiculacao)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TipoMidia)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.TipoMidia)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TipoVeiculacao)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.TipoVeiculacao)
+                            </dd>
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.PracaVeiculacao)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.PracaVeiculacao)
+                            </dd>
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.BonificacaoVeiculacao)
+                            </dt>
+                            @if (Model.BonificacaoVeiculacao == null)
+                            {
+                                <dd class="col-sm-9"> - </dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.BonificacaoVeiculacao)
+                                </dd>
+                            }
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TaxaImposto)
+                            </dt>
+                            @if (Model.TaxaImposto == null)
+                            {
+                                <dd class="col-sm-9"> - </dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.TaxaImposto)
+                                </dd>
+                            }
+
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TaxaLucro)
+                            </dt>
+                            @if (Model.TaxaLucro == null)
+                            {
+                                <dd class="col-sm-9"> - </dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.TaxaLucro)
+                                </dd>
+                            }
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Acrescimo)
+                            </dt>
+                            @if (Model.Acrescimo == null)
+                            {
+                                <dd class="col-sm-9">R$ 0,00</dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.Acrescimo)
+                                </dd>
+                            }
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Desconto)
+                            </dt>
+                            @if (Model.Desconto == null)
+                            {
+                                <dd class="col-sm-9">R$ 0,00</dd>
+                            }
+                            else
+                            {
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.Desconto)
+                                </dd>
+                            }
+
+                            <dt class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TotalOrcamento)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <b>@Html.DisplayFor(model => model.TotalOrcamento)</b>
+                            </dd>
+                        }
+
+                    </dl>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <h5 style="color:red">Serviços</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @if (Model.OrcamentoServicos.Count >= 1)
+                                {
+                                    <table class="table table-sm">
+                                        <tr>
+                                            <th>Serviço Prestado</th>
+                                            <th class="text-center">Valor Unitário</th>
+                                            <th class="text-center">Quantidade</th>
+                                            <th class="text-center">Valor Total</th>
+                                        </tr>
+                                        @foreach (var item in Model.OrcamentoServicos)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.ServicoPrestado.Descricao)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.ServicoPrestado.ValorUnitario)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.ValorTotal)</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                }
+                                else
+                                {
+                                    <p>Não há registros</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top:20px">
+                        <div class="card-header">
+                            <div class="row">
+                                <h5 style="color:red">Fornecedores</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @if (Model.OrcamentoFornecedores.Count >= 1)
+                                {
+                                    <table class="table table-sm">
+                                        <tr>
+                                            <th>Fornecedor</th>
+                                            <th class="text-center">Descrição</th>
+                                            <th class="text-center">Valor Unitário</th>
+                                            <th class="text-center">Quantidade</th>
+                                            <th class="text-center">Valor Total</th>
+                                        </tr>
+                                        @foreach (var item in Model.OrcamentoFornecedores)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Fornecedor.RazaoSocial)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.ValorUnitario)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.ValorTotal)</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                }
+                                else
+                                {
+                                    <p>Não há registros</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top:20px">
+                        <div class="card-header">
+                            <div class="row">
+                                <h5 style="color:red">Custos de Produção</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @if (Model.OrcamentoCustos.Count >= 1)
+                                {
+                                    <table class="table table-sm">
+                                        <tr>
+                                            <th>Descrição</th>
+                                            <th class="text-center">Valor Unitário</th>
+                                            <th class="text-center">Quantidade</th>
+                                            <th class="text-center">Valor Total</th>
+                                        </tr>
+                                        @foreach (var item in Model.OrcamentoCustos)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.ValorUnitario)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.ValorTotal)</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                }
+                                else
+                                {
+                                    <p>Não há registros</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Aberto)
+                {
+                    <div style="margin-top:30px">
+                        <a asp-action="AprovarOrcamento" class="btn btn-sm btn-success" asp-route-id="@Model.OrcamentoID">Aprovar</a>
+                        <a asp-action="ReprovarOrcamento" class="btn btn-sm btn-danger text-white" asp-route-id="@Model.OrcamentoID">Reprovar</a>
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                }
+                else
+                {
+                    <div style="margin-top:30px">
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

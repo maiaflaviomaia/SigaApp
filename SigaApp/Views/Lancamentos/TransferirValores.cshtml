@@ -1,0 +1,62 @@
+﻿@model SigaApp.Models.Entidades.Lancamento
+
+<form asp-action="TransferirValores">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTransferLabel">Transferir Valores</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="control-label">Data do Lançamento</label>
+                        <input type="date" class="form-control " name="txtData" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="control-label">Origem</label>
+                        <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))" name="txtOrigem">
+                            <option value="">-- Selecione --</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="control-label">Destino</label>
+                        <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))" name="txtDestino">
+                            <option value="">-- Selecione --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="control-label">Valor</label>
+                        <input class="form-control  money2" name="txtValor" />
+                    </div>
+
+                    <div class="col-md-9">
+                        <label class="control-label">Descrição</label>
+                        <input class="form-control " name="txtDescricao" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="control-label">Observações</label>
+                        <textarea class="form-control " name="txtObservacao"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary btnSalvar" />
+                        <a asp-action="Index" value="Fechar" class="btn btn-sm btn-dark">Fechar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

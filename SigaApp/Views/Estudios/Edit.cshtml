@@ -1,0 +1,52 @@
+﻿@model SigaApp.Models.Entidades.Estudio
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Editar Estúdio</div>
+            <div class="panel-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="EstudioID" />
+                    <input type="hidden" asp-for="DataCadastro" />
+                    <input type="hidden" asp-for="FlagAtivo" />
+                    <input type="hidden" asp-for="EmpresaID" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Nome" class="control-label"></label>
+                            <input asp-for="Nome" class="form-control " />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="HoraFuncionamentoInicio" class="control-label"></label>
+                            <input asp-for="HoraFuncionamentoInicio" class="form-control  time" />
+                            <span asp-validation-for="HoraFuncionamentoInicio" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="HoraFuncionamentoFim" class="control-label"></label>
+                            <input asp-for="HoraFuncionamentoFim" class="form-control  time" />
+                            <span asp-validation-for="HoraFuncionamentoFim" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="DescricaoDetalhada" class="control-label"></label>
+                            <textarea asp-for="DescricaoDetalhada" class="form-control "></textarea>
+                            <span asp-validation-for="DescricaoDetalhada" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

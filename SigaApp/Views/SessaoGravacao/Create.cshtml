@@ -1,0 +1,92 @@
+﻿@model SigaApp.Models.Entidades.SessaoGravacao
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabelSessao">Nova Sessão de Gravação</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ClienteID" class="control-label"></label>
+                        <select asp-for="ClienteID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaClientes, "ClienteID", "RazaoSocial"))">
+                            <option value="">-- Selecione --</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FornecedorID" class="control-label"></label>
+                        <select asp-for="FornecedorID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaFornecedores, "FornecedorID", "RazaoSocial"))">
+                            <option value="">-- Selecione --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="EstudioID" class="control-label"></label>
+                        <select asp-for="EstudioID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaEstudios, "EstudioID", "Nome"))">
+                            <option value="">-- Selecione --</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ServicoPrestadoID" class="control-label"></label>
+                        <select asp-for="ServicoPrestadoID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaServicos, "ServicoPrestadoID", "Descricao"))">
+                            <option value="">-- Selecione --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label asp-for="DataInicio" class="control-label"></label>
+                        <input asp-for="DataInicio" type="date" class="form-control " />
+                        <span asp-validation-for="DataInicio" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label asp-for="DataFim" class="control-label"></label>
+                        <input asp-for="DataFim" type="date" class="form-control " />
+                        <span asp-validation-for="DataFim" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label asp-for="HoraInicio" class="control-label"></label>
+                        <input asp-for="HoraInicio" type="text" class="form-control  time" />
+                        <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label asp-for="HoraFim" class="control-label"></label>
+                        <input asp-for="HoraFim" type="text" class="form-control  time" />
+                        <span asp-validation-for="HoraFim" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="Observacoes" class="control-label"></label>
+                        <textarea asp-for="Observacoes" class="form-control "></textarea>
+                        <span asp-validation-for="Observacoes"></span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary btnSalvar" />
+                        <a asp-action="Index" value="Fechar" class="btn btn-sm btn-dark">Fechar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </form>
+
+
+
+

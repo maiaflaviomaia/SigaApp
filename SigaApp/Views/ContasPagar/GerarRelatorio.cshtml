@@ -1,0 +1,121 @@
+﻿@model Paginacao<SigaApp.Models.Entidades.ContaPagar>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Relatório de Contas a Pagar</div>
+            <div class="panel-body">
+                @{
+                    if (TempData["Mensagem"] != null)
+                    {
+                        <div class="text-danger">
+                            <p>ERRO: @TempData["Mensagem"]</p>
+                        </div>
+                    }
+                }
+
+                <form asp-action="GerarRelatorio" class="mt-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="control-label">Fornecedor</label>
+                            <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaFornecedor, "FornecedorID", "RazaoSocial"))" name="txtFornecedor">
+                                <option value="">-- Selecione --</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label class="control-label">De<b class="text-danger">*</b></label>
+                            <input class="form-control " type="date" name="txtDataInicio" />
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label class="control-label">Até<b class="text-danger">*</b></label>
+                            <input class="form-control " type="date" name="txtDataFim" />
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label class="control-label">Status</label>
+                            <select class="form-control " name="txtStatus">
+                                <option value="">-- Selecione --</option>
+                                <option value="0">Aberto</option>
+                                <option value="1">Vencido</option>
+                                <option value="2">Pago</option>
+                                <option value="3">Atrasado</option>
+                                <option value="4">Protestado</option>
+                                <option value="5">Cancelado</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="submit" value="Pesquisar" class="btn btn-info btn-sm btn-block" style="margin-top:22px" />
+                        </div>
+                    </div>
+                </form>
+
+                @if (Model.Count >= 1)
+                {
+                    <div class="row mt-5">
+                        <div class="col-md-2">
+                            <h6>Quantidade: <span class="label label-warning">@Model.Count</span></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h6>Total: <span class="label label-danger">@ViewData["ValorTotal"]</span></h6>
+                        </div>
+                    </div>
+
+                    <div class="float-right mb-3" style="margin-top:-32px; float:right">
+                        <a asp-action="GerarExcel" class="btn btn-sm btn-success">Gerar Excel</a>
+                    </div>
+
+                    <table id="tabela" class="table table-sm table-hover mt-2">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Data Cadastro</th>
+                                <th class="text-center">Data Vencimento</th>
+                                <th class="text-center">Fornecedor</th>
+                                <th class="text-center">Descrição</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Valor</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.DataCadastro)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.DataVencimento)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.Fornecedor.RazaoSocial)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.Descricao)</td>
+
+                                    @if (item.Status == SigaApp.Utils.Enums.StatusContaPagar.Aberto)
+                                    {
+                                        <td class="text-center"><b>@Html.DisplayFor(modelItem => item.Status)</b></td>
+                                    }
+
+                                    @if (item.Status == SigaApp.Utils.Enums.StatusContaPagar.Vencido || item.Status == SigaApp.Utils.Enums.StatusContaPagar.Protestado)
+                                    {
+                                        <td class="text-center text-danger"><b>@Html.DisplayFor(modelItem => item.Status)</b></td>
+                                    }
+
+                                    @if (item.Status == SigaApp.Utils.Enums.StatusContaPagar.Pago)
+                                    {
+                                        <td class="text-center text-success"><b>@Html.DisplayFor(modelItem => item.Status)</b></td>
+                                    }
+
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.Valor)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>Não há dados para serem exibidos</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

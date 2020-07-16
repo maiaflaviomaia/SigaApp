@@ -1,0 +1,230 @@
+﻿@model SigaApp.Models.Entidades.Cliente
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Cadastrar Cliente</div>
+            <div class="panel-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <h5>Dados básicos</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="RazaoSocial" class="control-label"></label>
+                            <input asp-for="RazaoSocial" class="form-control" aria-describedby="sizing-addon3" />
+                            <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="NomeFantasia" class="control-label"></label>
+                            <input asp-for="NomeFantasia" class="form-control " />
+                            <span asp-validation-for="NomeFantasia" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="TipoPessoa" class="control-label"></label>
+                            <select asp-for="TipoPessoa" class="form-control " id="tipoPessoa" onchange="DefinirTipoPessoa();">
+                                <option value="">-- Selecione --</option>
+                                <option value="PF">Pessoa Física</option>
+                                <option value="PJ">Pessoa Jurídica</option>
+                            </select>
+                            <span asp-validation-for="TipoPessoa" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="CPF" class="control-label"></label>
+                            <input asp-for="CPF" data-mask class="form-control  cpf" id="txtCpf" disabled />
+                            <span asp-validation-for="CPF" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="CNPJ" class="control-label"></label>
+                            <input asp-for="CNPJ" class="form-control  cnpj" id="txtCnpj" disabled />
+                            <span asp-validation-for="CNPJ" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="InscricaoEstadual" class="control-label"></label>
+                            <input asp-for="InscricaoEstadual" class="form-control " id="txtEstadual" disabled />
+                            <span asp-validation-for="InscricaoEstadual" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="InscricaoMunicipal" class="control-label"></label>
+                            <input asp-for="InscricaoMunicipal" class="form-control " id="txtMunicipal" disabled />
+                            <span asp-validation-for="InscricaoMunicipal" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control " />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="TelefoneFixo" class="control-label"></label>
+                            <input asp-for="TelefoneFixo" class="form-control  telefone" />
+                            <span asp-validation-for="TelefoneFixo" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="TelefoneCelular" class="control-label"></label>
+                            <input asp-for="TelefoneCelular" class="form-control  celular" />
+                            <span asp-validation-for="TelefoneCelular" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="Responsavel" class="control-label"></label>
+                            <input asp-for="Responsavel" class="form-control " />
+                            <span asp-validation-for="Responsavel" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="Observacoes" class="control-label"></label>
+                            <textarea asp-for="Observacoes" class="form-control "></textarea>
+                            <span asp-validation-for="Observacoes"></span>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <h5 class="mt-3">Endereço</h5>
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Endereco.CEP" class="control-label"></label>
+                            <input asp-for="Endereco.CEP" class="form-control  cep" id="cep" />
+                            <span asp-validation-for="Endereco.CEP" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-8 mb-3">
+                            <label asp-for="Endereco.Logradouro" class="control-label"></label>
+                            <input asp-for="Endereco.Logradouro" class="form-control " id="logradouro" />
+                            <span asp-validation-for="Endereco.Logradouro" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Endereco.Numero" class="control-label"></label>
+                            <input asp-for="Endereco.Numero" class="form-control " />
+                            <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Endereco.Bairro" class="control-label"></label>
+                            <input asp-for="Endereco.Bairro" class="form-control " id="bairro" />
+                            <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Endereco.Cidade" class="control-label"></label>
+                            <input asp-for="Endereco.Cidade" class="form-control " id="cidade" />
+                            <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Endereco.UF" class="control-label"></label>
+                            <select asp-for="Endereco.UF" class="form-control " id="uf">
+                                <option value="">-- Selecione --</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocatins</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Endereco.Complemento" class="control-label"></label>
+                            <input asp-for="Endereco.Complemento" class="form-control " />
+                            <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <hr />
+
+                    <h5 class="mt-3">Dados Bancários</h5>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="DadosBancarios.NomeBanco" class="control-label"></label>
+                            <select asp-for="DadosBancarios.NomeBanco" class="form-control ">
+                                <option value="">-- Selecione --</option>
+                                <option value="Banco do Brasil">001 - Banco do Brasil</option>
+                                <option value="Bradesco">237 - Bradesco</option>
+                                <option value="Caixa Econômica">104 - Caixa Econômica</option>
+                                <option value="Citybank">745 - Citybank</option>
+                                <option value="HSBC">399 - HSBC Bank Brasil</option>
+                                <option value="Itaú">341 - Itaú</option>
+                                <option value="Santander">033 - Santander</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="DadosBancarios.NumeroAgencia" class="control-label"></label>
+                            <input asp-for="DadosBancarios.NumeroAgencia" class="form-control  agencia" />
+                            <span asp-validation-for="DadosBancarios.NumeroAgencia"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="DadosBancarios.NumeroConta" class="control-label"></label>
+                            <input asp-for="DadosBancarios.NumeroConta" class="form-control  conta" />
+                            <span asp-validation-for="DadosBancarios.NumeroConta"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="DadosBancarios.Operacao" class="control-label"></label>
+                            <input asp-for="DadosBancarios.Operacao" class="form-control  " />
+                            <span asp-validation-for="DadosBancarios.Operacao"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="DadosBancarios.Favorecido" class="control-label"></label>
+                            <input asp-for="DadosBancarios.Favorecido" class="form-control " />
+                            <span asp-validation-for="DadosBancarios.Favorecido"></span>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

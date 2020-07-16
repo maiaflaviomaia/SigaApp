@@ -1,0 +1,45 @@
+﻿@model SigaApp.Models.Entidades.Cargo
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Cargo</div>
+            <div class="panel-body">
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataCadastro)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataCadastro)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DescricaoSumaria)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DescricaoSumaria)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.SalarioBase)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.SalarioBase)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DescricaoDetalhada)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DescricaoDetalhada)
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="form-group">
+                    <a asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@Model.CargoID">Editar</a>
+                    <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
