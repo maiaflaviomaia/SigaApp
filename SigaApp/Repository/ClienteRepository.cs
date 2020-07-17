@@ -53,17 +53,13 @@ namespace SigaApp.Repository
 
         public Cliente ObterPorId(int id)
         {
-            return _contexto.Clietes
-                .Include(s => s.Endereco)
-                .Include(s => s.DadosBancarios).FirstOrDefault(c => c.ClienteID == id);
+            return _contexto.Clietes.FirstOrDefault(c => c.ClienteID == id);
         }
 
         public IEnumerable<Cliente> ObterTodos()
         {
             int id = _usuario.ObterEmpresa();
             return _contexto.Clietes
-                .Include(s => s.Endereco)
-                .Include(s => s.DadosBancarios)
                 .ToList()
                 .Where(s => s.FlagAtivo = true && s.DataExclusao is null && s.EmpresaID == id)
                 .OrderBy(s => s.RazaoSocial);

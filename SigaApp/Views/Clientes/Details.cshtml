@@ -79,31 +79,19 @@
                         <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.Responsavel)
                         </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.FlagAtivo)
+                        @*<dt class="col-sm-2">
+                            Endereço
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.FlagAtivo)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.DataExclusao)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.DataExclusao)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Endereco)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.EnderecoCompleto)
+                            @Html.DisplayFor(model => model.Logradouro + " " + model.Numero + ", " + model.Bairro + "." + model.Cidade + "/" + model.UF + " - " + model.CEP)
                         </dd>
 
                         <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.DadosBancarios)
+                            Dados Bancários
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.DadosBancariosCompleto)
-                        </dd>
+                            @Html.DisplayFor(model => model.NomeBanco + " Agência:" + model.NumeroAgencia + " Conta:" + model.NumeroConta)
+                        </dd>*@
                     </dl>
                 </div>
                 <div class="form-group">

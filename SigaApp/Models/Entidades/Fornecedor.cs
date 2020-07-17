@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SigaApp.Models.Entidades
 {
@@ -63,13 +62,38 @@ namespace SigaApp.Models.Entidades
 
         public int EmpresaID { get; set; }
 
-        [NotMapped]
-        public string EnderecoCompleto { get { return Endereco.Logradouro + ", " + Endereco.Numero + " - " + Endereco.Bairro + ". " + Endereco.Cidade + "/" + Endereco.UF + ". " + Endereco.CEP + ". " + Endereco.Complemento; } }
+        [Display(Name = "Logradouro")]
+        public string Logradouro { get; set; }
 
-        [NotMapped]
-        public string DadosBancariosCompleto { get { return "Banco: " + DadosBancarios.NomeBanco + ". " + "Agência: " + DadosBancarios.NumeroAgencia + ". " + "Conta: " + DadosBancarios.NumeroConta; } }
+        [Display(Name = "Número")]
+        public string Numero { get; set; }
 
-        public virtual Endereco Endereco { get; set; }
-        public virtual DadosBancarios DadosBancarios { get; set; }
+        [Display(Name = "Bairro")]
+        public string Bairro { get; set; }
+
+        [Display(Name = "Cidade")]
+        public string Cidade { get; set; }
+
+        [Display(Name = "UF")]
+        public string UF { get; set; }
+
+        [Display(Name = "CEP")]
+        [StringLength(9)]
+        public string CEP { get; set; }
+
+        [Display(Name = "Complemento")]
+        public string Complemento { get; set; }
+
+        [Display(Name = "Nome do Banco")]
+        public string NomeBanco { get; set; }
+
+        [Display(Name = "Número da Agência")]
+        public string NumeroAgencia { get; set; }
+
+        [Display(Name = "Número da Conta")]
+        public string NumeroConta { get; set; }
+
+        [Display(Name = "Operação")]
+        public string Operacao { get; set; }
     }
 }

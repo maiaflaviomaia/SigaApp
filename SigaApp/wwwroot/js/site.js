@@ -175,7 +175,7 @@ function AdicionarCustoProducao() {
         "<td class='text-center'>" + QuantidadeCusto.value + "</td>" +
         "<td class='text-center'>" + ValorUnitarioCusto.value + "</td>" +
         "<td class='text-center'>" + UnidadeCusto.value + "</td>" +
-        "<td class='ext-center valor-calculado_custo'>" + ValorTotalCusto + "</td>" +
+        "<td class='text-center valor-calculado_custo'>" + ValorTotalCusto + "</td>" +
         "<td class='text-center'><button type='button' class='btn btn-sm btn-danger' onclick = 'removerCusto(event)'>Excluir</button></td>" +
         "</tr>";
 
@@ -797,10 +797,7 @@ $(document).ready(function GerarGraficoReceitaxDespesaAcumulado() {
                 },
                 options: {
                     responsive: false,
-                    title: {
-                        display: true,
-                        text: "Receitas x Despesas (Acumulado)"
-                    }
+                   
                 }
             })
         }
@@ -841,10 +838,7 @@ $(document).ready(function GerarGraficoReceitaxDespesaMensal() {
                 },
                 options: {
                     responsive: false,
-                    title: {
-                        display: true,
-                        text: "Receitas x Despesas (Mensal)"
-                    },
+                    
                     scales: {
                         yAxes: [
                             {

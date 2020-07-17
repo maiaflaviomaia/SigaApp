@@ -52,17 +52,13 @@ namespace SigaApp.Repository
 
         public Fornecedor ObterPorId(int id)
         {
-            return _contexto.Fornecedores
-                .Include(s => s.Endereco)
-                .Include(s => s.DadosBancarios).FirstOrDefault(c => c.FornecedorID == id);
+            return _contexto.Fornecedores.FirstOrDefault(c => c.FornecedorID == id);
         }
 
         public IEnumerable<Fornecedor> ObterTodos()
         {
             int id = _usuario.ObterEmpresa();
             return _contexto.Fornecedores
-                .Include(s => s.Endereco)
-                .Include(s => s.DadosBancarios)
                 .ToList().Where(s => s.FlagAtivo = true && s.DataExclusao is null && s.EmpresaID == id).OrderBy(s => s.RazaoSocial);
         }
 

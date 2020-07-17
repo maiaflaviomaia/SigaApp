@@ -18,9 +18,7 @@ namespace SigaApp.Context
         public DbSet<ContaContabil> ContasContabeis { get; set; }
         public DbSet<ContaPagar> ContasPagar { get; set; }
         public DbSet<ContaReceber> ContasRebecer { get; set; }
-        public DbSet<DadosBancarios> DadosBancarios { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Estudio> Estudios { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
@@ -37,10 +35,8 @@ namespace SigaApp.Context
         {
             builder.Entity<Cliente>().ToTable("CLIENTES");
             builder.Entity<Fornecedor>().ToTable("FORNECEDORES");
-            builder.Entity<Endereco>().ToTable("ENDERECOS");
             builder.Entity<ServicoPrestado>().ToTable("SERVICO_PRESTADO");
             builder.Entity<Cargo>().ToTable("CARGOS");
-            builder.Entity<DadosBancarios>().ToTable("DADOS_BANCARIOS");
             builder.Entity<Funcionario>().ToTable("FUNCIONARIOS");
             builder.Entity<Usuario>().ToTable("USUARIOS");
             builder.Entity<Estudio>().ToTable("ESTUDIOS");

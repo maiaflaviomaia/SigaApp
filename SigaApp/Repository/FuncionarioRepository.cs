@@ -54,8 +54,6 @@ namespace SigaApp.Repository
         public Funcionario ObterPorId(int id)
         {
             return _contexto.Funcionarios
-                .Include(s => s.Endereco)
-                .Include(s => s.DadosBancarios)
                 .Include(s => s.Cargos)
                 .FirstOrDefault(c => c.FuncionarioID == id);
         }
@@ -64,8 +62,6 @@ namespace SigaApp.Repository
         {
             int id = _usuario.ObterEmpresa();
             return _contexto.Funcionarios
-                .Include(s => s.Endereco)
-                .Include(s => s.DadosBancarios)
                 .Include(s => s.Cargos)
                 .ToList()
                 .Where(s => s.FlagAtivo = true && s.DataExclusao is null && s.EmpresaID == id)

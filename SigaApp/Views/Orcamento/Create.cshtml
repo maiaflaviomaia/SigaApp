@@ -1,15 +1,13 @@
 ﻿@model SigaApp.Models.Entidades.Orcamento
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">Cadastrar Orçamento</div>
-            <div class="panel-body">
-                <form asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <h5 class="mt-3">Dados Básicos</h5>
-
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Orçamento</div>
+                <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 mb-3">
                             <label asp-for="TipoOrcamento" class="control-label"></label>
@@ -137,240 +135,183 @@
                             <span asp-validation-for="Observacoes"></span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <hr />
-                    
-                    <div class="row" id="servico" style="display:none">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Serviços
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-9 mb-3">
-                                            <label class="control-label">Serviço Prestado</label>
-                                            <select class="form-control " id="servicoSelecionado">
-                                                <option value="">-- Selecione --</option>
-                                                @{
-                                                    foreach (var item in ViewBag.ListaServicos)
-                                                    {
-                                                        <option value="@item.ServicoPrestadoID">@item.Descricao | @item.ValorUnitario</option>
-                                                    }
-                                                }
-                                            </select>
-                                        </div>
+    <!--SERVIÇOS-->
+    <div class="row" id="servico" style="display:none">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Serviços Prestados - R$ <span id="divTotal">0.00</span></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-9 mb-3">
+                            <label class="control-label">Serviço Prestado</label>
+                            <select class="form-control " id="servicoSelecionado">
+                                <option value="">-- Selecione --</option>
+                                @{
+                                    foreach (var item in ViewBag.ListaServicos)
+                                    {
+                                        <option value="@item.ServicoPrestadoID">@item.Descricao | @item.ValorUnitario</option>
+                                    }
+                                }
+                            </select>
+                        </div>
 
-                                        <div class="col-md-2 mb-3">
-                                            <label class="control-label">Quantidade</label>
-                                            <input class="form-control " value="1" type="number" id="txtQuantidade" />
-                                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label class="control-label">Quantidade</label>
+                            <input class="form-control " value="1" type="number" id="txtQuantidade" />
+                        </div>
 
-                                        <div class="col-md-1 mb-3" style="margin-top:18px">
-                                            <button type="button" class="btn btn-block btn-info" onclick="AdicionarServico()"><strong>+</strong></button>
-                                        </div>
-                                    </div>
-                                    <textarea asp-for="ServicosJSON" id="listaServicosJSON" style="display:none"></textarea>
-
-                                    <div class="row mb-3">
-                                        <table class="table table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <td class="text-center"><b>ID</b></td>
-                                                    <td class="text-center"><b>Serviço</b></td>
-                                                    <td class="text-center"><b>Quantidade</b></td>
-                                                    <td class="text-center"><b>Valor Unitário</b></td>
-                                                    <td class="text-center"><b>Total</b></td>
-                                                    <td class="text-center"></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="listaServicos"></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-1 mb-3" style="margin-top:18px">
+                            <button type="button" class="btn btn-block btn-info" onclick="AdicionarServico()"><strong>+</strong></button>
                         </div>
                     </div>
+                    <textarea asp-for="ServicosJSON" id="listaServicosJSON" style="display:none"></textarea>
 
-                    <!--SERVIÇOS-->
-                    <div class="panel panel-default" id="servico" style="display:none">
-                        <div class="panel-heading">
-                            <h5>Serviços - </h5>
-                            <h5 style="margin-left:5px; font-size:15px; margin-top:5px;color:red">R$ </h5>
-                            <h5 id="divTotal" style="margin-left:5px; font-size:15px; margin-top:5px;color:red">0.00</h5>
+                    <div class="row mb-3">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <td class="text-center"><b>ID</b></td>
+                                    <td class="text-center"><b>Serviço</b></td>
+                                    <td class="text-center"><b>Quantidade</b></td>
+                                    <td class="text-center"><b>Valor Unitário</b></td>
+                                    <td class="text-center"><b>Total</b></td>
+                                    <td class="text-center"></td>
+                                </tr>
+                            </thead>
+                            <tbody id="listaServicos"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--FORNECEDORES-->
+    <div class="row" id="fornecedor" style="display:none">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Fornecedores</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label>Fornecedor</label>
+                            <select class="form-control" id="fornecedorSelecionado" asp-items="@(new SelectList(ViewBag.ListaFornecedor, "FornecedorID", "RazaoSocial"))">
+                                <option value="">-- Selecione --</option>
+                            </select>
                         </div>
 
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-9 mb-3">
-                                    <label class="control-label">Serviço Prestado</label>
-                                    <select class="form-control " id="servicoSelecionado">
-                                        <option value="">-- Selecione --</option>
-                                        @{
-                                            foreach (var item in ViewBag.ListaServicos)
-                                            {
-                                                <option value="@item.ServicoPrestadoID">@item.Descricao | @item.ValorUnitario</option>
-                                            }
-                                        }
-                                    </select>
-                                </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Descrição</label>
+                            <input class="form-control" id="txtDescricaoFornecedor" />
+                        </div>
 
-                                <div class="col-md-2 mb-3">
-                                    <label class="control-label">Quantidade</label>
-                                    <input class="form-control " value="1" type="number" id="txtQuantidade" />
-                                </div>
+                        <div class="col-md-2 mb-3">
+                            <label>Quantidade</label>
+                            <input class="form-control" id="txtQuantidadeFornecedor" type="number" value="1" />
+                        </div>
 
-                                <div class="col-md-1 mb-3" style="margin-top:28px">
-                                    <button type="button" class="btn btn-block btn-outline-info" onclick="AdicionarServico()"><strong>+</strong></button>
-                                </div>
-                            </div>
+                        <div class="col-md-2 mb-3">
+                            <label>Valor Unitário</label>
+                            <input class="form-control valor" id="txtValorUnitarioForncedor" />
+                        </div>
 
-                            <textarea asp-for="ServicosJSON" id="listaServicosJSON" style="display:none"></textarea>
-
-                            <div class="row mb-3">
-                                <table class="table table-sm">
-                                    <thead>
-                                        <tr>
-                                            <td class="text-center"><b>ID</b></td>
-                                            <td class="text-center"><b>Serviço</b></td>
-                                            <td class="text-center"><b>Quantidade</b></td>
-                                            <td class="text-center"><b>Valor Unitário</b></td>
-                                            <td class="text-center"><b>Total</b></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="listaServicos"></tbody>
-                                </table>
-                            </div>
+                        <div class="col-md-1 mb-3" style="margin-top:18px">
+                            <button type="button" class="btn btn-block btn-info" onclick="AdicionarFornecedor()"><strong>+</strong></button>
                         </div>
                     </div>
+                    <textarea asp-for="FornecedoresJSON" id="listaFornecedoresJSON" style="display:none"></textarea>
 
-                    <br />
+                    <div class="row mb-3">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <td class="text-center"><b>ID</b></td>
+                                    <td class="text-center"><b>Fornecedor</b></td>
+                                    <td class="text-center"><b>Descrição</b></td>
+                                    <td class="text-center"><b>Quantidade</b></td>
+                                    <td class="text-center"><b>Valor Unitário</b></td>
+                                    <td class="text-center"><b>Valor Total</b></td>
+                                    <td class="text-center"></td>
+                                </tr>
+                            </thead>
+                            <tbody id="listaFornecedores"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <!--FORNECEDORES-->
-                    <div class="card" id="fornecedor" style="display:none">
-                        <div class="card-header">
-                            <div class="row">
-                                <h5>Fornecedores - </h5>
-                                <h5 style="margin-left:5px; font-size:15px; margin-top:5px;color:red">R$ </h5>
-                                <h5 id="divTotalFornecedores" style="margin-left:5px; font-size:15px; margin-top:5px;color:red">0.00</h5>
-                            </div>
+    <!--CUSTOS-->
+    <div class="row" id="custo" style="display:none">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Custos de Produção</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label>Descrição</label>
+                            <input class="form-control " id="txtDescricaoCusto" />
                         </div>
 
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label>Fornecedor</label>
-                                    <select class="form-control" id="fornecedorSelecionado" asp-items="@(new SelectList(ViewBag.ListaFornecedor, "FornecedorID", "RazaoSocial"))">
-                                        <option value="">-- Selecione --</option>
-                                    </select>
-                                </div>
+                        <div class="col-md-2 mb-3">
+                            <label>Quantidade</label>
+                            <input class="form-control " id="txtQuantidadeCusto" type="number" value="1" />
+                        </div>
 
-                                <div class="col-md-4 mb-3">
-                                    <label>Descrição</label>
-                                    <input class="form-control" id="txtDescricaoFornecedor" />
-                                </div>
+                        <div class="col-md-2 mb-3">
+                            <label>Unidade</label>
+                            <select class="form-control " id="txtUnidadeCusto">
+                                <option value="">-- Selecione --</option>
+                                <option value="Cachê">Cachê</option>
+                                <option value="Hora">Hora</option>
+                                <option value="Unidade">Unidade</option>
+                            </select>
+                        </div>
 
-                                <div class="col-md-2 mb-3">
-                                    <label>Quantidade</label>
-                                    <input class="form-control" id="txtQuantidadeFornecedor" type="number" value="1" />
-                                </div>
+                        <div class="col-md-2 mb-3">
+                            <label>Valor Unitário</label>
+                            <input class="form-control  valor" id="txtValorUnitarioCusto" />
+                        </div>
 
-                                <div class="col-md-2 mb-3">
-                                    <label>Valor Unitário</label>
-                                    <input class="form-control valor" id="txtValorUnitarioForncedor" />
-                                </div>
-
-                                <div class="col-md-1 mb-3" style="margin-top:28px">
-                                    <button type="button" class="btn btn-block btn-outline-info" onclick="AdicionarFornecedor()"><strong>+</strong></button>
-                                </div>
-                            </div>
-
-                            <textarea asp-for="FornecedoresJSON" id="listaFornecedoresJSON" style="display:none"></textarea>
-
-                            <div class="row mb-3">
-                                <table class="table table-sm">
-                                    <thead>
-                                        <tr>
-                                            <td class="text-center"><b>ID</b></td>
-                                            <td class="text-center"><b>Fornecedor</b></td>
-                                            <td class="text-center"><b>Descrição</b></td>
-                                            <td class="text-center"><b>Quantidade</b></td>
-                                            <td class="text-center"><b>Valor Unitário</b></td>
-                                            <td class="text-center"><b>Valor Total</b></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="listaFornecedores"></tbody>
-                                </table>
-                            </div>
+                        <div class="col-md-1 mb-3" style="margin-top:18px">
+                            <button type="button" class="btn btn-block btn-info" onclick="AdicionarCustoProducao()"><strong>+</strong></button>
                         </div>
                     </div>
+                    <textarea asp-for="CustoProducaoJSON" id="listaCustoProducaoJSON" style="display:none"></textarea>
 
-                    <br />
-
-                    <!--CUSTOS DE PRODUÇÃO-->
-                    <div class="card mb-3" id="custo" style="display:none">
-                        <div class="card-header">
-                            <div class="row">
-                                <h5>Custos de Produção - </h5>
-                                <h5 style="margin-left:5px; font-size:15px; margin-top:5px;color:red">R$ </h5>
-                                <h5 id="divTotalProducao" style="margin-left:5px; font-size:15px; margin-top:5px; color:red">0.00</h5>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-5 mb-3">
-                                    <label>Descrição</label>
-                                    <input class="form-control " id="txtDescricaoCusto" />
-                                </div>
-
-                                <div class="col-md-2 mb-3">
-                                    <label>Quantidade</label>
-                                    <input class="form-control " id="txtQuantidadeCusto" type="number" value="1" />
-                                </div>
-
-                                <div class="col-md-2 mb-3">
-                                    <label>Unidade</label>
-                                    <select class="form-control " id="txtUnidadeCusto">
-                                        <option value="">-- Selecione --</option>
-                                        <option value="Cachê">Cachê</option>
-                                        <option value="Hora">Hora</option>
-                                        <option value="Unidade">Unidade</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-md-2 mb-3">
-                                    <label>Valor Unitário</label>
-                                    <input class="form-control  valor" id="txtValorUnitarioCusto" />
-                                </div>
-
-                                <div class="col-md-1 mb-3" style="margin-top:28px">
-                                    <button type="button" class="btn btn-block btn-outline-info" onclick="AdicionarCustoProducao()"><strong>+</strong></button>
-                                </div>
-                            </div>
-
-                            <textarea asp-for="CustoProducaoJSON" id="listaCustoProducaoJSON" style="display:none"></textarea>
-
-                            <div class="row mb-3">
-                                <table class="table table-sm">
-                                    <thead>
-                                        <tr>
-                                            <td class="text-center"><b>Descrição</b></td>
-                                            <td class="text-center"><b>Quantidade</b></td>
-                                            <td class="text-center"><b>Valor Unitário</b></td>
-                                            <td class="text-center"><b>Unidade</b></td>
-                                            <td class="text-center"><b>Valor Total</b></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="listaCustosProducao"></tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="row mb-3">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <td class="text-center"><b>Descrição</b></td>
+                                    <td class="text-center"><b>Quantidade</b></td>
+                                    <td class="text-center"><b>Valor Unitário</b></td>
+                                    <td class="text-center"><b>Unidade</b></td>
+                                    <td class="text-center"><b>Valor Total</b></td>
+                                    <td class="text-center"></td>
+                                </tr>
+                            </thead>
+                            <tbody id="listaCustosProducao"></tbody>
+                        </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <div id="blocoTotal" style="display:none">
+    <!--TOTAL-->
+    <div class="row" id="blocoTotal" style="display:none">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Totais</div>
+                <div class="panel-body">
+                    <div>
                         <div class="row" style="margin-left:1px" id="sub1">
                             <h6 style="color:cornflowerblue">Subtotal 1 - </h6>
                             <h6 id="txtSubTotal" style="margin-left:5px; font-size:15px; color:cornflowerblue">0.00</h6>
@@ -444,36 +385,36 @@
                             <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
                         </div>
                     </div>
-                </form>
-
-                <div class="modal fade" id="modalClienteOrc" tabindex="-1" role="dialog" aria-labelledby="modalClienteLabelOrc" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalClienteLabelOrc">Adicionar Cliente</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="txtCliente" class="col-form-label">Razão Social:</label>
-                                        <input type="text" class="form-control" id="txtCliente">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-sm btn-primary" id="btnSalvarClienteOrc">Salvar</button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Fechar</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="modal fade" id="modalClienteOrc" tabindex="-1" role="dialog" aria-labelledby="modalClienteLabelOrc" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalClienteLabelOrc">Adicionar Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="txtCliente" class="col-form-label">Razão Social:</label>
+                            <input type="text" class="form-control" id="txtCliente">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-primary" id="btnSalvarClienteOrc">Salvar</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 @section Scripts{
     <script>
