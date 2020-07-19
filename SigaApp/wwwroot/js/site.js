@@ -733,43 +733,6 @@ function DefinirRecorrente() {
     }
 }
 
-//Abrir modal de cadastro de novo Lançamento
-$(function () {
-    $(".create").click(function () {
-        $("#modalCreate").load("Create", function () {
-            $("#modalCreate").modal();
-        })
-    })
-});
-
-//Abrir modal de transferência de valores
-$(function () {
-    $(".transfer").click(function () {
-        $("#modalTransfer").load("TransferirValores", function () {
-            $("#modalTransfer").modal();
-        })
-    })
-});
-
-//Abrir modal de cadastro de sessão de gravação
-$(function () {
-    $(".createSessao").click(function () {
-        $("#modalCreateSessao").load("Create", function () {
-            $("#modalCreateSessao").modal();
-        })
-    })
-});
-
-//Abrir modal de cadastro de evento na agenda de produção
-$(function () {
-    $(".createAgenda").click(function () {
-        $("#modalCreateAgenda").load("Create", function () {
-            $("#modalCreateAgenda").modal();
-        })
-    })
-});
-
-
 //Gerar o gráfico de rosca
 $(document).ready(function GerarGraficoReceitaxDespesaAcumulado() {
     $.ajax({

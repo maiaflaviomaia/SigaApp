@@ -78,12 +78,12 @@
                                         <td>
                                             <a asp-action="Details" asp-route-id="@item.OrcamentoID">Detalhes</a> |
                                             <a class="disabled">Cancelar</a> |
-                                            <div class="btn-group" role="group">
-                                                <button id="btnGerarPdf" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>PDF</button>
-                                                <div class="dropdown-menu" aria-labelledby="btnGerarPdf">
-                                                    <a class="dropdown-item disabled" aria-disabled="true" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a>
-                                                    <a class="dropdown-item disabled" aria-disabled="true" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a>
-                                                </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>PDF <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a></li>
+                                                    <li><a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a></li>
+                                                </ul>
                                             </div>
                                         </td>
                                     }
@@ -92,12 +92,12 @@
                                         <td>
                                             <a asp-action="Details" asp-route-id="@item.OrcamentoID">Detalhes</a> |
                                             <a asp-action="FaturarOrcamento" asp-route-id="@item.OrcamentoID" class="btn btn-sm btn-success">Faturar</a> |
-                                            <div class="btn-group" role="group">
-                                                <button id="btnGerarPdf" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF</button>
-                                                <div class="dropdown-menu" aria-labelledby="btnGerarPdf">
-                                                    <a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a>
-                                                    <a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a>
-                                                </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a></li>
+                                                    <li><a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a></li>
+                                                </ul>
                                             </div>
                                         </td>
                                     }
@@ -106,12 +106,12 @@
                                         <td>
                                             <a asp-action="Details" asp-route-id="@item.OrcamentoID">Detalhes</a> |
                                             <a class="disabled">Cancelar</a> |
-                                            <div class="btn-group" role="group">
-                                                <button id="btnGerarPdf" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF</button>
-                                                <div class="dropdown-menu" aria-labelledby="btnGerarPdf">
-                                                    <a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a>
-                                                    <a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a>
-                                                </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a></li>
+                                                    <li><a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a></li>
+                                                </ul>
                                             </div>
                                         </td>
                                     }
@@ -120,12 +120,12 @@
                                         <td>
                                             <a asp-action="Details" asp-route-id="@item.OrcamentoID">Detalhes</a> |
                                             <a asp-action="Delete" asp-route-id="@item.OrcamentoID">Cancelar</a> |
-                                            <div class="btn-group" role="group">
-                                                <button id="btnGerarPdf" type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF</button>
-                                                <div class="dropdown-menu" aria-labelledby="btnGerarPdf">
-                                                    <a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a>
-                                                    <a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a>
-                                                </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PDF <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" asp-action="GerarPDFResumido" asp-route-id="@item.OrcamentoID">Resumido</a></li>
+                                                    <li><a class="dropdown-item" asp-action="GerarPDFDetalhado" asp-route-id="@item.OrcamentoID">Detalhado</a></li>
+                                                </ul>
                                             </div>
                                         </td>
                                     }

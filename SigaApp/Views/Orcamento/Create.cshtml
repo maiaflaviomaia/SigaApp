@@ -144,7 +144,7 @@
     <div class="row" id="servico" style="display:none">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Serviços Prestados - R$ <span id="divTotal">0.00</span></div>
+                <div class="panel-heading">Serviços Prestados - R$ <span id="divTotal" style="font-size:20px">0.00</span></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-9 mb-3">
@@ -195,7 +195,7 @@
     <div class="row" id="fornecedor" style="display:none">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Fornecedores</div>
+                <div class="panel-heading">Fornecedores - R$ <span id="divTotalFornecedores" style="font-size:20px">0.00</span></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 mb-3">
@@ -251,7 +251,7 @@
     <div class="row" id="custo" style="display:none">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Custos de Produção</div>
+                <div class="panel-heading">Custos de Produção - R$ <span id="divTotalProducao" style="font-size:20px">0.00</span></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-5 mb-3">
@@ -312,10 +312,10 @@
                 <div class="panel-heading">Totais</div>
                 <div class="panel-body">
                     <div>
-                        <div class="row" style="margin-left:1px" id="sub1">
-                            <h6 style="color:cornflowerblue">Subtotal 1 - </h6>
-                            <h6 id="txtSubTotal" style="margin-left:5px; font-size:15px; color:cornflowerblue">0.00</h6>
-                            <h6 style="margin-left:5px; font-size:12px; color:cornflowerblue; margin-top:2px">(Serviços + Fornecedores + Custos de Produção)</h6>
+                        <div class="row mb-4" id="sub1">
+                            <div class="col-lg-12">
+                                <div class="alert bg-primary"><b>Subtotal 1 - <span id="txtSubTotal">0.00</span> <span>(Serviços + Fornecedores + Custos de Produção)</span></b></div>
+                            </div>
                         </div>
 
                         <div class="form-group row" id="lucro">
@@ -326,10 +326,10 @@
                             <h6 id="valorLucro" style="font-size:12px; margin-top:12px">0.00</h6>
                         </div>
 
-                        <div class="row" style="margin-left:1px; margin-bottom:7px" id="sub2">
-                            <h6 style="color:brown">Subtotal 2 - </h6>
-                            <h6 id="txtSubTotal2" style="margin-left:5px; font-size:15px; color:brown">0.00</h6>
-                            <h6 style="margin-left:5px; font-size:12px; color:brown; margin-top:2px">(Subtotal 1 + Lucro desejado)</h6>
+                        <div class="row mb-4" id="sub2">
+                            <div class="col-lg-12">
+                                <div class="alert bg-primary"><b>Subtotal 2 - <span id="txtSubTotal2">0.00</span> <span></span>(Subtotal 1 + Lucro desejado)</b></div>
+                            </div>
                         </div>
 
                         <div class="form-group row" id="bv">
@@ -372,9 +372,10 @@
 
                         <br />
 
-                        <div class="row" style="margin-left:1px" id="totalOrc">
-                            <h5 style="color:blue">Total Geral - </h5>
-                            <h5 id="divTotalOrcamento" style="margin-left:5px; font-size:18px; margin-top:3px; color:blue">0.00</h5>
+                        <div class="row" id="totalOrc">
+                            <div class="col-lg-12">
+                                <div class="alert bg-info"><b>Total Geral - <span id="divTotalOrcamento">0.00</span></b></div>
+                            </div>
                         </div>
 
                         <input asp-for="TotalOrcamento" id="txtTotalOrcamento" type="hidden" />
@@ -382,13 +383,13 @@
                         <hr />
                         <div class="form-group" id="botoes">
                             <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
-                            <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                            <a asp-action="Index" value="Fechar" class="btn btn-sm btn-dark">Voltar</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+   
 
     <div class="modal fade" id="modalClienteOrc" tabindex="-1" role="dialog" aria-labelledby="modalClienteLabelOrc" aria-hidden="true">
         <div class="modal-dialog">

@@ -1,8 +1,5 @@
 ﻿@model SigaApp.Models.Entidades.ContaPagar
 
-<h4 style="font-size:2.0rem; font-weight: 300; line-height: 1.2;">Pagar Conta</h4>
-<hr />
-
 <form asp-action="Pagar">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -27,143 +24,149 @@
     <input type="hidden" asp-for="FlagAtivo" />
     <input type="hidden" asp-for="ValorPago" />
 
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">@Html.DisplayFor(model => model.Fornecedor.RazaoSocial)</h5>
-            <h6 class="card-title">@Html.DisplayFor(model => model.Descricao)</h6>
-            <h6 class="card-title" style="color:red">@Html.DisplayFor(model => model.Valor)</h6>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Pagar Conta</div>
+                <div class="panel-body">
+                    <h5><b>@Html.DisplayFor(model => model.Fornecedor.RazaoSocial)</b></h5>
+                    <h6><b>@Html.DisplayFor(model => model.Descricao)</b></h6>
+                    <h6><b>@Html.DisplayFor(model => model.Valor)</b></h6>
 
-            <hr />
+                    <div class="row mt-3">
+                        <div class="col-md-3 mb-3">
+                            <label><b>Data de vencimento</b></label>
+                            <p>@Html.DisplayFor(model => model.DataVencimento)</p>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <label><b>Data de vencimento</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.DataVencimento)</p>
-                </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Competência</b></label>
+                            <p>@Html.DisplayFor(model => model.Competencia)</p>
+                        </div>
+                    </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Competência</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.Competencia)</p>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label><b>Tipo do Documento</b></label>
+                            <p>@Html.DisplayFor(model => model.TipoDocumento)</p>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <label><b>Tipo do Documento</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.TipoDocumento)</p>
-                </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Número do Documento</b></label>
+                            <p>@Html.DisplayFor(model => model.NumeroDocumento)</p>
+                        </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Número do Documento</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.NumeroDocumento)</p>
-                </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Forma de Pagamento</b></label>
+                            <p>@Html.DisplayFor(model => model.FormaPagamento)</p>
+                        </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Forma de Pagamento</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.FormaPagamento)</p>
-                </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Status</b></label>
+                            <p>@Html.DisplayFor(model => model.Status)</p>
+                        </div>
+                    </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Status</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.Status)</p>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label><b>Categoria</b></label>
+                            @if (Model.Categoria == null)
+                            {
+                                <p> - </p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.Categoria.Nome)</p>
+                            }
+                        </div>
 
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <label><b>Categoria</b></label>
-                    @if (Model.Categoria == null)
-                    {
-                        <p class="card-text" style="font-size:14px"> - </p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.Categoria.Nome)</p>
-                    }
-                </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Sub-categoria</b></label>
+                            @if (Model.SubCategoria == null)
+                            {
+                                <p> - </p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.SubCategoria.Nome)</p>
+                            }
+                        </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Sub-categoria</b></label>
-                    @if (Model.SubCategoria == null)
-                    {
-                        <p class="card-text" style="font-size:14px"> - </p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.SubCategoria.Nome)</p>
-                    }
-                </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Centro de Custo</b></label>
+                            @if (Model.CentroDeCusto == null)
+                            {
+                                <p> - </p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.CentroDeCusto.Nome)</p>
+                            }
+                        </div>
+                    </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Centro de Custo</b></label>
-                    @if (Model.CentroDeCusto == null)
-                    {
-                        <p class="card-text" style="font-size:14px"> - </p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.CentroDeCusto.Nome)</p>
-                    }
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <label><b>Observações</b></label>
-                    @if (@Model.Observacoes == null)
-                    {
-                        <p class="card-text" style="font-size:14px"> - </p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.Observacoes)</p>
-                    }
-                </div>
-            </div>
-
-            <hr />
-
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <label asp-for="ContaContabilID" class="control-label"></label>
-                    <select asp-for="ContaContabilID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))">
-                        <option value="">-- Selecione --</option>
-                    </select>
-                    <span asp-validation-for="ContaContabilID"></span>
-                </div>
-
-                <div class="col-md-3 mb-3">
-                    <label asp-for="DataPagamento" class="control-label"></label>
-                    <input asp-for="DataPagamento" class="form-control " />
-                    <span asp-validation-for="DataPagamento"></span>
-                </div>
-
-                <div class="col-md-2 mb-3">
-                    <label asp-for="Desconto" class="control-label"></label>
-                    <input asp-for="Desconto" class="form-control  money2" />
-                    <span asp-validation-for="Desconto"></span>
-                </div>
-
-                <div class="col-md-2 mb-3">
-                    <label asp-for="Juros" class="control-label"></label>
-                    <input asp-for="Juros" class="form-control  money2" />
-                    <span asp-validation-for="Juros"></span>
-                </div>
-
-                <div class="col-md-2 mb-3">
-                    <label asp-for="Multa" class="control-label"></label>
-                    <input asp-for="Multa" class="form-control  money2" />
-                    <span asp-validation-for="Multa"></span>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label><b>Observações</b></label>
+                            @if (@Model.Observacoes == null)
+                            {
+                                <p> - </p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.Observacoes)</p>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <input type="submit" value="Realizar Baixa" class="btn btn-sm btn-success" />
-        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="ContaContabilID" class="control-label"></label>
+                            <select asp-for="ContaContabilID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))">
+                                <option value="">-- Selecione --</option>
+                            </select>
+                            <span asp-validation-for="ContaContabilID"></span>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="DataPagamento" class="control-label"></label>
+                            <input asp-for="DataPagamento" class="form-control " />
+                            <span asp-validation-for="DataPagamento"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Desconto" class="control-label"></label>
+                            <input asp-for="Desconto" class="form-control  money2" />
+                            <span asp-validation-for="Desconto"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Juros" class="control-label"></label>
+                            <input asp-for="Juros" class="form-control  money2" />
+                            <span asp-validation-for="Juros"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label asp-for="Multa" class="control-label"></label>
+                            <input asp-for="Multa" class="form-control  money2" />
+                            <span asp-validation-for="Multa"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <input type="submit" value="Realizar Baixa" class="btn btn-sm btn-success" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
-
-
-

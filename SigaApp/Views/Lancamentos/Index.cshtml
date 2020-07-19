@@ -6,11 +6,11 @@
             <div class="panel-heading">Lançamentos</div>
             <div class="panel-body">
                 <p style="margin-top:20px">
-                    <button class="btn btn-info btn-sm create" data-toggle="modal" data-target="modalCreate">Cadastrar Novo</button>
-                    <button class="btn btn-warning btn-sm transfer text-white" data-toggle="modal" data-target="modalTransfer">Transferir Valores</button>
+                    <a asp-action="Create" class="btn btn-info btn-sm">Cadastrar Novo</a>
+                    <a asp-action="TransferirValores" class="btn btn-warning btn-sm">Transferir Valores</a>
                 </p>
-
-                <form asp-action="Index" method="get">
+                
+                <form asp-action="Index" method="get" class="mt-5">
                     <div class="row">
                         <div class="col-md-3">
                             <label class="control-label">Conta Contábil</label>
@@ -19,7 +19,7 @@
                             </select>
                         </div>
                         <div class="col-md-1">
-                            <input type="submit" value="Pesquisar" class="btn btn-sm btn-dark" style="margin-top:31px; margin-left:-22px">
+                            <input type="submit" value="Pesquisar" class="btn btn-sm btn-dark" style="margin-top:23px; margin-left:-22px">
                         </div>
                     </div>
                 </form>
@@ -27,11 +27,11 @@
                 @if (Model.Count() >= 1)
                 {
                     <div class="row mt-5">
-                        <div class="col-md-3">
-                            <h6>Saldo Inicial: <span class="badge badge-warning">@ViewData["SaldoInicial"]</span></h6>
+                        <div class="col-md-2">
+                            <h6>Saldo Inicial: <span class="label label-warning">@ViewData["SaldoInicial"]</span></h6>
                         </div>
-                        <div class="col-md-3">
-                            <h6>Saldo Atual: <span class="badge badge-primary">@ViewData["SaldoAtual"]</span></h6>
+                        <div class="col-md-2">
+                            <h6>Saldo Atual: <span class="label label-info">@ViewData["SaldoAtual"]</span></h6>
                         </div>
                     </div>
 
@@ -71,7 +71,7 @@
                                         @Html.DisplayFor(modelItem => item.Descricao)
                                     </td>
 
-                                    @if (item.TipoLancamento == SigaApp.Utils.Enums .TipoLancamento.Credito)
+                                    @if (item.TipoLancamento == SigaApp.Utils.Enums.TipoLancamento.Credito)
                                     {
                                         <td class="text-primary text-center">
                                             @Html.DisplayFor(modelItem => item.Valor)
