@@ -1,127 +1,133 @@
 ﻿@model Paginacao<SigaApp.Models.Entidades.Orcamento>
 
-<h2 style="font-size:2.0rem; font-weight: 300; line-height: 1.2;">Relatório de Orçamentos</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Relatório de Orçamentos</div>
+            <div class="panel-body">
+                @{
+                    if (TempData["Mensagem"] != null)
+                    {
+                        <div class="text-danger">
+                            <p>ERRO: @TempData["Mensagem"]</p>
+                        </div>
+                    }
+                }
 
-@{
-    if (TempData["Mensagem"] != null)
-    {
-        <div class="text-danger">
-            <p>ERRO: @TempData["Mensagem"]</p>
-        </div>
-    }
-}
+                <form asp-action="GerarRelatorio" class="mt-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<form asp-action="GerarRelatorio" class="mt-5">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="control-label">Cliente</label>
+                            <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaClientes, "ClienteID", "RazaoSocial"))" name="txtCliente">
+                                <option value="">-- Selecione --</option>
+                            </select>
+                        </div>
 
-    <div class="row">
-        <div class="col-md-3">
-            <label class="control-label">Cliente</label>
-            <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaClientes, "ClienteID", "RazaoSocial"))" name="txtCliente">
-                <option value="">-- Selecione --</option>
-            </select>
-        </div>
+                        <div class="col-md-2 mb-3">
+                            <label class="control-label">De<b class="text-danger">*</b></label>
+                            <input class="form-control " type="date" name="txtDataInicio" />
+                        </div>
 
-        <div class="col-md-2 mb-3">
-            <label class="control-label">De<b class="text-danger">*</b></label>
-            <input class="form-control " type="date" name="txtDataInicio" />
-        </div>
+                        <div class="col-md-2 mb-3">
+                            <label class="control-label">Até<b class="text-danger">*</b></label>
+                            <input class="form-control " type="date" name="txtDataFim" />
+                        </div>
 
-        <div class="col-md-2 mb-3">
-            <label class="control-label">Até<b class="text-danger">*</b></label>
-            <input class="form-control " type="date" name="txtDataFim" />
-        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Tipo</label>
+                            <select class="form-control " name="txtTipo">
+                                <option value="">-- Selecione --</option>
+                                <option value="Audio">Áudio</option>
+                                <option value="Video">Vídeo</option>
+                                <option value="Publicidade">Publicitário</option>
+                            </select>
+                        </div>
 
-        <div class="col-md-2">
-            <label class="control-label">Tipo</label>
-            <select class="form-control " name="txtTipo">
-                <option value="">-- Selecione --</option>
-                <option value="Audio">Áudio</option>
-                <option value="Video">Vídeo</option>
-                <option value="Publicidade">Publicitário</option>
-            </select>
-        </div>
+                        <div class="col-md-2 mb-3">
+                            <label class="control-label">Status</label>
+                            <select class="form-control " name="txtStatus">
+                                <option value="">-- Selecione --</option>
+                                <option value="0">Aberto</option>
+                                <option value="1">Aprovado</option>
+                                <option value="2">Reprovado</option>
+                                <option value="3">Cancelado</option>
+                                <option value="4">Encerrado</option>
+                                <option value="5">Faturado</option>
+                            </select>
+                        </div>
 
-        <div class="col-md-2 mb-3">
-            <label class="control-label">Status</label>
-            <select class="form-control " name="txtStatus">
-                <option value="">-- Selecione --</option>
-                <option value="0">Aberto</option>
-                <option value="1">Aprovado</option>
-                <option value="2">Reprovado</option>
-                <option value="3">Cancelado</option>
-                <option value="4">Encerrado</option>
-                <option value="5">Faturado</option>
-            </select>
-        </div>
+                        <div class="col-md-1">
+                            <input type="submit" value="Buscar" class="btn btn-info btn-sm btn-block" style="margin-top:22px" />
+                        </div>
+                    </div>
+                </form>
 
-        <div class="col-md-1">
-            <input type="submit" value="Buscar" class="btn btn-info btn-sm btn-block" style="margin-top:31px" />
+                @if (Model.Count >= 1)
+                {
+                    <div class="row mt-4">
+                        <div class="col-md-2">
+                            <h6>Quantidade: <span class="label label-warning">@Model.Count</span></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h6>Total: <span class="label label-primary">@ViewData["ValorTotal"]</span></h6>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" style="margin-top:-35px; float:right">
+                        <a asp-action="GerarExcel" class="btn btn-sm btn-success">Gerar Excel</a>
+                    </div>
+
+                    <table class="table table-sm table-hover mt-2">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Data Cadastro</th>
+                                <th class="text-center">Data Orçamento</th>
+                                <th class="text-center">Cliente</th>
+                                <th class="text-center">Título</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Valor</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.DataCadastro)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.DataOrcamento)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.Cliente.RazaoSocial)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.Titulo)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.TipoOrcamento)</td>
+
+                                    @if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Aberto)
+                                    {
+                                        <td class="text-center"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
+                                    }
+
+                                    @if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Cancelado || item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Encerrado || item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Reprovado)
+                                    {
+                                        <td class="text-center text-danger"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
+                                    }
+
+                                    @if (item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Faturado || item.StatusOrcamento == SigaApp.Utils.Enums.StatusOrcamento.Aprovado)
+                                    {
+                                        <td class="text-center text-success"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
+                                    }
+
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.TotalOrcamento)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>Não há dados para serem exibidos</p>
+                }
+            </div>
         </div>
     </div>
-</form>
-
-@if (Model.Count >= 1)
-{
-    <div class="row mt-4">
-        <div class="col-md-2">
-            <h6>Quantidade: <span class="badge badge-warning">@Model.Count</span></h6>
-        </div>
-        <div class="col-md-2">
-            <h6>Total: <span class="badge badge-primary">@ViewData["ValorTotal"]</span></h6>
-        </div>
-    </div>
-
-    <div class="float-right mb-3" style="margin-top:-35px">
-        <a asp-action="GerarExcel" class="btn btn-sm btn-success">Gerar Excel</a>
-    </div>
-
-    <table class="table table-sm table-hover mt-2">
-        <thead class="thead-dark">
-            <tr>
-                <th class="text-center">Data Cadastro</th>
-                <th class="text-center">Data Orçamento</th>
-                <th class="text-center">Cliente</th>
-                <th class="text-center">Título</th>
-                <th class="text-center">Tipo</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Valor</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.DataCadastro)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.DataOrcamento)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.Cliente.RazaoSocial)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.Titulo)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.TipoOrcamento)</td>
-
-                    @if (item.StatusOrcamento == SigaApp.StatusOrcamento.Aberto)
-                    {
-                        <td class="text-center"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
-                    }
-
-                    @if (item.StatusOrcamento == SigaApp.StatusOrcamento.Cancelado || item.StatusOrcamento == SigaApp.StatusOrcamento.Encerrado || item.StatusOrcamento == SigaApp.StatusOrcamento.Reprovado)
-                    {
-                        <td class="text-center text-danger"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
-                    }
-
-                    @if (item.StatusOrcamento == SigaApp.StatusOrcamento.Faturado || item.StatusOrcamento == SigaApp.StatusOrcamento.Aprovado)
-                    {
-                        <td class="text-center text-success"><b>@Html.DisplayFor(modelItem => item.StatusOrcamento)</b></td>
-                    }
-
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.TotalOrcamento)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Não há dados para serem exibidos</p>
-}
-
+</div>

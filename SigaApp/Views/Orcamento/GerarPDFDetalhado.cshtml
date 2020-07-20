@@ -19,7 +19,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SIGA - Gestão Audiovisual</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header class="text-right text-sm-right">
@@ -32,8 +31,8 @@
 
     @if (Model.TipoOrcamento == "Audio")
     {
-        <div class="row text-center mt-4">
-            <div class="co-lg-12">
+        <div class="row text-center mt-5">
+            <div class="col-lg-12">
                 <h4><b>ORÇAMENTO</b></h4>
             </div>
         </div>
@@ -45,17 +44,17 @@
         <h6>Validade: @Model.DataValidade.ToString("dd/MM/yyyy")</h6>
         <h6>Orçamento: @Model.OrcamentoID</h6>
 
-        <div class="row mt-4">
-            <div class="co-lg-12">
+        <div class="row" style="margin-top:25px">
+            <div class="col-lg-12">
                 <p>Conforme solicitado, encaminhamos nosso orçamento referente aos serviços prestados abaixo:</p>
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="co-lg-12">
+        <div class="row" style="margin-top:25px">
+            <div class="col-lg-12">
                 <h5><b>Serviços</b></h5>
                 <div class="row">
-                    <div class="co-lg-12">
+                    <div class="col-lg-12">
                         @if (Model.OrcamentoServicos.Count >= 1)
                         {
                             <table class="table table-sm table-bordered">
@@ -87,13 +86,13 @@
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="co-lg-12">
+        <div class="row" style="margin-top:25px">
+            <div class="col-lg-12">
                 <h5><b>Total: @Model.TotalOrcamento.ToString("C")</b><span style="font-size:14px; margin-left:10px;">(@Model.ValorPorExtenso)</span></h5>
             </div>
         </div>
 
-        <div class="mt-5">
+        <div style="margin-top:25px">
             <h5><b>Observações</b></h5>
             <h6> - Impostos e encargos inclusos na proposta;</h6>
             <h6> - Forma de pagamento: à definir;</h6>
@@ -104,7 +103,7 @@
     else
     {
         <div class="row text-center mt-4">
-            <div class="co-lg-12">
+            <div class="col-lg-12">
                 <h4><b>ORÇAMENTO</b></h4>
             </div>
         </div>
@@ -117,14 +116,14 @@
         <h6>Validade: @Model.DataValidade.ToString("dd/MM/yyyy")</h6>
         <h6>Orçamento: @Model.OrcamentoID</h6>
 
-        <div class="row mt-5">
-            <div class="co-lg-12">
+        <div class="row" style="margin-top:25px">
+            <div class="col-lg-12">
                 <p>Conforme solicitado, encaminhamos nosso orçamento referente aos serviços prestados abaixo:</p>
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="co-lg-12">
+        <div class="row" style="margin-top:25px">
+            <div class="col-lg-12">
                 <h5><b>Serviços</b></h5>
                 <div class="row">
                     <div class="col">
@@ -159,14 +158,14 @@
             </div>
         </div>
 
-        <div class="row mt-4">
-            <div class="co-lg-12">
+        <div class="row" style="margin-top:25px">
+            <div class="col-lg-12">
                 <h5><b>Total: @Model.TotalOrcamento.ToString("C")</b><span style="font-size:14px; margin-left:10px;">(@Model.ValorPorExtenso)</span></h5>
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="co-lg-12">
+        <div class="row" style="margin-top:25px">
+            <div class="col-lg-12">
                 <h5><b>Informações sobre veiculação</b></h5>
                 <h6> - Nome da Peça: @Model.NomePeca</h6>
                 <h6> - Duração: @Model.DuracaoPeca</h6>
@@ -178,7 +177,7 @@
             </div>
         </div>
 
-        <div class="mt-4">
+        <div style="margin-top:25px">
             <h5><b>Observações</b></h5>
             <h6> - Impostos e encargos inclusos na proposta;</h6>
             <h6> - Forma de pagamento: à definir;</h6>
@@ -186,8 +185,8 @@
         </div>
     }
 
-    <div class="row mt-5">
-        <div class="co-lg-12">
+    <div class="row" style="margin-top:25px">
+        <div class="col-lg-12">
             <h6>Atenciosamente,</h6>
             <h6>@User.Identity.Name</h6>
         </div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SigaApp.Models.Entidades
 {
@@ -129,7 +130,13 @@ namespace SigaApp.Models.Entidades
 
         [Display(Name = "Operação")]
         public string Operacao { get; set; }
-                
+
+        [NotMapped]
+        public string Endereco => Logradouro + "," + Numero + "." + Bairro + " - " + Cidade + "/" + UF + "." + CEP;
+
+        [NotMapped]
+        public string DadosBancarios => NomeBanco + " Agência: " + NumeroAgencia + " Conta: " + NumeroConta;
+
         public Cargo Cargos { get; set; }
     }
 }

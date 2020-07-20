@@ -62,7 +62,7 @@ namespace SigaApp.Models.Entidades
 
         public Cliente Cliente { get; set; }
         public Fornecedor Fornecedor { get; set; }
-        public ServicoPrestado servicoPrestado { get; set; }
+        public ServicoPrestado ServicoPrestado { get; set; }
         public Estudio Estudio { get; set; }
     }
 }

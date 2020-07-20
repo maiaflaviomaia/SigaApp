@@ -22,9 +22,18 @@
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.DescricaoDetalhada)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.DescricaoDetalhada)
-                        </dd>
+
+                        @if (Model.DescricaoDetalhada != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.DescricaoDetalhada)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.HoraFuncionamentoInicio)
                         </dt>
@@ -36,18 +45,6 @@
                         </dt>
                         <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.HoraFuncionamentoFim)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.FlagAtivo)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.FlagAtivo)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.DataExclusao)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.DataExclusao)
                         </dd>
                     </dl>
                 </div>

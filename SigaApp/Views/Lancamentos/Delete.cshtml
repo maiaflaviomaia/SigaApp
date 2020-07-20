@@ -15,18 +15,27 @@
                         <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.DataLancamento)
                         </dd>
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Nome)
                         </dt>
                         <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.Nome)
                         </dd>
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Descricao)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Descricao)
-                        </dd>
+                        @if (Model.Descricao  != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Descricao)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
 
                         @if (Model.TipoLancamento == SigaApp.Utils.Enums.TipoLancamento.Credito)
                         {
@@ -53,42 +62,83 @@
                         <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.NumeroDocumento)
                         </dd>
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.CategoriaID)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Categoria.Nome)
-                        </dd>
+                        @if (Model.CategoriaID != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Categoria.Nome)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.SubCategoriaID)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.SubCategoria.Nome)
-                        </dd>
+                        @if (Model.SubCategoriaID != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.SubCategoria.Nome)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.CentroCusto)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.CentroCusto.Descricao)
-                        </dd>
+                        @if (Model.CentroCustoID != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.CentroCusto.Descricao)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.ContaContabil)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.ContaContabil.Descricao)
-                        </dd>
+                        @if (Model.ContaContabilID != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.ContaContabil.Descricao)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Valor)
                         </dt>
                         <dd class="col-sm-10">
                             <b>@Html.DisplayFor(model => model.Valor)</b>
                         </dd>
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Observacoes)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Observacoes)
-                        </dd>
+                        @if (Model.Observacoes != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Observacoes)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
                     </dl>
 
                     <form asp-action="Delete">

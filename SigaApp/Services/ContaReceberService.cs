@@ -98,14 +98,14 @@ namespace SigaApp.Servicos
                 if (conta.DataVencimento == null)
                     throw new ArgumentException("Campo Data de Vencimento é obrigatório");
 
-                if (conta.DataVencimento != null && conta.DataVencimento < DateTime.Now)
+                if (conta.DataVencimento != null && conta.DataVencimento.Date < DateTime.Now.Date)
                     throw new ArgumentException("A data de vencimento não pode ser menor que a data atual");
 
                 if (conta.FormaPagamento == null)
                     throw new ArgumentException("Campo Forma de Pagamento é obrigatório");
 
                 if (conta.ClienteID == null || conta.ClienteID <= 0)
-                    throw new ArgumentException("Fornecedor inválido. Campo obrigatório");
+                    throw new ArgumentException("Cliente inválido. Campo obrigatório");
 
                 if (conta.CategoriaID == null || conta.CategoriaID <= 0)
                     throw new ArgumentException("Categoria inválida. Campo obrigatório");

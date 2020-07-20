@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SigaApp.Models.Entidades;
@@ -161,6 +163,161 @@ namespace SigaApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        [HttpGet]
+        public ActionResult GerarRelatorio(int? pagina)
+        {
+            CarregarClientes();
+            CarregarEstudios();
+            CarregarServicos();
+            var relatorio = _sessao.ObterTodos().Where(x => x.SessaoID == 0);
+
+            int pageSize = 20;
+            return View(Paginacao<SessaoGravacao>.Create(relatorio, pagina ?? 1, pageSize));
+        }
+
+        [HttpPost]
+        public ActionResult GerarRelatorio(int? txtEstudio, int? txtCliente, DateTime txtDataInicio, DateTime txtDataFim, int? txtServico, int? pagina)
+        {
+            try
+            {
+                CarregarClientes();
+                CarregarEstudios();
+                CarregarServicos();
+
+                var dateDiff = txtDataFim.Date - txtDataInicio.Date;
+
+                if (txtDataInicio.Date == DateTime.MinValue || txtDataFim.Date == DateTime.MinValue)
+                    throw new ArgumentException("O intervalo de datas é obrigatório");
+
+                if (dateDiff.Days > 90)
+                    throw new ArgumentException("Intervalo máximo de 90 dias");
+
+                if (txtDataFim.Date < txtDataInicio.Date)
+                    throw new ArgumentException("A Data Fim não pode ser menor que a Data Inicio");
+
+                var relatorio = _sessao.ObterTodos().Where(x => x.SessaoID == 0);
+
+                if (txtEstudio != null && txtCliente != null && txtDataInicio != null && txtDataFim != null && txtServico != null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.EstudioID == txtEstudio && x.ClienteID ==  txtCliente && x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim && x.ServicoPrestadoID == txtServico);
+
+                if (txtEstudio == null && txtCliente == null && txtDataInicio != null && txtDataFim != null && txtServico == null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim);
+
+                if (txtEstudio != null && txtCliente == null && txtDataInicio != null && txtDataFim != null && txtServico == null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.EstudioID == txtEstudio && x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim);
+
+                if (txtEstudio != null && txtCliente != null && txtDataInicio != null && txtDataFim != null && txtServico == null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.EstudioID == txtEstudio && x.ClienteID == txtCliente && x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim);
+
+                if (txtEstudio == null && txtCliente != null && txtDataInicio != null && txtDataFim != null && txtServico == null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.ClienteID == txtCliente && x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim);
+
+                if (txtEstudio == null && txtCliente == null && txtDataInicio != null && txtDataFim != null && txtServico != null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim && x.ServicoPrestadoID == txtServico);
+
+                TempData["txtEstudio"] = txtEstudio;
+                TempData["txtCliente"] = txtCliente;
+                TempData["txtDataInicio"] = txtDataInicio;
+                TempData["txtDataFim"] = txtDataFim;
+                TempData["txtServico"] = txtServico;
+
+                int pageSize = 200000000;
+                return View(Paginacao<SessaoGravacao>.Create(relatorio, pagina ?? 1, pageSize));
+            }
+            catch (Exception ex)
+            {
+                Mensagem = ex.Message.ToString();
+                ModelState.AddModelError(String.Empty, Mensagem);
+                return RedirectToAction(nameof(GerarRelatorio));
+            }
+        }
+
+
+        public ActionResult GerarExcel(int? txtEstudio, int? txtCliente, DateTime txtDataInicio, DateTime txtDataFim, int? txtServico, int? pagina)
+        {
+            try
+            {
+                if (TempData["txtEstudio"] != null)
+                    txtEstudio = (int)TempData["txtEstudio"];
+
+                if (TempData["txtCliente"] != null)
+                    txtCliente = (int)TempData["txtCliente"];
+
+                if (TempData["txtDataInicio"] != null)
+                    txtDataInicio = (DateTime)TempData["txtDataInicio"];
+
+                if (TempData["txtDataFim"] != null)
+                    txtDataFim = (DateTime)TempData["txtDataFim"];
+
+                if (TempData["txtServico"] != null)
+                    txtServico = (int)TempData["txtServico"];
+
+                var relatorio = _sessao.ObterTodos().Where(x => x.SessaoID == 0);
+
+                if (txtEstudio != null && txtCliente != null && txtDataInicio != null && txtDataFim != null && txtServico != null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.EstudioID == txtEstudio && x.ClienteID == txtCliente && x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim && x.ServicoPrestadoID == txtServico);
+
+                if (txtEstudio == null && txtCliente == null && txtDataInicio != null && txtDataFim != null && txtServico == null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim);
+
+                if (txtEstudio != null && txtCliente == null && txtDataInicio != null && txtDataFim != null && txtServico == null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.EstudioID == txtEstudio && x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim);
+
+                if (txtEstudio != null && txtCliente != null && txtDataInicio != null && txtDataFim != null && txtServico == null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.EstudioID == txtEstudio && x.ClienteID == txtCliente && x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim);
+
+                if (txtEstudio == null && txtCliente != null && txtDataInicio != null && txtDataFim != null && txtServico == null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.ClienteID == txtCliente && x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim);
+
+                if (txtEstudio == null && txtCliente == null && txtDataInicio != null && txtDataFim != null && txtServico != null)
+                    relatorio = _sessao.ObterTodos().Where(x => x.DataInicio >= txtDataInicio && x.DataFim <= txtDataFim && x.ServicoPrestadoID == txtServico);
+
+                using (var workbook = new XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add("Gravações");
+                    var currentRow = 1;
+                    worksheet.Cell(currentRow, 1).Value = "Data de Cadastro";
+                    worksheet.Cell(currentRow, 2).Value = "Data Início";
+                    worksheet.Cell(currentRow, 3).Value = "Data Fim";
+                    worksheet.Cell(currentRow, 4).Value = "Hora Início";
+                    worksheet.Cell(currentRow, 5).Value = "Hora Fim";
+                    worksheet.Cell(currentRow, 6).Value = "Estúdio";
+                    worksheet.Cell(currentRow, 7).Value = "Cliente";
+                    worksheet.Cell(currentRow, 8).Value = "Fornecedor";
+                    worksheet.Cell(currentRow, 9).Value = "Serviço Prestado";
+
+                    foreach (var rel in relatorio)
+                    {
+                        currentRow++;
+                        worksheet.Cell(currentRow, 1).Value = rel.DataCadastro.ToString("dd/MM/yyyy");
+                        worksheet.Cell(currentRow, 2).Value = rel.DataInicio.ToString("dd/MM/yyyy");
+                        worksheet.Cell(currentRow, 3).Value = rel.DataFim.ToString("dd/MM/yyyy");
+                        worksheet.Cell(currentRow, 4).Value = rel.HoraInicio.ToString();
+                        worksheet.Cell(currentRow, 5).Value = rel.HoraFim.ToString();
+                        worksheet.Cell(currentRow, 6).Value = rel.Estudio.Nome;
+                        worksheet.Cell(currentRow, 7).Value = rel.Cliente.RazaoSocial;
+                        worksheet.Cell(currentRow, 8).Value = rel.Fornecedor.RazaoSocial;
+                        worksheet.Cell(currentRow, 9).Value = rel.ServicoPrestado.Descricao;
+                    }
+
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        var content = stream.ToArray();
+
+                        return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Gravacoes.xlsx");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensagem = ex.Message.ToString();
+                ModelState.AddModelError(String.Empty, Mensagem);
+                return RedirectToAction(nameof(GerarRelatorio));
+            }
+        }
+
         public IEnumerable<Estudio> CarregarEstudios()
         {
             return ViewBag.ListaEstudios = _estudio.ObterTodos();
@@ -179,11 +336,6 @@ namespace SigaApp.Controllers
         public IEnumerable<ServicoPrestado> CarregarServicos()
         {
             return ViewBag.ListaServicos = _servico.ObterTodos();
-        }
-
-        public IEnumerable<SessaoGravacao> CarregarLista()
-        {
-            return _sessao.ObterTodos();
         }
 
         private void CarregarCampos()

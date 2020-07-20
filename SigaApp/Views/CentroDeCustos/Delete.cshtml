@@ -24,21 +24,16 @@
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Descricao)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Descricao)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.FlagAtivo)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.FlagAtivo)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.DataExclusao)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.DataExclusao)
-                        </dd>
+                        @if (Model.Descricao != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Descricao)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
                     </dl>
 
                     <form asp-action="Delete">

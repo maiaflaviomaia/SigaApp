@@ -42,37 +42,25 @@
                             @Html.DisplayNameFor(model => model.EstudioID)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.EstudioID)
+                            @Html.DisplayFor(model => model.Estudio.Nome)
                         </dd>
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.ClienteID)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.ClienteID)
+                            @Html.DisplayFor(model => model.Cliente.RazaoSocial)
                         </dd>
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.FornecedorID)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.FornecedorID)
+                            @Html.DisplayFor(model => model.Fornecedor.RazaoSocial)
                         </dd>
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.ServicoPrestadoID)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.ServicoPrestadoID)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.FlagAtivo)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.FlagAtivo)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.DataExclusao)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.DataExclusao)
+                            @Html.DisplayFor(model => model.ServicoPrestado.Descricao)
                         </dd>
                     </dl>
 

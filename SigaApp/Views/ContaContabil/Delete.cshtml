@@ -1,93 +1,109 @@
-﻿@*@model Orion.IO.Models.Entidades.ContaContabil
+﻿@model SigaApp.Models.Entidades.ContaContabil
 
-@{
-    ViewData["Title"] = "Delete";
-}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Conta Contábil</div>
+            <div class="panel-body">
+                <p class="alert alert-danger" style="font-size:1.5rem; font-weight: 300; line-height: 1.2;">Tem certeza que deseja excluir este registro? Esta operação não poderá ser desfeita.</p>
+                <div>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataCadastro)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataCadastro)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataAbertura)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataAbertura)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NomeConta)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.NomeConta)
+                        </dd>
 
-<h1>Delete</h1>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Descricao)
+                        </dt>
+                        @if (Model.Descricao != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Descricao)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>ContaContabil</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataCadastro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataCadastro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataAbertura)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataAbertura)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeConta)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomeConta)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoConta)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoConta)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SaldoInicial)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SaldoInicial)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SaldoAtual)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SaldoAtual)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeBanco)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomeBanco)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumeroAgencia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumeroAgencia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumeroConta)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumeroConta)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FlagAtivo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FlagAtivo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataExclusao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataExclusao)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ContaContabilID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>*@
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.TipoConta)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TipoConta)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.SaldoInicial)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.SaldoInicial)
+                        </dd>
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NomeBanco)
+                        </dt>
+                        @if (Model.NomeBanco != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.NomeBanco)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NumeroAgencia)
+                        </dt>
+                        @if (Model.NumeroAgencia != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.NumeroAgencia)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NumeroConta)
+                        </dt>
+                        @if ()
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.NumeroConta)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+                    </dl>
+                </div>
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="ContaContabilID" />
+                    <input type="submit" value="Excluir" class="btn btn-danger btn-sm" />
+                    <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

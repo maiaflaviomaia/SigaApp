@@ -9,53 +9,150 @@
 
                 <div>
                     <dl class="row">
-                        <dt class="col-sm-3">
+                        <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.DataCadastro)
                         </dt>
-                        <dd class="col-sm-9">
+                        <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.DataCadastro)
                         </dd>
-                        <dt class="col-sm-3">
-                            @Html.DisplayNameFor(model => model.Valor)
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Valor)
-                        </dd>
-                        <dt class="col-sm-3">
-                            @Html.DisplayNameFor(model => model.CategoriaID)
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Categoria.Nome)
-                        </dd>
-                        <dt class="col-sm-3">
-                            @Html.DisplayNameFor(model => model.ClienteID)
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Cliente.RazaoSocial)
-                        </dd>
-                        <dt class="col-sm-3">
+                        <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Competencia)
                         </dt>
-                        <dd class="col-sm-9">
+                        <dd class="col-sm-10">
                             @Html.DisplayFor(model => model.Competencia)
                         </dd>
-                        <dt class="col-sm-3">
-                            @Html.DisplayNameFor(model => model.NumeroDocumento)
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.ClienteID)
                         </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.NumeroDocumento)
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Cliente.RazaoSocial)
                         </dd>
-                        <dt class="col-sm-3">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Descricao)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Descricao)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataVencimento)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataVencimento)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Status)
+                        </dd>
+                        <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.TipoDocumento)
                         </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.TipoDocumento)
+                        @if (Model.TipoDocumento != 0)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.TipoDocumento)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.NumeroDocumento)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.NumeroDocumento)
                         </dd>
-                        <dt class="col-sm-3">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.CategoriaID)
+                        </dt>
+                        @if (Model.CategoriaID != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Categoria.Nome)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.SubCategoriaID)
+                        </dt>
+                        @if (Model.SubCategoriaID != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.SubCategoria.Nome)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
+                        <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Observacoes)
                         </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Observacoes)
+                        @if (Model.Observacoes != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Observacoes)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Desconto)
+                        </dt>
+                        @if (Model.Desconto == null)
+                        {
+                            <dd class="col-sm-10">R$ 0,00</dd>
+                        }
+                        else
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Desconto)
+                            </dd>
+                        }
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Juros)
+                        </dt>
+                        @if (Model.Juros == null)
+                        {
+                            <dd class="col-sm-10">R$ 0,00</dd>
+                        }
+                        else
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Juros)
+                            </dd>
+                        }
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Multa)
+                        </dt>
+                        @if (Model.Multa == null)
+                        {
+                            <dd class="col-sm-10">R$ 0,00</dd>
+                        }
+                        else
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Multa)
+                            </dd>
+                        }
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Valor)
+                        </dt>
+
+                        <dd class="col-sm-10">
+                            <b>@Html.DisplayFor(model => model.Valor)</b>
                         </dd>
                     </dl>
 

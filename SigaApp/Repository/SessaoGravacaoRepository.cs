@@ -56,7 +56,7 @@ namespace SigaApp.Repository
             return _contexto.SessoesGravacoes
                 .Include(s => s.Cliente)
                 .Include(s => s.Fornecedor)
-                .Include(s => s.servicoPrestado)
+                .Include(s => s.ServicoPrestado)
                 .Include(s => s.Estudio)
                 .AsNoTracking()
                 .FirstOrDefault(o => o.SessaoID == id);
@@ -68,7 +68,7 @@ namespace SigaApp.Repository
             return _contexto.SessoesGravacoes
                 .Include(s => s.Cliente)
                 .Include(s => s.Fornecedor)
-                .Include(s => s.servicoPrestado)
+                .Include(s => s.ServicoPrestado)
                 .Include(s => s.Estudio)
                 .ToList().Where(s => s.FlagAtivo = true && s.DataExclusao is null && s.EmpresaID == id).OrderBy(s => s.DataCadastro);
         }

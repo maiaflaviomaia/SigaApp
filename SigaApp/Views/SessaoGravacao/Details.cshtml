@@ -7,6 +7,12 @@
                 <div>
                     <dl class="row">
                         <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.DataCadastro)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DataCadastro)
+                        </dd>
+                        <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.DataInicio)
                         </dt>
                         <dd class="col-sm-10">
@@ -52,7 +58,7 @@
                             @Html.DisplayNameFor(model => model.ServicoPrestadoID)
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.servicoPrestado.Descricao)
+                            @Html.DisplayFor(model => model.ServicoPrestado.Descricao)
                         </dd>
                     </dl>
                 </div>

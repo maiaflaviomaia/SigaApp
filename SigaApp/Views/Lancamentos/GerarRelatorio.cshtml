@@ -1,110 +1,117 @@
 ﻿@model Paginacao<SigaApp.Models.Entidades.Lancamento>
 
-<h2 style="font-size:2.0rem; font-weight: 300; line-height: 1.2;">Relatório de Lançamentos</h2>
-
-@{
-    if (TempData["Mensagem"] != null)
-    {
-    <div class="text-danger">
-        <p>ERRO: @TempData["Mensagem"]</p>
-    </div>
-    }
-}
-
-<form asp-action="GerarRelatorio" class="mt-5">
-    <div asp-validation-summary="All" class="text-danger"></div>
-
-    <div class="row">
-        <div class="col-md-3">
-            <label class="control-label">Conta Contábil</label>
-            <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))" name="txtConta">
-                <option value="">-- Selecione --</option>
-            </select>
-        </div>
-
-        <div class="col-md-2 mb-3">
-            <label class="control-label">De<b class="text-danger">*</b></label>
-            <input class="form-control " type="date" name="txtDataInicio" />
-        </div>
-
-        <div class="col-md-2 mb-3">
-            <label class="control-label">Até<b class="text-danger">*</b></label>
-            <input class="form-control " type="date" name="txtDataFim" />
-        </div>
-
-        <div class="col-md-3">
-            <label class="control-label">Tipo</label>
-            <select class="form-control " name="txtTipo">
-                <option value="">-- Selecione --</option>
-                <option value="0">Crédito</option>
-                <option value="1">Débito</option>
-            </select>
-        </div>
-
-        <div class="col-md-2">
-            <input type="submit" value="Pesquisar" class="btn btn-info btn-sm btn-block" style="margin-top:31px" />
-        </div>
-    </div>
-</form>
-
-@if (Model.Count >= 1)
-{
-    <div class="row mt-4">
-        <div class="col-md-2">
-            <h6>Quantidade: <span class="badge badge-warning">@Model.Count</span></h6>
-        </div>
-        <div class="col-md-2">
-            <h6>Créditos: <span class="badge badge-primary">@ViewData["ValorCredito"]</span></h6>
-        </div>
-        <div class="col-md-2">
-            <h6>Débitos: <span class="badge badge-danger">@ViewData["ValorDebito"]</span></h6>
-        </div>
-    </div>
-
-    <div class="float-right mb-3" style="margin-top:-35px">
-        <a asp-action="GerarExcel" class="btn btn-sm btn-success">Gerar Excel</a>
-    </div>
-
-    <table class="table table-sm table-hover mt-2">
-        <thead class="thead-dark">
-            <tr>
-                <th class="text-center">Data Lançamento</th>
-                <th class="text-center">Conta</th>
-                <th class="text-center">Número Doc.</th>
-                <th class="text-center">Cliente/Fornecedor</th>
-                <th class="text-center">Descrição</th>
-                <th class="text-center">Tipo</th>
-                <th class="text-center">Valor</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.DataLancamento)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.ContaContabil.NomeConta)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.NumeroDocumento)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.Nome)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.Descricao)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.TipoLancamento)</td>
-
-                    @if (item.TipoLancamento == SigaApp.TipoLancamento.Credito)
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Relatório de Lançamentos</div>
+            <div class="panel-body">
+                @{
+                    if (TempData["Mensagem"] != null)
                     {
-                        <td class="text-center text-primary">@Html.DisplayFor(modelItem => item.Valor)</td>
+                        <div class="text-danger">
+                            <p>ERRO: @TempData["Mensagem"]</p>
+                        </div>
                     }
+                }
 
-                    @if (item.TipoLancamento == SigaApp.TipoLancamento.Debito)
-                    {
-                        <td class="text-center text-danger">@Html.DisplayFor(modelItem => item.Valor)</td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Não há dados para serem exibidos</p>
-}
+                <form asp-action="GerarRelatorio" class="mt-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="control-label">Conta Contábil</label>
+                            <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))" name="txtConta">
+                                <option value="">-- Selecione --</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label class="control-label">De<b class="text-danger">*</b></label>
+                            <input class="form-control " type="date" name="txtDataInicio" />
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label class="control-label">Até<b class="text-danger">*</b></label>
+                            <input class="form-control " type="date" name="txtDataFim" />
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="control-label">Tipo</label>
+                            <select class="form-control " name="txtTipo">
+                                <option value="">-- Selecione --</option>
+                                <option value="1">Crédito</option>
+                                <option value="2">Débito</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="submit" value="Pesquisar" class="btn btn-info btn-sm btn-block" style="margin-top:23px" />
+                        </div>
+                    </div>
+                </form>
+
+                @if (Model.Count >= 1)
+                {
+                    <div class="row mt-4">
+                        <div class="col-md-2">
+                            <h6>Quantidade: <span class="label label-warning">@Model.Count</span></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h6>Créditos: <span class="label label-info">@ViewData["ValorCredito"]</span></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h6>Débitos: <span class="label label-danger">@ViewData["ValorDebito"]</span></h6>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" style="margin-top:-35px; float:right">
+                        <a asp-action="GerarExcel" class="btn btn-sm btn-success">Gerar Excel</a>
+                    </div>
+
+                    <table class="table table-sm table-hover mt-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Data Lançamento</th>
+                                <th class="text-center">Conta</th>
+                                <th class="text-center">Número Doc.</th>
+                                <th class="text-center">Cliente/Fornecedor</th>
+                                <th class="text-center">Descrição</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Valor</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.DataLancamento)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.ContaContabil.NomeConta)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.NumeroDocumento)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.Nome)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.TipoLancamento)</td>
+
+                                    @if (item.TipoLancamento == SigaApp.Utils.Enums.TipoLancamento.Credito)
+                                    {
+                                        <td class="text-center text-primary">@Html.DisplayFor(modelItem => item.Valor)</td>
+                                    }
+
+                                    @if (item.TipoLancamento == SigaApp.Utils.Enums.TipoLancamento.Debito)
+                                    {
+                                        <td class="text-center text-danger">@Html.DisplayFor(modelItem => item.Valor)</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>Não há dados para serem exibidos</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 

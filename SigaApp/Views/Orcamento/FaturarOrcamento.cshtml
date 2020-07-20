@@ -1,203 +1,201 @@
 ﻿@model SigaApp.Models.Entidades.Orcamento
 
-<h4 style="font-size:2.0rem; font-weight: 300; line-height: 1.2;">Faturar Orçamento</h4>
-<hr />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Faturar Orçamento</div>
+            <div class="panel-body">
+                <form asp-action="FaturarOrcamento">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="OrcamentoID" />
+                    <input type="hidden" asp-for="DataCadastro" />
+                    <input type="hidden" asp-for="EmpresaID" />
+                    <input type="hidden" asp-for="ClienteID" />
+                    <input type="hidden" asp-for="DataOrcamento" />
+                    <input type="hidden" asp-for="DataValidade" />
+                    <input type="hidden" asp-for="TipoOrcamento" />
+                    <input type="hidden" asp-for="StatusOrcamento" />
+                    <input type="hidden" asp-for="Titulo" />
+                    <input type="hidden" asp-for="TotalOrcamento" />
+                    <input type="hidden" asp-for="Desconto" />
+                    <input type="hidden" asp-for="Acrescimo" />
+                    <input type="hidden" asp-for="TaxaComissao" />
+                    <input type="hidden" asp-for="TaxaImposto" />
+                    <input type="hidden" asp-for="TaxaLucro" />
+                    <input type="hidden" asp-for="Solicitante" />
+                    <input type="hidden" asp-for="TipoVeiculacao" />
+                    <input type="hidden" asp-for="PracaVeiculacao" />
+                    <input type="hidden" asp-for="NomePeca" />
+                    <input type="hidden" asp-for="DuracaoPeca" />
+                    <input type="hidden" asp-for="PeriodoVeiculacao" />
+                    <input type="hidden" asp-for="TipoMidia" />
+                    <input type="hidden" asp-for="BonificacaoVeiculacao" />
+                    <input type="hidden" asp-for="Observacoes" />
+                    <input type="hidden" asp-for="FlagAtivo" />
+                    <input type="hidden" asp-for="DataExclusao" />
 
-<form asp-action="FaturarOrcamento">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <h5><b>@Html.DisplayFor(model => model.Cliente.RazaoSocial)</b></h5>
+                    <h6>Título: @Html.DisplayFor(model => model.Titulo)</h6>
+                    <h6>Nome da Peça: @Html.DisplayFor(model => model.NomePeca)</h6>
+                    <h6><b>@Html.DisplayFor(model => model.TotalOrcamento)</b></h6>
 
-    <input type="hidden" asp-for="OrcamentoID" />
-    <input type="hidden" asp-for="DataCadastro" />
-    <input type="hidden" asp-for="EmpresaID" />
-    <input type="hidden" asp-for="ClienteID" />
-    <input type="hidden" asp-for="DataOrcamento" />
-    <input type="hidden" asp-for="DataValidade" />
-    <input type="hidden" asp-for="TipoOrcamento" />
-    <input type="hidden" asp-for="StatusOrcamento" />
-    <input type="hidden" asp-for="Titulo" />
-    <input type="hidden" asp-for="TotalOrcamento" />
-    <input type="hidden" asp-for="Desconto" />
-    <input type="hidden" asp-for="Acrescimo" />
-    <input type="hidden" asp-for="TaxaComissao" />
-    <input type="hidden" asp-for="TaxaImposto" />
-    <input type="hidden" asp-for="TaxaLucro" />
-    <input type="hidden" asp-for="Solicitante" />
-    <input type="hidden" asp-for="TipoVeiculacao" />
-    <input type="hidden" asp-for="PracaVeiculacao" />
-    <input type="hidden" asp-for="NomePeca" />
-    <input type="hidden" asp-for="DuracaoPeca" />
-    <input type="hidden" asp-for="PeriodoVeiculacao" />
-    <input type="hidden" asp-for="TipoMidia" />
-    <input type="hidden" asp-for="BonificacaoVeiculacao" />
-    <input type="hidden" asp-for="Observacoes" />
-    <input type="hidden" asp-for="FlagAtivo" />
-    <input type="hidden" asp-for="DataExclusao" />
+                    <div class="row mt-4">
+                        <div class="col-md-3 mb-3">
+                            <label><b>Data do Orçamento</b></label>
+                            <p>@Html.DisplayFor(model => model.DataOrcamento)</p>
+                        </div>
 
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title"><b>@Html.DisplayFor(model => model.Cliente.RazaoSocial)</b></h5>
-            <h6 class="card-title">Título: @Html.DisplayFor(model => model.Titulo)</h6>
-            <h6 class="card-title">Nome da Peça: @Html.DisplayFor(model => model.NomePeca)</h6>
-            <h6 class="card-title" style="color: blue"><b>@Html.DisplayFor(model => model.TotalOrcamento)</b></h6>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Validade</b></label>
+                            <p>@Html.DisplayFor(model => model.DataValidade)</p>
+                        </div>
+                    </div>
 
-            <hr />
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label><b>Solicitante</b></label>
+                            <p>@Html.DisplayFor(model => model.Solicitante)</p>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <label><b>Data do Orçamento</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.DataOrcamento)</p>
-                </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Tipo</b></label>
+                            <p>@Html.DisplayFor(model => model.TipoOrcamento)</p>
+                        </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Validade</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.DataValidade)</p>
-                </div>
-            </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Status</b></label>
+                            <p>@Html.DisplayFor(model => model.StatusOrcamento)</p>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <label><b>Solicitante</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.Solicitante)</p>
-                </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Praça de Veiculação</b></label>
+                            <p>@Html.DisplayFor(model => model.PracaVeiculacao)</p>
+                        </div>
+                    </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Tipo</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.TipoOrcamento)</p>
-                </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label><b>Duração da Peça</b></label>
+                            <p>@Html.DisplayFor(model => model.DuracaoPeca)</p>
+                        </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Status</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.StatusOrcamento)</p>
-                </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Período de Veiculação</b></label>
+                            <p>@Html.DisplayFor(model => model.PeriodoVeiculacao)</p>
+                        </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Praça de Veiculação</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.PracaVeiculacao)</p>
-                </div>
-            </div>
+                        <div class="col-md-3 mb-3">
+                            <label><b>Tipo de Mídia</b></label>
+                            <p>@Html.DisplayFor(model => model.TipoMidia)</p>
+                        </div>
+                    </div>
 
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <label><b>Duração da Peça</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.DuracaoPeca)</p>
-                </div>
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <label><b>BV (%)</b></label>
+                            @if (Model.BonificacaoVeiculacao == null)
+                            {
+                                <p>0.00</p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.BonificacaoVeiculacao)</p>
+                            }
+                        </div>
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Período de Veiculação</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.PeriodoVeiculacao)</p>
-                </div>
+                        <div class="col-md-2 mb-3">
+                            <label><b>Comissão (%)</b></label>
+                            @if (Model.TaxaComissao == null)
+                            {
+                                <p>0.00</p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.TaxaComissao)</p>
+                            }
 
-                <div class="col-md-3 mb-3">
-                    <label><b>Tipo de Mídia</b></label>
-                    <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.TipoMidia)</p>
-                </div>
-            </div>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-2 mb-3">
-                    <label><b>BV (%)</b></label>
-                    @if (Model.BonificacaoVeiculacao == null)
-                    {
-                        <p class="card-text" style="font-size:14px">0.00</p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.BonificacaoVeiculacao)</p>
-                    }
-                </div>
+                        <div class="col-md-2 mb-3">
+                            <label><b>Impostos (%)</b></label>
+                            @if (Model.TaxaImposto == null)
+                            {
+                                <p>0.00</p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.TaxaImposto)</p>
+                            }
 
-                <div class="col-md-2 mb-3">
-                    <label><b>Comissão (%)</b></label>
-                    @if (Model.TaxaComissao == null)
-                    {
-                        <p class="card-text" style="font-size:14px">0.00</p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.TaxaComissao)</p>
-                    }
+                        </div>
 
-                </div>
+                        <div class="col-md-2 mb-3">
+                            <label><b>Lucro (%)</b></label>
+                            @if (Model.TaxaLucro == null)
+                            {
+                                <p>0.00</p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.TaxaLucro)</p>
+                            }
 
-                <div class="col-md-2 mb-3">
-                    <label><b>Impostos (%)</b></label>
-                    @if (Model.TaxaImposto == null)
-                    {
-                        <p class="card-text" style="font-size:14px">0.00</p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.TaxaImposto)</p>
-                    }
+                        </div>
 
-                </div>
+                        <div class="col-md-2 mb-3">
+                            <label><b>Acréscimos (R$)</b></label>
+                            @if (Model.Acrescimo == null)
+                            {
+                                <p>0.00</p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.Acrescimo)</p>
+                            }
 
-                <div class="col-md-2 mb-3">
-                    <label><b>Lucro (%)</b></label>
-                    @if (Model.TaxaLucro == null)
-                    {
-                        <p class="card-text" style="font-size:14px">0.00</p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.TaxaLucro)</p>
-                    }
+                        </div>
 
-                </div>
+                        <div class="col-md-2 mb-3">
+                            <label><b>Desconto (R$)</b></label>
+                            @if (Model.Desconto == null)
+                            {
+                                <p>0.00</p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.Desconto)</p>
+                            }
 
-                <div class="col-md-2 mb-3">
-                    <label><b>Acréscimos (R$)</b></label>
-                    @if (Model.Acrescimo == null)
-                    {
-                        <p class="card-text" style="font-size:14px">0.00</p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.Acrescimo)</p>
-                    }
+                        </div>
+                    </div>
 
-                </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label><b>Observações</b></label>
+                            @if (Model.Observacoes == null)
+                            {
+                                <p> - </p>
+                            }
+                            else
+                            {
+                                <p>@Html.DisplayFor(model => model.Observacoes)</p>
+                            }
 
-                <div class="col-md-2 mb-3">
-                    <label><b>Desconto (R$)</b></label>
-                    @if (Model.Desconto == null)
-                    {
-                        <p class="card-text" style="font-size:14px">0.00</p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.Desconto)</p>
-                    }
+                        </div>
+                    </div>
 
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div class="alert bg-warning"><b>@Html.CheckBoxFor(model => model.GerarPagamentos, true) Gerar Contas a Pagar para os fornecedores envolvidos neste orçamento?</b></div>
+                        </div>
+                    </div>
 
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label><b>Observações</b></label>
-                    @if (Model.Observacoes == null)
-                    {
-                        <p class="card-text" style="font-size:14px"> - </p>
-                    }
-                    else
-                    {
-                        <p class="card-text" style="font-size:14px">@Html.DisplayFor(model => model.Observacoes)</p>
-                    }
-
-                </div>
+                    <div class="form-group">
+                        <input type="submit" value="Faturar" class="btn btn-sm btn-success" />
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
-
-    <div class="form-group form-check mb-3">
-        <input class="form-check-input" id="chkFor" asp-for="GerarPagamentos" checked="checked" />
-        <label class="form-check-label" for="chkFor">Gerar Contas a Pagar para os fornecedores envolvidos neste orçamento.</label>
-    </div>
-
-
-    <div class="form-group">
-        <input type="submit" value="Faturar" class="btn btn-sm btn-success" />
-        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
-    </div>
-</form>
+</div>

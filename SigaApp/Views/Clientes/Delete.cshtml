@@ -24,63 +24,149 @@
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.NomeFantasia)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.NomeFantasia)
-                        </dd>
+                        @if (Model.NomeFantasia != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.NomeFantasia)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.TipoPessoa)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.TipoPessoa)
-                        </dd>
+                        @if (Model.TipoPessoa != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.TipoPessoa)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.CPF)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.CPF)
-                        </dd>
+                        @if (Model.CPF != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.CPF)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.CNPJ)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.CNPJ)
-                        </dd>
+                        @if (Model.CNPJ != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.CNPJ)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.InscricaoEstadual)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.InscricaoEstadual)
-                        </dd>
+                        @if (Model.InscricaoEstadual != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.InscricaoEstadual)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.InscricaoMunicipal)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.InscricaoMunicipal)
-                        </dd>
+                        @if (Model.InscricaoMunicipal != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.InscricaoMunicipal)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Email)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Email)
-                        </dd>
+                        @if (Model.Email != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Email)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.TelefoneFixo)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.TelefoneFixo)
-                        </dd>
+                        @if (Model.TelefoneFixo != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.TelefoneFixo)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.TelefoneCelular)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.TelefoneCelular)
-                        </dd>
+                        @if (Model.TelefoneCelular != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.TelefoneCelular)
+                            </dd>
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Responsavel)
                         </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Responsavel)
-                        </dd>
+                        @if (Model.Responsavel != null)
+                        {
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Responsavel)
+                            </dd>
+
+                        }
+                        else
+                        {
+                            <dd> - </dd>
+                        }
+
+                        <dt class="col-sm-2">Endereço</dt>
+                        <dd class="col-sm-10">@Model.Endereco</dd>
+
+                        <dt class="col-sm-2">Dados Bancários</dt>
+                        <dd class="col-sm-10">@Model.DadosBancarios</dd>
                     </dl>
 
                     <div class="form-group">

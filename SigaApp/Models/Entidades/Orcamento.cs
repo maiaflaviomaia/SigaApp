@@ -115,7 +115,7 @@ namespace SigaApp.Models.Entidades
         public string ValorPorExtenso { get; set; }
 
         [NotMapped]
-        public bool? GerarPagamentos { get; set; }
+        public bool GerarPagamentos { get; set; }
 
         public ICollection<OrcamentoServico> OrcamentoServicos { get; set; }
         public ICollection<OrcamentoFornecedor> OrcamentoFornecedores { get; set; }
