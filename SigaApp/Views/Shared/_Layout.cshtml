@@ -97,11 +97,6 @@
                 </a>
                 <ul class="children collapse" id="financeiro">
                     <li>
-                        <a asp-controller="ContaContabil" asp-action="Index">
-                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Conta Contábil
-                        </a>
-                    </li>
-                    <li>
                         <a asp-controller="ContasPagar" asp-action="Index">
                             <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Contas a Pagar
                         </a>
@@ -114,6 +109,11 @@
                     <li>
                         <a asp-controller="Lancamentos" asp-action="Index">
                             <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Lançamentos
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="ContaContabil" asp-action="Index">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Conta Contábil
                         </a>
                     </li>
                     <li>
@@ -167,6 +167,11 @@
                     <em class="glyphicon glyphicon-list-alt">&nbsp;</em> Relatórios <span data-toggle="collapse" href="#relatorios" class="icon pull-right"><em class="glyphicon glyphicon-plus"></em></span>
                 </a>
                 <ul class="children collapse" id="relatorios">
+                    <li>
+                        <a asp-controller="Lancamentos" asp-action="GerarDRE">
+                            <span class="glyphicon glyphicon-menu-right">&nbsp;</span> DRE
+                        </a>
+                    </li>
                     <li>
                         <a asp-controller="ContasPagar" asp-action="GerarRelatorio">
                             <span class="glyphicon glyphicon-menu-right">&nbsp;</span> Contas a Pagar
