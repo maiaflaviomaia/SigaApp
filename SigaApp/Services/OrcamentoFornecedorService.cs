@@ -13,7 +13,7 @@ namespace SigaApp.Servicos
                     throw new ArgumentException("Fornecedor inválido");
 
                 if (fornecedor.EmpresaID.Equals(null))
-                    throw new ArgumentException("Erro ao obter Empresa. Orçamento Publicidade - Fornecedor");
+                    throw new ArgumentException("Erro ao obter Empresa.");
 
                 if (fornecedor.OrcamentoID.Equals(null))
                     throw new ArgumentException("Orçamento inválido");

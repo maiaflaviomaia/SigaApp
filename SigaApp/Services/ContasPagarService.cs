@@ -43,7 +43,7 @@ namespace SigaApp.Servicos
                 if (conta.ContaContabilID == null || conta.ContaContabilID <= 0)
                     throw new ArgumentException("Informe a Conta Contábil");
                 
-                conta.Status = Utils.Enums.StatusContaPagar.Pago;
+                conta.Status = StatusContaPagar.Pago;
                 conta.ValorPago = (conta.Valor + conta.Juros + conta.Multa) - conta.Desconto;
                 conta.DataPagamento = DateTime.Now;
 

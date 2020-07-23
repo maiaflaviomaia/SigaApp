@@ -14,6 +14,7 @@ namespace SigaApp.Servicos
             orcamento.DataCadastro = DateTime.Now;
             orcamento.FlagAtivo = true;
             orcamento.DataExclusao = null;
+            orcamento.StatusOrcamento = StatusOrcamento.Aberto;
 
             ValidarCampos(orcamento);
         }
@@ -60,9 +61,6 @@ namespace SigaApp.Servicos
 
                 if (String.IsNullOrEmpty(orcamento.TipoOrcamento))
                     throw new ArgumentException("O campo Tipo é obrigatório");
-
-                if (!String.IsNullOrEmpty(orcamento.TipoOrcamento) && orcamento.TipoOrcamento.Length > 50)
-                    throw new ArgumentException("Máximo de 50 caracteres - Campo Tipo");
 
                 if (String.IsNullOrEmpty(orcamento.Titulo))
                     throw new ArgumentException("O campo Título é obrigatório");

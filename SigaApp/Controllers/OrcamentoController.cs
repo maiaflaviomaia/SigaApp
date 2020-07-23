@@ -231,12 +231,19 @@ namespace SigaApp.Controllers
             if(orcamento == null)
                 return NotFound();
 
-            OrcamentoService service = new OrcamentoService();
-            service.AprovarOrcamento(orcamento);
+            if (orcamento.StatusOrcamento == StatusOrcamento.Aberto)
+            {
+                OrcamentoService service = new OrcamentoService();
+                service.AprovarOrcamento(orcamento);
 
-            _orcamento.Atualizar(orcamento);
+                _orcamento.Atualizar(orcamento);
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
 
@@ -247,11 +254,18 @@ namespace SigaApp.Controllers
             if (orcamento == null)
                 return NotFound();
 
-            OrcamentoService service = new OrcamentoService();
-            service.ReprovarOrcamento(orcamento);
+            if (orcamento.StatusOrcamento == StatusOrcamento.Aberto)
+            {
+                OrcamentoService service = new OrcamentoService();
+                service.ReprovarOrcamento(orcamento);
 
-            _orcamento.Atualizar(orcamento);
-            return RedirectToAction(nameof(Index));
+                _orcamento.Atualizar(orcamento);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
 
@@ -387,7 +401,6 @@ namespace SigaApp.Controllers
                 ModelState.AddModelError(String.Empty, Mensagem);
                 return RedirectToAction(nameof(Index));
             }
-            
         }
 
         public ActionResult GerarPDFDetalhado(int id)

@@ -38,7 +38,7 @@ namespace SigaApp.Servicos
                 if (String.IsNullOrEmpty(funcionario.NomeCompleto))
                     throw new ArgumentException("O campo Nome Completo é obrigatório");
 
-                if (funcionario.DataAdmissao != null && funcionario.DataAdmissao > DateTime.Now.Date)
+                if (funcionario.DataAdmissao.Date != null && funcionario.DataAdmissao.Date > DateTime.Now.Date)
                     throw new ArgumentException("A data de admissão não pode ser maior que a data atual");
 
                 if (funcionario.DataDemissao < funcionario.DataAdmissao)

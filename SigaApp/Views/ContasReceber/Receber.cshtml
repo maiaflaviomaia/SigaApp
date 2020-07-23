@@ -1,8 +1,7 @@
 ﻿@model SigaApp.Models.Entidades.ContaReceber
 
     <form asp-action="Receber">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+        
         <input type="hidden" asp-for="ContaReceberID" />
         <input type="hidden" asp-for="EmpresaID" />
         <input type="hidden" asp-for="DataCadastro" />
@@ -28,6 +27,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Receber Conta</div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="panel-body">
                         <h5><b>@Html.DisplayFor(model => model.Cliente.RazaoSocial)</b></h5>
                         <h6><b>@Html.DisplayFor(model => model.Descricao)</b></h6>

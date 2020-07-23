@@ -74,6 +74,7 @@ namespace SigaApp.Repository
                 .Include(o => o.Fornecedor)
                 .Include(o => o.Cliente)
                 .Include(o => o.ContaContabil)
+                .OrderBy(o => o.DataLancamento)
                 .ToList().Where(o => o.FlagAtivo == true && o.DataExclusao is null && o.EmpresaID == id);
         }
 

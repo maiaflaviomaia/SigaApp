@@ -26,7 +26,7 @@ namespace SigaApp.Servicos
                 throw new ArgumentException("Hora inválida");
 
             if  (agenda.DataEvento.Date < DateTime.Now.Date)
-                throw new ArgumentException("Não é permitido criar um agendamento para dias anteriores à hoje");
+                throw new ArgumentException("Não é permitido criar um agendamento para dias anteriores à data atual");
         }
     }
 }

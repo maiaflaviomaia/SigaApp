@@ -23,13 +23,7 @@ namespace SigaApp.Servicos
                 throw;
             }
         }
-
-        public void Desativar(Categoria categoria)
-        {
-            categoria.FlagAtivo = false;
-            categoria.DataExclusao = DateTime.Now;
-        }
-
+        
         public void ValidarCampos(Categoria categoria)
         {
             try

@@ -45,8 +45,6 @@ namespace SigaApp.Servicos
                 conta.DataPagamento = DateTime.Now;
                 conta.Status = StatusContaReceber.Pago;
                 conta.ValorRecebido = (conta.Valor + conta.Juros + conta.Multa) - conta.Desconto;
-
-                ValidarCampos(conta);
             }
             catch (Exception)
             {

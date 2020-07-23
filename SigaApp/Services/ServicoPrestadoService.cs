@@ -33,7 +33,7 @@ namespace SigaApp.Servicos
                     throw new ArgumentException("Serviço inválido");
 
                 if (String.IsNullOrEmpty(servico.UnidadeValor))
-                    throw new ArgumentException("Campo Unidade de Valor não pode ser nulo");
+                    throw new ArgumentException("Campo Unidade de Valor não pode ser vazio");
 
                 if (String.IsNullOrEmpty(servico.Descricao))
                     throw new ArgumentException("Campo Descrição não pode ser nulo");

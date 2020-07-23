@@ -120,6 +120,7 @@ namespace SigaApp.Controllers
                 lancamentoDebitar.EmpresaID = Convert.ToInt32(User.FindFirst(ClaimTypes.GroupSid).Value);
                 lancamentoDebitar.FlagAtivo = true;
                 lancamentoDebitar.isContaPagarReceber = false;
+                lancamentoDebitar.isTransferencia = true;
                 lancamentoDebitar.FornecedorID = null;
                 lancamentoDebitar.Nome = "Transferência entre contas";
                 lancamentoDebitar.NumeroDocumento = new Random().Next(1000000000);
@@ -143,6 +144,7 @@ namespace SigaApp.Controllers
                 lancamentoCreditar.EmpresaID = Convert.ToInt32(User.FindFirst(ClaimTypes.GroupSid).Value);
                 lancamentoCreditar.FlagAtivo = true;
                 lancamentoCreditar.isContaPagarReceber = false;
+                lancamentoDebitar.isTransferencia = true;
                 lancamentoCreditar.FornecedorID = null;
                 lancamentoCreditar.Nome = "Transferência entre contas";
                 lancamentoCreditar.NumeroDocumento = new Random().Next(1000000000);
@@ -430,6 +432,15 @@ namespace SigaApp.Controllers
                 return RedirectToAction(nameof(GerarRelatorio));
             }
             
+        }
+
+        public ActionResult GerarDRE()
+        {
+            int ano = DateTime.Now.Year;
+
+            var result = _lancamento.ObterTodos().GroupBy(x => x.Categoria.Nome).Select(x => new { x.Key, Valor = x.Sum(y => y.Valor) }).ToList();
+
+            return View(result);
         }
 
         public IEnumerable<Fornecedor> CarregarFornecedores()
