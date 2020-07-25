@@ -61,6 +61,7 @@ namespace SigaApp
             services.AddScoped<ICentroDeCusto, CentroDeCustoRepository>();
             services.AddScoped<ILancamento, LancamentoRepository>();
             services.AddScoped<IAgenda, AgendaRepository>();
+            services.AddScoped<IMensagemSite, MensagemSiteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,7 +84,7 @@ namespace SigaApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Usuario}/{action=Login}/{id?}");
+                    template: "{controller=Home}/{action=PaginaInicial}/{id?}");
             });
 
             RotativaConfiguration.Setup(env);

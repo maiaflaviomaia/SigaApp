@@ -1,6 +1,5 @@
 ﻿
 $(document).ready(function () {
-    $('.date').mask('11/11/1111');
     $('.time').mask('00:00');
     $('.date_time').mask('99/99/9999 00:00:00');
     $('.cep').mask('99999-999');
@@ -888,5 +887,3 @@ function PegarNome() {
         $("#txtNome").val(nomeCliente);
     }
 }
-
-
