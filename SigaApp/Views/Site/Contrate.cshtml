@@ -1,0 +1,119 @@
+﻿@model SigaApp.Models.Entidades.Usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGA - Gestão Audiovisual</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <style>
+        body {
+            background: #f1f4f7;
+            color: #444444;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-controller="Site" asp-action="PaginaInicial" class="navbar-brand">SIGA - Gestão Audiovisual</a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="Site" asp-action="PaginaInicial">Home</a></li>
+                    <li><a asp-controller="Site" asp-action="Funcionalidades">Funcionalidades</a></li>
+                    <li><a asp-controller="Site" asp-action="Contrate">Contrate</a></li>
+                </ul>
+
+                <a asp-controller="Usuario" asp-action="Login" type="button" class="btn btn-sm btn-warning navbar-btn navbar-right"><b>Acessar</b></a>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="row" style="margin-top:90px; margin-bottom:30px">
+            <p style="text-align:center; font-size:16px;"><b>Gostaria de experimentar o AppSIGA - Sistema de Gestão Audiovisual - grátis por 15 dias corridos sem compromisso?</b></p>
+            <p style="text-align:center; font-size:16px;"><b>Basta preencher as informações abaixo e criar seu usuário agora mesmo. Sem complicações!</b></p>
+            <p style="text-align:center; font-size:16px;"><b>Todos os campos são de preenchimento obrigatório</b></p>
+        </div>
+
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form asp-action="Contrate" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nome*</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Nome" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email*</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Email" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Senha*</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Senha" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Empresa*</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="txtEmpresa" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">CPF/CNPJ*</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="txtDocumento" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Telefone*</label>
+                            <div class="col-sm-10">
+                                <input class="form-control telefone" name="txtTelefone" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" class="btn btn-primary" value="Enviar" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-12" style="margin-top:15px">
+            <hr />
+            <h3 style="text-align:center">Contato</h3>
+            <h5 style="text-align:center"><b>E-mail:</b> contato@appsiga.com.br</h5>
+            <h5 style="text-align:center"><b>Whatsapp:</b> (81) 98804.7062</h5>
+        </div>
+                
+        <footer class="col-md-12">
+            <hr />
+            <p>&copy; 2020 - AppSIGA. Sistema de Gestão Audiovisual</p>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>
+

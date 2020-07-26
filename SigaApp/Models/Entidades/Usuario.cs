@@ -33,6 +33,10 @@ namespace SigaApp.Models.Entidades
         [Display(Name = "Ativo?")]
         public bool FlagAtivo { get; set; }
 
+        [Display(Name = "Data de Cadastro")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? DataLimiteTeste { get; set; }
+
         [Display(Name = "Data de Exclusão")]
         public DateTime? DataExclusao { get; set; }
 

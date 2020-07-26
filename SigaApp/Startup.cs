@@ -84,7 +84,7 @@ namespace SigaApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=PaginaInicial}/{id?}");
+                    template: "{controller=Site}/{action=PaginaInicial}/{id?}");
             });
 
             RotativaConfiguration.Setup(env);

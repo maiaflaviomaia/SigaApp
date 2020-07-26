@@ -7,7 +7,6 @@ using SigaApp.Models.Interfaces;
 using static SigaApp.Utils.Enums;
 using SigaApp.Models.Entidades;
 using System.Net;
-using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace SigaApp.Controllers
 {
@@ -114,33 +113,6 @@ namespace SigaApp.Controllers
             model.SomaDespesasMes = GerarValoresDespesas();
 
             return Json(model);
-        }
-
-        [AllowAnonymous]
-        public ActionResult PaginaInicial()
-        {
-            return View();
-        }
-
-        [AllowAnonymous]
-        public ActionResult EnviarMensagem(string txtNome, string txtEmail, string txtMensagem)
-        {
-            if (!String.IsNullOrEmpty(txtNome) && !String.IsNullOrEmpty(txtEmail) && !String.IsNullOrEmpty(txtMensagem))
-            {
-                IPAddress ip = Request.HttpContext.Connection.RemoteIpAddress;
-
-                MensagemSite mensagem = new MensagemSite();
-                mensagem.DataCadastro = DateTime.Now;
-                mensagem.Nome = txtNome;
-                mensagem.Email = txtEmail;
-                mensagem.Mensagem = txtMensagem;
-                mensagem.IPUsuario = ip.ToString();
-
-                _mensagem.Inserir(mensagem);
-
-                return RedirectToAction(nameof(EnviarMensagem));
-            }
-            return RedirectToAction(nameof(EnviarMensagem));
         }
     }
 }

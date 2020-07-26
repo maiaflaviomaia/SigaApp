@@ -29,18 +29,35 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span>Siga </span>Gestão Audiovisual</a>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <em class="glyphicon glyphicon-cog"></em>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li><a asp-controller="Usuario" asp-action="Details">Perfil</a></li>
-                            <li><a asp-controller="Empresas" asp-action="Index">Empresas</a></li>
-                            <li><a asp-controller="Usuario" asp-action="Index">Usuários</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                @if (User.IsInRole("Master"))
+                {
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <em class="glyphicon glyphicon-cog"></em>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li><a asp-controller="Usuario" asp-action="Details">Perfil</a></li>
+                                <li><a asp-controller="Empresas" asp-action="Index">Empresas</a></li>
+                                <li><a asp-controller="Usuario" asp-action="Index">Usuários</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <em class="glyphicon glyphicon-cog"></em>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li><a asp-controller="Usuario" asp-action="Details">Perfil</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+
             </div>
         </div>
     </nav>

@@ -26,14 +26,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-controller="Home" asp-action="PaginaInicial" class="navbar-brand">SIGA - Gestão Audiovisual</a>
+                <a asp-controller="Site" asp-action="PaginaInicial" class="navbar-brand">SIGA - Gestão Audiovisual</a>
             </div>
 
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Home" asp-action="PaginaInicial">Home</a></li>
-                    <li><a asp-controller="Home" asp-action="Funcionalidades">Funcionalidades</a></li>
-                    <li><a asp-controller="Home" asp-action="Contrate">Contrate</a></li>
+                    <li><a asp-controller="Site" asp-action="PaginaInicial">Home</a></li>
+                    <li><a asp-controller="Site" asp-action="Funcionalidades">Funcionalidades</a></li>
+                    <li><a asp-controller="Site" asp-action="Contrate">Contrate</a></li>
                 </ul>
 
                 <a asp-controller="Usuario" asp-action="Login" type="button" class="btn btn-sm btn-warning navbar-btn navbar-right"><b>Acessar</b></a>
@@ -195,7 +195,7 @@
                     </div>
 
                     <div class="form-group" style="text-align:right; margin-top:15px">
-                        <input asp-controller="Home" asp-action="EnviarMensagem" type="submit" value="Enviar" class="btn btn-xs btn-primary" />
+                        <input asp-controller="Site" asp-action="EnviarMensagem" type="submit" value="Enviar" class="btn btn-xs btn-primary" />
                     </div>
                 </form>
             </div>
@@ -217,3 +217,4 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 </body>
 </html>
+
