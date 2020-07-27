@@ -68,6 +68,9 @@ namespace SigaApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Contrate(Usuario usuario, string txtEmpresa, string txtDocumento, string txtTelefone)
         {
+            if (usuario == null || String.IsNullOrEmpty(txtEmpresa) || String.IsNullOrEmpty(txtDocumento) || String.IsNullOrEmpty(txtTelefone))
+                throw new ArgumentException("Todos os campos são obrigatórios");
+
             if (ModelState.IsValid)
             {
                 try

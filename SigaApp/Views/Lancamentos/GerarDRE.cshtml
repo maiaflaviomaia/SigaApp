@@ -1,0 +1,110 @@
+﻿@model Paginacao<SigaApp.Models.Entidades.Lancamento>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">DRE - Demonstração do Resultado do Exercício</div>
+            <div class="panel-body">
+                @{
+                    if (TempData["Mensagem"] != null)
+                    {
+                        <div class="text-danger">
+                            <p>ERRO: @TempData["Mensagem"]</p>
+                        </div>
+                    }
+                }
+
+                <form asp-action="GerarDRE">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label class="control-label">Mês</label>
+                            <select class="form-control" name="txtMes">
+                                <option value="">-- Selecione --</option>
+                                <option value="0">Todos</option>
+                                <option value="1">Janeiro</option>
+                                <option value="2">Fevereiro</option>
+                                <option value="3">Março</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Maio</option>
+                                <option value="6">Junho</option>
+                                <option value="7">Julho</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-1">
+                            <input type="submit" value="Gerar" class="btn btn-info btn-sm btn-block" style="margin-top:23px" />
+                        </div>
+                    </div>
+                </form>
+
+                @if (Model.Count >= 1)
+                {
+                    <div class="row mt-4">
+                        <div class="col-md-2">
+                            <h6>Quantidade: <span class="label label-warning">@Model.Count</span></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h6>Créditos: <span class="label label-info">@ViewData["ValorCredito"]</span></h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h6>Débitos: <span class="label label-danger">@ViewData["ValorDebito"]</span></h6>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" style="margin-top:-35px; float:right">
+                        <a asp-action="GerarExcel" class="btn btn-sm btn-success">Gerar Excel</a>
+                    </div>
+
+                    <table class="table table-sm table-hover mt-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Data Lançamento</th>
+                                <th class="text-center">Conta</th>
+                                <th class="text-center">Número Doc.</th>
+                                <th class="text-center">Cliente/Fornecedor</th>
+                                <th class="text-center">Descrição</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Valor</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.DataLancamento)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.ContaContabil.NomeConta)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.NumeroDocumento)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.Nome)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.TipoLancamento)</td>
+
+                                    @if (item.TipoLancamento == SigaApp.Utils.Enums.TipoLancamento.Credito)
+                                    {
+                                        <td class="text-center text-primary">@Html.DisplayFor(modelItem => item.Valor)</td>
+                                    }
+
+                                    @if (item.TipoLancamento == SigaApp.Utils.Enums.TipoLancamento.Debito)
+                                    {
+                                        <td class="text-center text-danger">@Html.DisplayFor(modelItem => item.Valor)</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="mt-4">Não há dados para serem exibidos</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

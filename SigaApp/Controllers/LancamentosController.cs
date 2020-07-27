@@ -89,11 +89,8 @@ namespace SigaApp.Controllers
         [HttpGet]
         public ActionResult TransferirValores()
         {
-            var model = new Lancamento();
-            model.DataLancamento = DateTime.Now;
-
             CarregarContaContabil();
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -102,6 +99,11 @@ namespace SigaApp.Controllers
         {
             try
             {
+                var saldoContaOrigem = VerificarSaldoContaOrigem(txtOrigem);
+                
+                if (txtValor > saldoContaOrigem)
+                    throw new ArgumentException("Saldo insuficiente. Seu saldo na conta origem é de " + saldoContaOrigem.ToString("C"));
+
                 LancamentoService service = new LancamentoService();
                 service.ValidarTransferencia(txtData, txtOrigem, txtDestino, txtValor, txtDescricao, txtObservacao);
 
@@ -159,11 +161,22 @@ namespace SigaApp.Controllers
             {
                 Mensagem = ex.Message.ToString();
                 ModelState.AddModelError(String.Empty, Mensagem);
-                return RedirectToAction(nameof(TransferirValores));
+                CarregarContaContabil();
+                return View();
             }
         }
 
+        public decimal VerificarSaldoContaOrigem(int txtOrigem)
+        {
+            var lancamento = _lancamento.ObterTodos().Where(x => x.ContaContabilID == txtOrigem);
+            var saldoInicial = _contaContabil.ObterPorId(txtOrigem).SaldoInicial;
 
+            var receitas = lancamento.Where(x => x.TipoLancamento == TipoLancamento.Credito).Select(x => x.Valor).Sum();
+            var despesas = lancamento.Where(x => x.TipoLancamento == TipoLancamento.Debito).Select(x => x.Valor).Sum();
+            var saldo = saldoInicial + receitas - despesas;
+            return saldo;
+        }
+        
         [HttpGet]
         public ActionResult Create()
         {
@@ -288,16 +301,7 @@ namespace SigaApp.Controllers
             _lancamento.Desativar(id);
             return RedirectToAction(nameof(Index));
         }
-
-        public decimal ObterTotalLancamento()
-        {
-            var receitas = _lancamento.ObterTodos().Where(x => x.TipoLancamento == TipoLancamento.Credito).Select(x => x.Valor).Sum();
-            var despesas = _lancamento.ObterTodos().Where(x => x.TipoLancamento == TipoLancamento.Debito).Select(x => x.Valor).Sum();
-
-            return receitas - despesas;
-        }
-
-
+        
         [HttpGet]
         public ActionResult GerarRelatorio(int? pagina)
         {
@@ -326,7 +330,7 @@ namespace SigaApp.Controllers
                 if (txtDataFim.Date < txtDataInicio.Date)
                     throw new ArgumentException("A Data Fim não pode ser menor que a Data Inicio");
 
-                var relatorio = _lancamento.ObterTodos().Where(x => x.ClienteID == 0);
+                var relatorio = _lancamento.ObterTodos().Where(x => x.LancamentoID == 0);
 
                 if (txtConta != null && txtDataInicio != null && txtDataFim != null && txtTipo == null)
                     relatorio = _lancamento.ObterTodos().Where(x => x.ContaContabilID == txtConta && x.DataLancamento >= txtDataInicio && x.DataLancamento <= txtDataFim);
@@ -355,7 +359,7 @@ namespace SigaApp.Controllers
             {
                 Mensagem = ex.Message.ToString();
                 ModelState.AddModelError(String.Empty, Mensagem);
-                return RedirectToAction(nameof(GerarRelatorio));
+                return View();
             }
         }
 
@@ -396,24 +400,32 @@ namespace SigaApp.Controllers
                     var currentRow = 1;
                     worksheet.Cell(currentRow, 1).Value = "Data de Cadastro";
                     worksheet.Cell(currentRow, 2).Value = "Data Lançamento";
-                    worksheet.Cell(currentRow, 3).Value = "Conta";
-                    worksheet.Cell(currentRow, 4).Value = "Número Doc.";
-                    worksheet.Cell(currentRow, 5).Value = "Cliente/Fornecedor";
-                    worksheet.Cell(currentRow, 6).Value = "Descrição";
-                    worksheet.Cell(currentRow, 7).Value = "Tipo";
-                    worksheet.Cell(currentRow, 8).Value = "Valor";
+                    worksheet.Cell(currentRow, 3).Value = "Descrição";
+                    worksheet.Cell(currentRow, 4).Value = "Tipo Lançamento";
+                    worksheet.Cell(currentRow, 5).Value = "Conta";
+                    worksheet.Cell(currentRow, 6).Value = "Número Doc.";
+                    worksheet.Cell(currentRow, 7).Value = "Cliente/Fornecedor";
+                    worksheet.Cell(currentRow, 8).Value = "Categoria";
+                    worksheet.Cell(currentRow, 9).Value = "Sub-Categoria";
+                    worksheet.Cell(currentRow, 10).Value = "Centro de Custo";
+                    worksheet.Cell(currentRow, 11).Value = "Conta COntábil";
+                    worksheet.Cell(currentRow, 12).Value = "Valor";
 
                     foreach (var rel in relatorio)
                     {
                         currentRow++;
                         worksheet.Cell(currentRow, 1).Value = rel.DataCadastro.ToString("dd/MM/yyyy");
                         worksheet.Cell(currentRow, 2).Value = rel.DataLancamento.ToString("dd/MM/yyyy");
-                        worksheet.Cell(currentRow, 3).Value = rel.ContaContabil.NomeConta;
-                        worksheet.Cell(currentRow, 4).Value = rel.NumeroDocumento;
-                        worksheet.Cell(currentRow, 5).Value = rel.Nome;
-                        worksheet.Cell(currentRow, 6).Value = rel.Descricao;
-                        worksheet.Cell(currentRow, 7).Value = rel.TipoLancamento;
-                        worksheet.Cell(currentRow, 8).Value = rel.Valor;
+                        worksheet.Cell(currentRow, 3).Value = rel.Descricao ?? "-";
+                        worksheet.Cell(currentRow, 4).Value = rel.TipoLancamento;
+                        worksheet.Cell(currentRow, 5).Value = rel.ContaContabil.NomeConta ?? "-";
+                        worksheet.Cell(currentRow, 6).Value = rel.NumeroDocumento ?? 0;
+                        worksheet.Cell(currentRow, 7).Value = rel.Nome ?? "-";
+                        worksheet.Cell(currentRow, 8).Value = rel.Categoria.Nome ?? "-";
+                        worksheet.Cell(currentRow, 9).Value = rel.SubCategoria.Nome ?? "-";
+                        worksheet.Cell(currentRow, 10).Value = rel.CentroCusto.Nome ?? "-";
+                        worksheet.Cell(currentRow, 11).Value = rel.ContaContabil.NomeConta ?? "-";
+                        worksheet.Cell(currentRow, 12).Value = rel.Valor.ToString("C") ?? "R$ 0.00";
                     }
 
                     using (var stream = new MemoryStream())
@@ -434,13 +446,36 @@ namespace SigaApp.Controllers
             
         }
 
-        public ActionResult GerarDRE()
+        [HttpGet]
+        public ActionResult GerarDRE(int? pagina)
         {
+            var result = _lancamento.ObterTodos().Where(x => x.LancamentoID == 0);
+            
+            int pageSize = 20;
+            return View(Paginacao<Lancamento>.Create(result, pagina ?? 1, pageSize));
+        }
+
+        [HttpPost]
+        public ActionResult GerarDRE(int txtMes) 
+        {
+            List<Lancamento> listaLancamento = new List<Lancamento>();
             int ano = DateTime.Now.Year;
 
-            var result = _lancamento.ObterTodos().GroupBy(x => x.Categoria.Nome).Select(x => new { x.Key, Valor = x.Sum(y => y.Valor) }).ToList();
+            var result = from lancamento in _lancamento.ObterTodos()
+                         .Where(x => x.DataLancamento >= (new DateTime(ano, txtMes, 1)) && x.DataLancamento <= (new DateTime(ano, txtMes, DateTime.DaysInMonth(ano, txtMes))))
+                         group lancamento by lancamento.Categoria.Nome into g
+                         select new
+                         {
+                             CategoriaNome = g.Key,
+                             ValorCategoria = g.Sum(x => x.Valor)
+                         };
 
-            return View(result);
+            foreach(var item in result)
+            {
+                listaLancamento.Add(item);
+            }
+
+            return View(listaLancamento);
         }
 
         public IEnumerable<Fornecedor> CarregarFornecedores()

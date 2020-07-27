@@ -154,34 +154,30 @@ namespace SigaApp.Controllers
                         usuario.EmpresaID = user.ElementAt(0).EmpresaID;
                         usuario.FlagAtivo = user.ElementAt(0).FlagAtivo;
                         usuario.DataExclusao = user.ElementAt(0).DataExclusao;
-                        //usuario.IsLogado = user.ElementAt(0).IsLogado;
+                        usuario.DataLimiteTeste = user.ElementAt(0).DataLimiteTeste;
 
-                        //if (usuario.IsLogado)
-                        //    return RedirectToAction("UsuarioLogado", usuario);
-
-                        //var usuarioAtualizar = _usuario.ObterPorId(usuario.UsuarioID);
-                        //usuarioAtualizar.IsLogado = true;
-                        //_usuario.Atualizar(usuarioAtualizar);
-
-                        Autorizar(usuario);
-
-                        return Redirect("/Home/Index");
+                        if (usuario.DataLimiteTeste != null && DateTime.Now.Date > usuario.DataLimiteTeste)
+                        {
+                            throw new ArgumentException("Seu período de teste expirou");
+                        }
+                        else
+                        {
+                            Autorizar(usuario);
+                            return Redirect("/Home/Index");
+                        }
                     }
                     else
                     {
-                        MensagemLogin = "E-mail ou senha inválidos";
-                        return RedirectToAction(nameof(Login));
+                        throw new ArgumentException("E-mail ou senha inválidos");
                     }
                 }
-                else
-                {
-                    return View();
-                }
+                return View(usuario);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MensagemLogin = "Erro ao tentar realizar o login.";
-                return RedirectToAction(nameof(Login));
+                MensagemLogin = ex.Message.ToString();
+                ModelState.AddModelError(String.Empty, MensagemLogin);
+                return View(usuario);
             }
         }
 
@@ -203,7 +199,7 @@ namespace SigaApp.Controllers
             var propriedadesDeAutenticacao = new AuthenticationProperties
             {
                 AllowRefresh = true,
-                ExpiresUtc = DateTime.Now.ToLocalTime().AddMinutes(30),
+                ExpiresUtc = DateTime.Now.ToLocalTime().AddMinutes(15),
                 IsPersistent = false
             };
 
@@ -216,7 +212,6 @@ namespace SigaApp.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var usuario = _usuario.ObterPorId(Convert.ToInt32(userId));
-            //usuario.IsLogado = false;
             _usuario.Atualizar(usuario);
                         
             await HttpContext.SignOutAsync();
