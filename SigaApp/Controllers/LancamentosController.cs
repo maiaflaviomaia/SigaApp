@@ -456,13 +456,22 @@ namespace SigaApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult GerarDRE(int txtMes) 
+        public JsonResult GerarDRE(int txtMes) 
         {
-            List<Lancamento> listaLancamento = new List<Lancamento>();
+            var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
+            var start = Request.Form["start"].FirstOrDefault();
+            var length = Request.Form["length"].FirstOrDefault();
+            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][categoriaNome]"].FirstOrDefault();
+            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+            var searchValue = Request.Form["search[value]"].FirstOrDefault();
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt32(start) : 0;
+            int recordsTotal = 0;
+
             int ano = DateTime.Now.Year;
 
             var result = from lancamento in _lancamento.ObterTodos()
-                         .Where(x => x.DataLancamento >= (new DateTime(ano, txtMes, 1)) && x.DataLancamento <= (new DateTime(ano, txtMes, DateTime.DaysInMonth(ano, txtMes))))
+                         //.Where(x => x.DataLancamento >= (new DateTime(ano, txtMes, 1)) && x.DataLancamento <= (new DateTime(ano, txtMes, DateTime.DaysInMonth(ano, txtMes))))
                          group lancamento by lancamento.Categoria.Nome into g
                          select new
                          {
@@ -470,12 +479,15 @@ namespace SigaApp.Controllers
                              ValorCategoria = g.Sum(x => x.Valor)
                          };
 
-            foreach(var item in result)
+            if (!string.IsNullOrEmpty(searchValue))
             {
-                listaLancamento.Add(item);
+                result = result.Where(m => m.CategoriaNome == searchValue);
             }
 
-            return View(listaLancamento);
+            recordsTotal = result.Count();
+            var data = result.Skip(skip).Take(pageSize).ToList();
+
+            return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
         }
 
         public IEnumerable<Fornecedor> CarregarFornecedores()
