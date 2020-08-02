@@ -42,6 +42,9 @@ namespace SigaApp.Servicos
                 if (conta.ContaContabilID == null || conta.ContaContabilID <= 0)
                     throw new ArgumentException("Informe a Conta Contábil");
 
+                if (conta.CategoriaID == null || conta.SubCategoriaID == null)
+                    throw new ArgumentException("Categorias financeiras não informadas. Favor informar as categorias na tela de Edição.");
+
                 conta.DataPagamento = DateTime.Now;
                 conta.Status = StatusContaReceber.Pago;
                 conta.ValorRecebido = (conta.Valor + conta.Juros + conta.Multa) - conta.Desconto;

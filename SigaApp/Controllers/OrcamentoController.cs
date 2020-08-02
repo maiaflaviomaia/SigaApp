@@ -292,7 +292,7 @@ namespace SigaApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    orcamento = _orcamento.ObterPorId(id);
+                    var orcamentoAux = _orcamento.ObterPorId(id);
                     TratarValores tratarValores = new TratarValores();
 
                     OrcamentoService service = new OrcamentoService();
@@ -308,23 +308,23 @@ namespace SigaApp.Controllers
                     contaReceber.DataPagamento = null;
                     contaReceber.DataVencimento = DateTime.Now.AddMonths(1);
                     contaReceber.FlagAtivo = true;
-                    contaReceber.ClienteID = orcamento.ClienteID;
+                    contaReceber.ClienteID = orcamentoAux.ClienteID;
                     contaReceber.CategoriaID = null;
                     contaReceber.SubCategoriaID = null;
                     contaReceber.CentroDeCustoID = null;
                     contaReceber.ContaContabilID = null;
-                    contaReceber.OrcamentoID = orcamento.OrcamentoID;
-                    contaReceber.Valor = orcamento.TotalOrcamento;
+                    contaReceber.OrcamentoID = orcamentoAux.OrcamentoID;
+                    contaReceber.Valor = orcamentoAux.TotalOrcamento;
                     contaReceber.Recorrente = false;
                     contaReceber.TipoDocumento = TipoDocumento.NotaFiscal;
-                    contaReceber.NumeroDocumento = Convert.ToInt32(orcamento.OrcamentoID.ToString() + tratarValores.TransformarHoraEmNumero(orcamento.DataCadastro));
-                    contaReceber.Descricao = orcamento.Titulo;
+                    contaReceber.NumeroDocumento = Convert.ToInt32(orcamentoAux.OrcamentoID.ToString() + tratarValores.TransformarHoraEmNumero(orcamentoAux.DataCadastro));
+                    contaReceber.Descricao = orcamentoAux.Titulo;
                     contaReceber.FormaPagamento = FormaPagamento.Boleto;
                     contaReceber.Status = StatusContaReceber.Aberto;
                     contaReceber.Desconto = 0;
                     contaReceber.Juros = 0;
                     contaReceber.Multa = 0;
-                    contaReceber.Observacoes = "Gerado automaticamente através do orçamento " + orcamento.OrcamentoID + " - " + orcamento.Cliente.RazaoSocial + " - " + orcamento.Titulo;
+                    contaReceber.Observacoes = "Gerado automaticamente através do orçamento " + orcamentoAux.OrcamentoID + " - " + orcamentoAux.Cliente.RazaoSocial + " - " + orcamentoAux.Titulo;
 
                     _contaReceber.Inserir(contaReceber);
                     #endregion

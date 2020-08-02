@@ -6,6 +6,11 @@ namespace SigaApp.Models.Entidades
 {
     public class Categoria
     {
+        public Categoria()
+        {
+            SomatorioMensal = new List<SomatorioMensal>();
+        }
+
         [Key]
         public int CategoriaID { get; set; }
 
@@ -36,6 +41,15 @@ namespace SigaApp.Models.Entidades
         public int EmpresaID { get; set; }
 
         public ICollection<Categoria> SubCategoria { get; set; }
+
+        public List<SomatorioMensal> SomatorioMensal { get; set; }
+    }
+
+    public class SomatorioMensal
+    {
+        [Key]
+        public string MesAno { get; set; }
+        public decimal Total { get; set; }
     }
 
     /*Criada para vizualizar as categorias em estilo TreeView*/

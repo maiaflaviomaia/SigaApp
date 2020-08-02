@@ -32,16 +32,6 @@
             Cancelado = 5
         }
 
-        public enum StatusTitulo
-        {
-            Aberto = 0,
-            Vencido = 1,
-            Pago = 2,
-            Atrasado = 3,
-            Protestado = 4,
-            Cancelado = 5
-        }
-
         public enum FormaPagamento
         {
             Dinheiro = 0,

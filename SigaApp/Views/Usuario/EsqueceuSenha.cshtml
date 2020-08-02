@@ -16,8 +16,8 @@
 
     <style type="text/css">
         body {
-            color: #fff;
-            background: #3598dc;
+            color: #444444;
+            background: #f1f4f7;
         }
 
         .form-control {
@@ -37,7 +37,7 @@
 
         .login-form {
             width: 350px;
-            margin: 130px auto;
+            margin: 100px auto;
             text-align: center;
         }
 
@@ -88,23 +88,12 @@
 <body>
     <div class="login-form">
         <form asp-controller="Usuario" asp-action="EsqueceuSenha" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <a href="#" class="text-center">
                 <img src="~/img/Siga_Login_Logo.png" />
             </a>
 
-            @{
-                if (TempData["Mensagem"] != null)
-                {
-                    <div class="alert alert-danger" role="alert" alert-dismissible fade show>
-                        @TempData["Mensagem"]
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                }
-            }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group has-error">
                 <input type="email" class="form-control " name="txtEmail" placeholder="E-mail">
@@ -114,7 +103,7 @@
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar E-mail</button>
             </div>
         </form>
-        <p class="text-center small">2020. Siga - Gestão Audiovisual.</p>
+        <p class="text-center small">2020. AppSiga - Gestão Audiovisual.</p>
     </div>
 </body>
 </html>                                                  

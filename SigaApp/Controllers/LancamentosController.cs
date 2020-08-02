@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SigaApp.Models.Entidades;
 using SigaApp.Models.Interfaces;
+using SigaApp.Models.ViewModels;
 using SigaApp.Servicos;
 using static SigaApp.Utils.Enums;
 
@@ -446,48 +447,52 @@ namespace SigaApp.Controllers
             
         }
 
-        [HttpGet]
-        public ActionResult GerarDRE(int? pagina)
-        {
-            var result = _lancamento.ObterTodos().Where(x => x.LancamentoID == 0);
+        //[HttpGet]
+        //public ActionResult GerarDRE(int? pagina)
+        //{
+        //    var result = _lancamento.ObterTodos().Where(x => x.LancamentoID == 0);
             
-            int pageSize = 20;
-            return View(Paginacao<Lancamento>.Create(result, pagina ?? 1, pageSize));
+        //    int pageSize = 20;
+        //    return View(Paginacao<Lancamento>.Create(result, pagina ?? 1, pageSize));
+        //}
+
+        [HttpGet]
+        public ActionResult GerarDRE() 
+        {
+            return View(new RelatorioDREViewModel { Relatorio = RelatorioDRE() });
         }
 
-        [HttpPost]
-        public JsonResult GerarDRE(int txtMes) 
+        private IEnumerable<RelatorioDRE> RelatorioDRE()
         {
-            var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
-            var start = Request.Form["start"].FirstOrDefault();
-            var length = Request.Form["length"].FirstOrDefault();
-            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][categoriaNome]"].FirstOrDefault();
-            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-            var searchValue = Request.Form["search[value]"].FirstOrDefault();
-            int pageSize = length != null ? Convert.ToInt32(length) : 0;
-            int skip = start != null ? Convert.ToInt32(start) : 0;
-            int recordsTotal = 0;
+            string ano = DateTime.Now.Year.ToString();
+            string[] meses = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
 
-            int ano = DateTime.Now.Year;
+            var todosLancamentos = _lancamento.ObterTodos();
+            var todasCategorias = _categoria.ObterTodos();
 
-            var result = from lancamento in _lancamento.ObterTodos()
-                         //.Where(x => x.DataLancamento >= (new DateTime(ano, txtMes, 1)) && x.DataLancamento <= (new DateTime(ano, txtMes, DateTime.DaysInMonth(ano, txtMes))))
-                         group lancamento by lancamento.Categoria.Nome into g
-                         select new
-                         {
-                             CategoriaNome = g.Key,
-                             ValorCategoria = g.Sum(x => x.Valor)
-                         };
-
-            if (!string.IsNullOrEmpty(searchValue))
+            for (int i = 0; i < meses.Length; i++)
             {
-                result = result.Where(m => m.CategoriaNome == searchValue);
+                foreach (var item in todasCategorias)
+                {
+                    string _mesAno = string.Format("{0}/{1}", meses[i], ano);
+                    var lancamentos = todosLancamentos.Where(x => x.MesAno.Equals(_mesAno) && x.SubCategoriaID == item.CategoriaID).ToList();
+                    decimal somatorioLancamentos = lancamentos != null && lancamentos.Count > 0 ? lancamentos.Sum(x => x.Valor) : 0;
+                    item.SomatorioMensal.Add(new SomatorioMensal() { MesAno = _mesAno, Total = somatorioLancamentos});
+                }
             }
 
-            recordsTotal = result.Count();
-            var data = result.Skip(skip).Take(pageSize).ToList();
+            var categorias = from c in todasCategorias
+                             where !c.CategoriaPai.HasValue
+                             select new RelatorioDRE
+                             {
+                                 CategoriaPaiID = c.CategoriaID,
+                                 DescricaoCategoria = c.Nome,
+                                 ListaSubCategorias = (from nc in todasCategorias
+                                                       where nc.CategoriaPai.HasValue && nc.CategoriaPai == c.CategoriaID
+                                                       select nc).ToList()
+                             };
 
-            return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
+            return categorias;
         }
 
         public IEnumerable<Fornecedor> CarregarFornecedores()

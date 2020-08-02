@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static SigaApp.Utils.Enums;
 
 namespace SigaApp.Models.Entidades
@@ -66,6 +67,9 @@ namespace SigaApp.Models.Entidades
         public bool isContaPagarReceber { get; set; }
 
         public bool isTransferencia { get; set; }
+
+        [NotMapped]
+        public string MesAno { get { return DataLancamento.ToString("MM/yyyy"); } }
 
         [Display(Name = "Data de Exclusão")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
