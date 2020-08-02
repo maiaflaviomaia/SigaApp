@@ -23,6 +23,7 @@ namespace SigaApp.Context
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<Lancamento> Lancamentos { get; set; }
+        public DbSet<LogUsuarioLogon> LogUsuarios { get; set; }
         public DbSet<MensagemSite> MensagensSite { get; set; }
         public DbSet<Orcamento> Orcamentos { get; set; }
         public DbSet<OrcamentoCustos> OrcamentoCustos { get; set; }
@@ -59,6 +60,7 @@ namespace SigaApp.Context
             builder.Entity<Lancamento>().ToTable("LANCAMENTOS");
             builder.Entity<Agenda>().ToTable("AGENDA");
             builder.Entity<MensagemSite>().ToTable("MENSAGENS_SITE");
+            builder.Entity<LogUsuarioLogon>().ToTable("LOG_USUARIOS_LOGON");
         }
     }
 }

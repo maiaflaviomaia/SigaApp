@@ -6,8 +6,7 @@
 
 <style type="text/css">
     body {
-        padding-top: 60px;
-        font-size: 12px;
+        font-size: 14px;
         color: #444444;
         font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
@@ -42,7 +41,7 @@
 
     <div class="row mt-4">
         <div class="col-lg-12">
-            <p>
+            <p class="text-justify">
                 Declaramos para os devidos fins que recebemos de <b>@Model.Cliente.RazaoSocial</b>, inscrito no CPF/CNPJ sob o número de
                 @if (Model.Cliente.CPF != null)
                 {
@@ -64,6 +63,9 @@
             <p>Pelo qual damos plena e total quitação referente ao débito acima citado.</p>
         </div>
     </div>
+
+    <br />
+    <br />
 
     <div class="row mt-5">
         <div class="col-lg-12">

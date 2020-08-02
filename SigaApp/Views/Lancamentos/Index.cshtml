@@ -117,17 +117,13 @@
                 }
                 <ul class="pager">
                     <li class="@prevDisabled">
-                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex - 1)" asp-route-filtroAtual="@ViewData["FiltroAtual"]">Anterior</a>
+                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex - 1)" asp-route-txtConta="@ViewData["FiltroAtual"]">Anterior</a>
                     </li>
 
                     <li class="@nextDisabled">
-                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex + 1)" asp-route-filtroAtual="@ViewData["FiltroAtual"]">Próxima</a>
+                        <a asp-action="Index" asp-route-pagina="@(Model.PageIndex + 1)" asp-route-txtConta="@ViewData["FiltroAtual"]">Próxima</a>
                     </li>
                 </ul>
-
-                <div id="modalCreate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modalLabel"></div>
-
-                <div id="modalTransfer" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modalTransferLabel"></div>
             </div>
         </div>
     </div>

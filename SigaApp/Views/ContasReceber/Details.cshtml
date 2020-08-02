@@ -6,6 +6,11 @@
             <div class="panel-heading">Conta a Receber</div>
             <div class="panel-body">
                 <div>
+                    @if (Model.CategoriaID == null || Model.SubCategoriaID == null)
+                    {
+                        <p class="alert alert-danger">Atenção! Categorias Financeiras não informadas. Favor preencher na tela de Edição.</p>
+                    }
+
                     <dl class="row">
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.DataCadastro)
@@ -54,7 +59,7 @@
                         }
                         else
                         {
-                            <dd> - </dd>
+                            <dd class="col-sm-10"> - </dd>
                         }
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.NumeroDocumento)
@@ -73,7 +78,7 @@
                         }
                         else
                         {
-                            <dd> - </dd>
+                            <dd class="col-sm-10"> - </dd>
                         }
 
                         <dt class="col-sm-2">
@@ -87,7 +92,7 @@
                         }
                         else
                         {
-                            <dd> - </dd>
+                            <dd class="col-sm-10"> - </dd>
                         }
 
                         <dt class="col-sm-2">
@@ -101,7 +106,7 @@
                         }
                         else
                         {
-                            <dd> - </dd>
+                            <dd class="col-sm-10"> - </dd>
                         }
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Desconto)
@@ -158,6 +163,13 @@
                 @if (Model.Status == SigaApp.Utils.Enums.StatusContaReceber.Pago)
                 {
                     <div class="form-group">
+                        <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
+                    </div>
+                }
+                else if (Model.CategoriaID == null || Model.SubCategoriaID == null)
+                {
+                    <div class="form-group">
+                        <a asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@Model.ContaReceberID">Editar</a>
                         <a asp-action="Index" class="btn btn-sm btn-dark">Voltar</a>
                     </div>
                 }

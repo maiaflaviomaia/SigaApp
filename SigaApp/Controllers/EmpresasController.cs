@@ -9,7 +9,7 @@ using SigaApp.Utils;
 
 namespace SigaApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Master")]
     public class EmpresasController : Controller
     {
         private readonly IEmpresa _empresa;

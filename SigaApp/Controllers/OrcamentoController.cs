@@ -362,7 +362,7 @@ namespace SigaApp.Controllers
                                 contaPagar.Desconto = 0;
                                 contaPagar.Juros = 0;
                                 contaPagar.Multa = 0;
-                                contaPagar.Observacoes = "Gerado automaticamente através do orçamento " + orcamento.OrcamentoID + " - " + orcamento.Cliente.RazaoSocial + " - " + orcamento.Titulo;
+                                contaPagar.Observacoes = "Gerado automaticamente através do orçamento " + orcamento.OrcamentoID + " - " + orcamentoAux.Cliente.RazaoSocial + " - " + orcamento.Titulo;
 
                                 _contaPagar.Inserir(contaPagar);
                             }

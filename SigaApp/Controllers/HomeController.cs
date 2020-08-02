@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using SigaApp.Models.Interfaces;
 using static SigaApp.Utils.Enums;
 using SigaApp.Models.Entidades;
-using System.Net;
 
 namespace SigaApp.Controllers
 {
@@ -17,15 +16,13 @@ namespace SigaApp.Controllers
         private readonly IContaPagar _contaPagar;
         private readonly IOrcamento _orcamento;
         private readonly ILancamento _lancamento;
-        private readonly IMensagemSite _mensagem;
-
-        public HomeController(IContaReceber contaReceber, IContaPagar contaPagar, IOrcamento orcamento, ILancamento lancamento, IMensagemSite mensagem)
+        
+        public HomeController(IContaReceber contaReceber, IContaPagar contaPagar, IOrcamento orcamento, ILancamento lancamento)
         {
             _contaReceber = contaReceber;
             _contaPagar = contaPagar;
             _orcamento = orcamento;
             _lancamento = lancamento;
-            _mensagem = mensagem;
         }
 
         public IActionResult Index()
@@ -62,9 +59,6 @@ namespace SigaApp.Controllers
         public JsonResult GerarGraficoAcumulado()
         {
             GraficoAcumuladoViewModel model = new GraficoAcumuladoViewModel();
-            //model.TotalReceita = _contaReceber.ObterTodos().Select(x => x.Valor).Sum();
-            //model.TotalDespesa = _contaPagar.ObterTodos().Select(x => x.Valor).Sum();
-
             model.TotalReceita = _lancamento.ObterTodos().Where(x => x.TipoLancamento == TipoLancamento.Credito && x.isTransferencia == false).Select(x => x.Valor).Sum();
             model.TotalDespesa = _lancamento.ObterTodos().Where(x => x.TipoLancamento == TipoLancamento.Debito && x.isTransferencia == false).Select(x => x.Valor).Sum();
 
@@ -78,7 +72,6 @@ namespace SigaApp.Controllers
            
             for(int i = 1; i <= 12; i++)
             {
-                //var pesquisa = _contaReceber.ObterTodos().Where(x => x.DataVencimento >= (new DateTime(ano, i, 1)) && x.DataVencimento <= (new DateTime(ano, i, DateTime.DaysInMonth(ano, i)))).Select(x => x.Valor).Sum();
                 var valorMes = _lancamento.ObterTodos()
                     .Where(x => x.TipoLancamento == TipoLancamento.Credito && x.DataLancamento >= (new DateTime(ano, i, 1)) && x.DataLancamento <= (new DateTime(ano, i, DateTime.DaysInMonth(ano, i))) && x.isTransferencia == false)
                     .Select(x => x.Valor).Sum();
@@ -95,7 +88,6 @@ namespace SigaApp.Controllers
 
             for (int i = 1; i <= 12; i++)
             {
-                //var valorMes = _contaPagar.ObterTodos().Where(x => x.DataVencimento >= (new DateTime(ano, i, 1)) && x.DataVencimento <= (new DateTime(ano, i, DateTime.DaysInMonth(ano, i)))).Select(x => x.Valor).Sum();
                 var valorMes = _lancamento.ObterTodos()
                     .Where(x => x.TipoLancamento == TipoLancamento.Debito && x.DataLancamento >= (new DateTime(ano, i, 1)) && x.DataLancamento <= (new DateTime(ano, i, DateTime.DaysInMonth(ano, i))) && x.isTransferencia == false)
                     .Select(x => x.Valor).Sum();

@@ -62,6 +62,7 @@ namespace SigaApp
             services.AddScoped<ILancamento, LancamentoRepository>();
             services.AddScoped<IAgenda, AgendaRepository>();
             services.AddScoped<IMensagemSite, MensagemSiteRepository>();
+            services.AddScoped<ILogUsuarioLogon, LogUsuarioLogonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

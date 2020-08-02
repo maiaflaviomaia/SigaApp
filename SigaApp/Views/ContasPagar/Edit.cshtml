@@ -94,7 +94,9 @@
 
                         <div class="col-md-3 mb-3">
                             <label asp-for="SubCategoriaID" class="control-label"></label>
-                            <select id="subCategoria" asp-for="SubCategoriaID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaSubCategorias, "CategoriaID", "Nome"))"></select>
+                            <select id="subCategoria" asp-for="SubCategoriaID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaSubCategorias, "CategoriaID", "Nome"))">
+                                <option value="">-- Selecione --</option>
+                            </select>
                             <span asp-validation-for="SubCategoriaID" class="text-danger"></span>
                         </div>
                     </div>

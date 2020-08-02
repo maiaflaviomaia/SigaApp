@@ -23,12 +23,14 @@ namespace SigaApp.Controllers
         private readonly IUsuario _usuario;
         private readonly IEmpresa _empresa;
         private readonly IEmail _email;
+        private readonly ILogUsuarioLogon _log;
         
-        public UsuarioController(IUsuario usuario, IEmpresa empresa, IEmail email, IHostingEnvironment env)
+        public UsuarioController(IUsuario usuario, IEmpresa empresa, IEmail email, ILogUsuarioLogon log, IHostingEnvironment env)
         {
             _usuario = usuario;
             _empresa = empresa;
             _email = email;
+            _log = log;
         }
 
         [TempData]
@@ -68,9 +70,8 @@ namespace SigaApp.Controllers
         {
             var usuario = _usuario.ObterPorId(id);
             if (usuario == null)
-            {
                 return NotFound();
-            }
+            
             return View(usuario);
         }
 
@@ -114,7 +115,6 @@ namespace SigaApp.Controllers
             else
             {
                 var user = _usuario.ObterPorId(usuario.UsuarioID);
-                //user.IsLogado = false;
                 _usuario.Atualizar(user);
                 HttpContext.SignOutAsync();
                 return RedirectToAction(nameof(Login));
@@ -177,6 +177,17 @@ namespace SigaApp.Controllers
             {
                 MensagemLogin = ex.Message.ToString();
                 ModelState.AddModelError(String.Empty, MensagemLogin);
+
+                LogUsuarioLogon logs = new LogUsuarioLogon();
+                logs.DataCadastro = DateTime.Now;
+                logs.EmpresaID = usuario.EmpresaID;
+                logs.IP = HttpContext.Connection.RemoteIpAddress.ToString();
+                logs.UsuarioID = usuario.UsuarioID;
+                logs.Sucesso = false;
+                logs.Mensagem = "Erro ao efetuar login do usuário " + usuario.Nome + " - " + ex.Message.ToString();
+                logs.StackTrace = ex.StackTrace.ToString();
+                _log.Inserir(logs);
+
                 return View(usuario);
             }
         }
@@ -203,6 +214,16 @@ namespace SigaApp.Controllers
                 IsPersistent = false
             };
 
+            LogUsuarioLogon logs = new LogUsuarioLogon();
+            logs.DataCadastro = DateTime.Now;
+            logs.EmpresaID = usuario.EmpresaID;
+            logs.IP = HttpContext.Connection.RemoteIpAddress.ToString();
+            logs.UsuarioID = usuario.UsuarioID;
+            logs.Sucesso = true;
+            logs.Mensagem = "Efetuado login do usuário " + usuario.Nome;
+            logs.StackTrace = null;
+            _log.Inserir(logs);
+
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, propriedadesDeAutenticacao);
         }
 
@@ -210,10 +231,18 @@ namespace SigaApp.Controllers
         public async Task<IActionResult> Logout()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             var usuario = _usuario.ObterPorId(Convert.ToInt32(userId));
-            _usuario.Atualizar(usuario);
                         
+            LogUsuarioLogon logs = new LogUsuarioLogon();
+            logs.DataCadastro = DateTime.Now;
+            logs.EmpresaID = usuario.EmpresaID;
+            logs.IP = HttpContext.Connection.RemoteIpAddress.ToString();
+            logs.UsuarioID = usuario.UsuarioID;
+            logs.Sucesso = true;
+            logs.Mensagem = "Efetuado Logoff do usuário " + usuario.Nome;
+            logs.StackTrace = null;
+            _log.Inserir(logs);
+
             await HttpContext.SignOutAsync();
             return RedirectToAction("Login");
         }
