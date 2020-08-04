@@ -447,15 +447,7 @@ namespace SigaApp.Controllers
             
         }
 
-        //[HttpGet]
-        //public ActionResult GerarDRE(int? pagina)
-        //{
-        //    var result = _lancamento.ObterTodos().Where(x => x.LancamentoID == 0);
-            
-        //    int pageSize = 20;
-        //    return View(Paginacao<Lancamento>.Create(result, pagina ?? 1, pageSize));
-        //}
-
+        
         [HttpGet]
         public ActionResult GerarDRE() 
         {
@@ -469,7 +461,7 @@ namespace SigaApp.Controllers
 
             var todosLancamentos = _lancamento.ObterTodos();
             var todasCategorias = _categoria.ObterTodos();
-
+            
             for (int i = 0; i < meses.Length; i++)
             {
                 foreach (var item in todasCategorias)
@@ -477,7 +469,7 @@ namespace SigaApp.Controllers
                     string _mesAno = string.Format("{0}/{1}", meses[i], ano);
                     var lancamentos = todosLancamentos.Where(x => x.MesAno.Equals(_mesAno) && x.SubCategoriaID == item.CategoriaID).ToList();
                     decimal somatorioLancamentos = lancamentos != null && lancamentos.Count > 0 ? lancamentos.Sum(x => x.Valor) : 0;
-                    item.SomatorioMensal.Add(new SomatorioMensal() { MesAno = _mesAno, Total = somatorioLancamentos});
+                    item.SomatorioMensal.Add(new SomatorioMensal() { MesAno = _mesAno, Total = somatorioLancamentos });
                 }
             }
 
