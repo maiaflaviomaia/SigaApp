@@ -2,58 +2,58 @@
 
 @if (Model != null)
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Categoria</th>
-                <th class="text-center">Total Anual</th>
-                <th class="text-center"><b>Jan.</b></th>
-                <th class="text-center"><b>Fev.</b></th>
-                <th class="text-center"><b>Mar.</b></th>
-                <th class="text-center"><b>Abr.</b></th>
-                <th class="text-center"><b>Mai.</b></th>
-                <th class="text-center"><b>Jun.</b></th>
-                <th class="text-center"><b>Jul.</b></th>
-                <th class="text-center"><b>Ago.</b></th>
-                <th class="text-center"><b>Set.</b></th>
-                <th class="text-center"><b>Out.</b></th>
-                <th class="text-center"><b>Nov.</b></th>
-                <th class="text-center"><b>Dez.</b></th>
+<table class="table">
+    <thead>
+        <tr class="alert alert-warning">
+            <th>Categoria</th>
+            <th>Total Anual</th>
+            <th class="text-center"><b>Jan.</b></th>
+            <th class="text-center"><b>Fev.</b></th>
+            <th class="text-center"><b>Mar.</b></th>
+            <th class="text-center"><b>Abr.</b></th>
+            <th class="text-center"><b>Mai.</b></th>
+            <th class="text-center"><b>Jun.</b></th>
+            <th class="text-center"><b>Jul.</b></th>
+            <th class="text-center"><b>Ago.</b></th>
+            <th class="text-center"><b>Set.</b></th>
+            <th class="text-center"><b>Out.</b></th>
+            <th class="text-center"><b>Nov.</b></th>
+            <th class="text-center"><b>Dez.</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var relatorio in Model)
+        {
+            <tr class="bg-primary" style="border-top: 10px solid white;">
+                <td><b>@relatorio.DescricaoCategoria</b></td>
+                <td style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("01/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("02/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("03/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("04/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("05/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("06/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("07/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("08/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("09/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("10/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("11/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("12/")).Sum(y => y.Total)).ToString("C")</b></td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var relatorio in Model)
+            @foreach (var categoriaFilho in @relatorio.ListaSubCategorias)
             {
-                <tr style="background-color:lightgrey">
-                    <td><b>@relatorio.DescricaoCategoria</b></td>
-                    <td style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("01/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("02/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("03/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("04/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("05/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("06/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("07/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("08/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("09/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("10/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("11/")).Sum(y => y.Total)).ToString("C")</b></td>
-                    <td class="text-center" style="font-size:10px"><b>@relatorio.ListaSubCategorias.Sum(x => x.SomatorioMensal.Where(y => y.MesAno.Contains("12/")).Sum(y => y.Total)).ToString("C")</b></td>
+                <tr>
+                    <td style="font-size:10px"> - @categoriaFilho.Nome</td>
+                    <td style="font-size:10px">@categoriaFilho.SomatorioMensal.Sum(x => x.Total).ToString("C")</td>
+                    @foreach (var itemMensal in categoriaFilho.SomatorioMensal)
+                    {
+                        <td class="text-center" style="font-size:8px">@itemMensal.Total.ToString("C")</td>
+                    }
                 </tr>
-                @foreach(var categoriaFilho in @relatorio.ListaSubCategorias)
-                {
-                    <tr>
-                        <td style="font-size:10px"> - @categoriaFilho.Nome</td>
-                        <td style="font-size:10px">@categoriaFilho.SomatorioMensal.Sum(x => x.Total).ToString("C")</td>
-                        @foreach(var itemMensal in categoriaFilho.SomatorioMensal)
-                        {
-                            <td class="text-center" style="font-size:8px">@itemMensal.Total.ToString("C")</td>
-                        }
-                    </tr>
-                }
             }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 }
 
 
