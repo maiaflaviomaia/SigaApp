@@ -147,7 +147,7 @@ namespace SigaApp.Controllers
                 lancamentoCreditar.EmpresaID = Convert.ToInt32(User.FindFirst(ClaimTypes.GroupSid).Value);
                 lancamentoCreditar.FlagAtivo = true;
                 lancamentoCreditar.isContaPagarReceber = false;
-                lancamentoDebitar.isTransferencia = true;
+                lancamentoCreditar.isTransferencia = true;
                 lancamentoCreditar.FornecedorID = null;
                 lancamentoCreditar.Nome = "Transferência entre contas";
                 lancamentoCreditar.NumeroDocumento = new Random().Next(1000000000);
@@ -261,6 +261,9 @@ namespace SigaApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Lancamento lancamento)
         {
+            if (lancamento.isContaPagarReceber == true || lancamento.isTransferencia == true)
+                return BadRequest();
+
             try
             {
                 if (ModelState.IsValid)

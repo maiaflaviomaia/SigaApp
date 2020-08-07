@@ -201,6 +201,9 @@ namespace SigaApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var contaReceberAux = _contas.ObterPorId(id);
+
+                    contaReceber.Cliente = contaReceberAux.Cliente;
                     ContaReceberService service = new ContaReceberService();
                     service.ValidarCampos(contaReceber);
 

@@ -36,17 +36,27 @@
                     <div class="row">
                         <div class="col-md-4 mb-3" id="fornecedor" style="display:none">
                             <label asp-for="FornecedorID" class="control-label"></label>
-                            <select asp-for="FornecedorID" id="forSelect" class="form-control " asp-items="@(new SelectList(ViewBag.ListaFornecedor, "FornecedorID", "RazaoSocial"))">
-                                <option value="">-- Selecione --</option>
-                            </select>
+                            <div class="input-group">
+                                <select asp-for="FornecedorID" id="forSelect" class="form-control" asp-items="@(new SelectList(ViewBag.ListaFornecedor, "FornecedorID", "RazaoSocial"))">
+                                    <option value="">-- Selecione --</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="right" title="Adicionar Fornecedor" onclick="MostrarModalFornecedor();"> + </button>
+                                </span>
+                            </div>
                             <span asp-validation-for="FornecedorID" class="text-danger"></span>
                         </div>
 
                         <div class="col-md-4 mb-3" id="cliente" style="display:none">
                             <label asp-for="ClienteID" class="control-label"></label>
-                            <select asp-for="ClienteID" id="cliSelect" class="form-control " asp-items="@(new SelectList(ViewBag.ListaClientes, "ClienteID", "RazaoSocial"))">
-                                <option value="">-- Selecione --</option>
-                            </select>
+                            <div class="input-group">
+                                <select asp-for="ClienteID" id="cliSelect" class="form-control" asp-items="@(new SelectList(ViewBag.ListaClientes, "ClienteID", "RazaoSocial"))">
+                                    <option value="">-- Selecione --</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="right" title="Adicionar Cliente" onclick="MostrarModalCliente();"> + </button>
+                                </span>
+                            </div>
                             <span asp-validation-for="ClienteID" class="text-danger"></span>
                         </div>
 
@@ -72,7 +82,7 @@
 
                         <div class="col-md-2 mb-3" style="display:none" id="centroCusto">
                             <label asp-for="CentroCustoID" class="control-label"></label>
-                            <select asp-for="CentroCustoID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaCentroDeCusto, "CentroCustoID", "Nome"))">
+                            <select asp-for="CentroCustoID" class="form-control" asp-items="@(new SelectList(ViewBag.ListaCentroDeCusto, "CentroCustoID", "Nome"))">
                                 <option value="">-- Selecione --</option>
                             </select>
                             <span asp-validation-for="CentroCustoID" class="text-danger"></span>
@@ -80,7 +90,7 @@
 
                         <div class="col-md-3 mb-3" style="display:none" id="divCategoria">
                             <label asp-for="CategoriaID" class="control-label"></label>
-                            <select id="categoria" asp-for="CategoriaID" onchange="CarregarSubCategorias();" class="form-control " asp-items="@(new SelectList(ViewBag.ListaCategorias, "CategoriaID", "Nome"))">
+                            <select id="categoria" asp-for="CategoriaID" onchange="CarregarSubCategorias();" class="form-control" asp-items="@(new SelectList(ViewBag.ListaCategorias, "CategoriaID", "Nome"))">
                                 <option value="">-- Selecione --</option>
                             </select>
                             <span asp-validation-for="CategoriaID" class="text-danger"></span>
@@ -88,7 +98,7 @@
 
                         <div class="col-md-3 mb-3" style="display:none" id="divSubCategoria">
                             <label asp-for="SubCategoriaID" class="control-label"></label>
-                            <select id="subCategoria" asp-for="SubCategoriaID" class="form-control " asp-items="@(new SelectList(ViewBag.ListaSubCategorias, "CategoriaID", "Nome"))">
+                            <select id="subCategoria" asp-for="SubCategoriaID" class="form-control" asp-items="@(new SelectList(ViewBag.ListaSubCategorias, "CategoriaID", "Nome"))">
                                 <option value="">-- Selecione --</option>
                             </select>
                             <span asp-validation-for="SubCategoriaID" class="text-danger"></span>
@@ -113,6 +123,50 @@
     </div>
 </form>
 
+<div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="modalClienteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalClienteLabel">Adicionar Cliente</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="txtCliente" class="col-form-label">Razão Social:</label>
+                        <input type="text" class="form-control" id="txtCliente">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-primary" id="btnSalvarCliente">Salvar</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalFornecedor" tabindex="-1" role="dialog" aria-labelledby="modalFornecedorLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalFornecedorLabel">Adicionar Fornecedor</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="txtFornecedor" class="col-form-label">Razão Social:</label>
+                        <input type="text" class="form-control" id="txtFornecedor">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-primary" id="btnSalvarFornecedor">Salvar</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <script type="text/javascript">
         $("body").on("change", "#forSelect", function () {
@@ -122,5 +176,57 @@
         $("body").on("change", "#cliSelect", function () {
             $("#nome").val($(this).find("option:selected").text());
         });
+    </script>
+
+    <script>
+        function MostrarModalCliente() {
+            $("#modalCliente").modal();
+
+            $("#btnSalvarCliente").on('click', function () {
+                var txtCliente = $("#txtCliente").val();
+
+                $.ajax({
+                    url: "/Clientes/AdicionarCliente",
+                    method: "POST",
+                    data: { txtCliente: txtCliente },
+                    success: function (data) {
+                        if (!data) {
+                            $(".modal").modal('hide');
+                            $(".modal").modal('dispose');
+                            $("#btnSalvarCliente").unbind('click');
+                            $("#txtCliente").val("");
+                            alert("Cliente já cadastrado");
+                        }
+                        else location.reload(true);
+                    }
+                });
+            });
+        }
+    </script>
+
+    <script>
+        function MostrarModalFornecedor() {
+            $("#modalFornecedor").modal();
+
+            $("#btnSalvarFornecedor").on('click', function () {
+                var txtFornecedor = $("#txtFornecedor").val();
+
+                $.ajax({
+                    url: "/Fornecedores/AdicionarFornecedor",
+                    method: "POST",
+                    data: { txtFornecedor: txtFornecedor },
+                    success: function (data) {
+                        if (!data) {
+                            $(".modal").modal('hide');
+                            $(".modal").modal('dispose');
+                            $("#btnSalvarFornecedor").unbind('click');
+                            $("#txtFornecedor").val("");
+                            alert("Fornecedor já cadastrado");
+                        }
+                        else location.reload(true);
+                    }
+                });
+            });
+        }
     </script>
 }

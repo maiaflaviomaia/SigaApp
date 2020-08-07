@@ -15,35 +15,35 @@
 
                         <div class="col-md-3 mb-3">
                             <label class="control-label">Origem</label>
-                            <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))" name="txtOrigem">
+                            <select class="form-control" asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))" name="txtOrigem">
                                 <option value="">-- Selecione --</option>
                             </select>
                         </div>
 
                         <div class="col-md-3 mb-3">
                             <label class="control-label">Destino</label>
-                            <select class="form-control " asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))" name="txtDestino">
+                            <select class="form-control" asp-items="@(new SelectList(ViewBag.ListaContaContabil, "ContaContabilID", "NomeConta"))" name="txtDestino">
                                 <option value="">-- Selecione --</option>
                             </select>
                         </div>
 
                         <div class="col-md-3 mb-3">
                             <label class="control-label">Valor</label>
-                            <input class="form-control  money2" name="txtValor" />
+                            <input class="form-control money2" name="txtValor" />
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label class="control-label">Descrição</label>
-                            <input class="form-control " name="txtDescricao" />
+                            <input class="form-control" name="txtDescricao" />
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label class="control-label">Observações</label>
-                            <textarea class="form-control " name="txtObservacao"></textarea>
+                            <textarea class="form-control" name="txtObservacao"></textarea>
                         </div>
                     </div>
 
