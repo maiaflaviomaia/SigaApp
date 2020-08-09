@@ -5,16 +5,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Relatório de Contas a Receber</div>
             <div class="panel-body">
-                @{
-                    if (TempData["Mensagem"] != null)
-                    {
-                        <div class="text-danger">
-                            <p>ERRO: @TempData["Mensagem"]</p>
-                        </div>
-                    }
-                }
-
-                <form asp-action="GerarRelatorio" class="mt-5">
+                <form asp-action="GerarRelatorio" class="mt-3">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="row">

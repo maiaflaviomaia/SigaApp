@@ -352,7 +352,9 @@ namespace SigaApp.Controllers
             {
                 Mensagem = ex.Message.ToString();
                 ModelState.AddModelError(String.Empty, Mensagem);
-                return RedirectToAction(nameof(GerarRelatorio));
+                CarregarClientes();
+                var relatorio = _contas.ObterTodos().Where(x => x.ClienteID == 0);
+                return View(Paginacao<ContaReceber>.Create(relatorio, pagina ?? 1, 20));
             }
         }
 
@@ -392,21 +394,65 @@ namespace SigaApp.Controllers
                 {
                     var worksheet = workbook.Worksheets.Add("ContasReceber");
                     var currentRow = 1;
-                    worksheet.Cell(currentRow, 1).Value = "Data de Cadastro";
-                    worksheet.Cell(currentRow, 2).Value = "Data Competência";
-                    worksheet.Cell(currentRow, 3).Value = "Data Vencimento";
-                    worksheet.Cell(currentRow, 4).Value = "Data Pagamento";
-                    worksheet.Cell(currentRow, 5).Value = "Categoria";
-                    worksheet.Cell(currentRow, 6).Value = "Sub-categoria";
-                    worksheet.Cell(currentRow, 7).Value = "Centro de Custo";
-                    worksheet.Cell(currentRow, 8).Value = "Cliente";
-                    worksheet.Cell(currentRow, 9).Value = "Descrição";
-                    worksheet.Cell(currentRow, 10).Value = "Status";
-                    worksheet.Cell(currentRow, 11).Value = "Valor";
-                    worksheet.Cell(currentRow, 12).Value = "Juros";
-                    worksheet.Cell(currentRow, 13).Value = "Multa";
-                    worksheet.Cell(currentRow, 14).Value = "Descontos";
-                    worksheet.Cell(currentRow, 15).Value = "Valor Recebido";
+                    worksheet.Cell(currentRow, 1).Value = "DATA DE CADASTRO";
+                    worksheet.Cell(currentRow, 1).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 1).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 2).Value = "DATA COMPETÊNCIA";
+                    worksheet.Cell(currentRow, 2).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 2).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 3).Value = "DATA VENCIMENTO";
+                    worksheet.Cell(currentRow, 3).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 3).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 4).Value = "DATA PAGAMENTO";
+                    worksheet.Cell(currentRow, 4).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 4).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 5).Value = "CATEGORIA";
+                    worksheet.Cell(currentRow, 5).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 5).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 6).Value = "SUB-CATEGORIA";
+                    worksheet.Cell(currentRow, 6).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 6).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 7).Value = "CENTRO DE CUSTO";
+                    worksheet.Cell(currentRow, 7).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 7).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 8).Value = "CLIENTE";
+                    worksheet.Cell(currentRow, 8).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 8).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 9).Value = "DESCRIÇÃO";
+                    worksheet.Cell(currentRow, 9).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 9).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 10).Value = "STATUS";
+                    worksheet.Cell(currentRow, 10).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 10).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 11).Value = "VALOR";
+                    worksheet.Cell(currentRow, 11).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 11).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 12).Value = "JUROS";
+                    worksheet.Cell(currentRow, 12).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 12).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 13).Value = "MULTA";
+                    worksheet.Cell(currentRow, 13).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 13).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 14).Value = "DESCONTOS";
+                    worksheet.Cell(currentRow, 14).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 14).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 15).Value = "VALOR RECEBIDO";
+                    worksheet.Cell(currentRow, 15).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 15).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
 
                     foreach (var rel in relatorio)
                     {
@@ -415,17 +461,17 @@ namespace SigaApp.Controllers
                         worksheet.Cell(currentRow, 2).Value = rel.Competencia.ToString("MM/yyyy");
                         worksheet.Cell(currentRow, 3).Value = rel.DataVencimento.ToString("dd/MM/yyyy");
                         worksheet.Cell(currentRow, 4).Value = rel.DataPagamento;
-                        worksheet.Cell(currentRow, 5).Value = rel.Categoria.Nome;
-                        worksheet.Cell(currentRow, 6).Value = rel.SubCategoria.Nome;
-                        worksheet.Cell(currentRow, 7).Value = rel.CentroDeCusto.Nome;
-                        worksheet.Cell(currentRow, 8).Value = rel.Cliente.RazaoSocial;
-                        worksheet.Cell(currentRow, 9).Value = rel.Descricao;
-                        worksheet.Cell(currentRow, 10).Value = rel.Status;
-                        worksheet.Cell(currentRow, 11).Value = rel.Valor;
-                        worksheet.Cell(currentRow, 12).Value = rel.Juros;
-                        worksheet.Cell(currentRow, 13).Value = rel.Multa;
-                        worksheet.Cell(currentRow, 14).Value = rel.Desconto;
-                        worksheet.Cell(currentRow, 15).Value = rel.ValorRecebido;
+                        worksheet.Cell(currentRow, 5).Value = rel.Categoria.Nome ?? " - ";
+                        worksheet.Cell(currentRow, 6).Value = rel.SubCategoria.Nome ?? " - ";
+                        worksheet.Cell(currentRow, 7).Value = rel.CentroDeCusto.Nome ?? " - ";
+                        worksheet.Cell(currentRow, 8).Value = rel.Cliente.RazaoSocial ?? " - ";
+                        worksheet.Cell(currentRow, 9).Value = rel.Descricao ?? " - ";
+                        worksheet.Cell(currentRow, 10).Value = rel.Status.ToString() ?? " - ";
+                        worksheet.Cell(currentRow, 11).Value = rel.Valor.ToString() ?? "R$ 0,00";
+                        worksheet.Cell(currentRow, 12).Value = rel.Juros ?? 0;
+                        worksheet.Cell(currentRow, 13).Value = rel.Multa ?? 0;
+                        worksheet.Cell(currentRow, 14).Value = rel.Desconto ?? 0;
+                        worksheet.Cell(currentRow, 15).Value = rel.ValorRecebido ?? 0;
                     }
 
                     using (var stream = new MemoryStream())

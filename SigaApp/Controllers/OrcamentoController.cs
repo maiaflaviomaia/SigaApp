@@ -483,7 +483,9 @@ namespace SigaApp.Controllers
             {
                 Mensagem = ex.Message.ToString();
                 ModelState.AddModelError(String.Empty, Mensagem);
-                return RedirectToAction(nameof(GerarRelatorio));
+                CarregarClientes();
+                var relatorio = _orcamento.ObterTodos().Where(x => x.ClienteID == 0);
+                return View(Paginacao<Orcamento>.Create(relatorio, pagina ?? 1, 20));
             }
         }
 
@@ -529,22 +531,119 @@ namespace SigaApp.Controllers
                 {
                     var worksheet = workbook.Worksheets.Add("Orçamentos");
                     var currentRow = 1;
-                    worksheet.Cell(currentRow, 1).Value = "Data de Cadastro";
-                    worksheet.Cell(currentRow, 2).Value = "Data Orçamento";
-                    worksheet.Cell(currentRow, 3).Value = "Cliente";
-                    worksheet.Cell(currentRow, 4).Value = "Titulo";
-                    worksheet.Cell(currentRow, 5).Value = "Status";
-                    worksheet.Cell(currentRow, 6).Value = "Valor";
+                    worksheet.Cell(currentRow, 1).Value = "DATA DE CADASTRO";
+                    worksheet.Cell(currentRow, 1).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 1).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 2).Value = "DATA ORÇAMENTO";
+                    worksheet.Cell(currentRow, 2).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 2).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 3).Value = "DATA VALIDADE";
+                    worksheet.Cell(currentRow, 3).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 3).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 4).Value = "TIPO ORÇAMENTO";
+                    worksheet.Cell(currentRow, 4).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 4).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+                                        
+                    worksheet.Cell(currentRow, 5).Value = "CLIENTE";
+                    worksheet.Cell(currentRow, 5).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 5).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 6).Value = "SOLICITANTE";
+                    worksheet.Cell(currentRow, 6).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 6).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 7).Value = "TITULO";
+                    worksheet.Cell(currentRow, 7).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 7).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 8).Value = "STATUS";
+                    worksheet.Cell(currentRow, 8).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 8).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 9).Value = "TIPO VEICULAÇÃO";
+                    worksheet.Cell(currentRow, 9).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 9).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 10).Value = "PRAÇA VEICULAÇÃO";
+                    worksheet.Cell(currentRow, 10).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 10).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 11).Value = "NOME PEÇA";
+                    worksheet.Cell(currentRow, 11).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 11).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 12).Value = "DURAÇÃO PEÇA";
+                    worksheet.Cell(currentRow, 12).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 12).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 13).Value = "PERÍODO VEICULAÇÃO";
+                    worksheet.Cell(currentRow, 13).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 13).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 14).Value = "TIPO MÍDIA";
+                    worksheet.Cell(currentRow, 14).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 14).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 15).Value = "PEDIDO DE PRODUÇÃO";
+                    worksheet.Cell(currentRow, 15).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 15).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 16).Value = "BV(%)";
+                    worksheet.Cell(currentRow, 16).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 16).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 17).Value = "TAXA LUCRO(%)";
+                    worksheet.Cell(currentRow, 17).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 17).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 18).Value = "TAXA IMPOSTO(%)";
+                    worksheet.Cell(currentRow, 18).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 18).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 19).Value = "TAXA COMISSÃO(%)";
+                    worksheet.Cell(currentRow, 19).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 19).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 20).Value = "ACRÉSCIMOS(R$)";
+                    worksheet.Cell(currentRow, 20).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 20).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 21).Value = "DESCONTOS(R$)";
+                    worksheet.Cell(currentRow, 21).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 21).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
+
+                    worksheet.Cell(currentRow, 22).Value = "VALOR(R$)";
+                    worksheet.Cell(currentRow, 22).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, 22).Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.5);
 
                     foreach (var rel in relatorio)
                     {
                         currentRow++;
                         worksheet.Cell(currentRow, 1).Value = rel.DataCadastro.ToString("dd/MM/yyyy");
                         worksheet.Cell(currentRow, 2).Value = rel.DataOrcamento.ToString("dd/MM/yyyy");
-                        worksheet.Cell(currentRow, 3).Value = rel.Cliente.RazaoSocial;
-                        worksheet.Cell(currentRow, 4).Value = rel.Titulo;
-                        worksheet.Cell(currentRow, 5).Value = rel.StatusOrcamento;
-                        worksheet.Cell(currentRow, 6).Value = rel.TotalOrcamento;
+                        worksheet.Cell(currentRow, 3).Value = rel.DataValidade.ToString("dd/MM/yyyy");
+                        worksheet.Cell(currentRow, 4).Value = rel.TipoOrcamento;
+                        worksheet.Cell(currentRow, 5).Value = rel.Cliente.RazaoSocial;
+                        worksheet.Cell(currentRow, 6).Value = rel.Solicitante;
+                        worksheet.Cell(currentRow, 7).Value = rel.Titulo;
+                        worksheet.Cell(currentRow, 8).Value = rel.StatusOrcamento;
+                        worksheet.Cell(currentRow, 9).Value = rel.TipoVeiculacao ?? " - ";
+                        worksheet.Cell(currentRow, 10).Value = rel.PracaVeiculacao ?? " - ";
+                        worksheet.Cell(currentRow, 11).Value = rel.NomePeca ?? " - ";
+                        worksheet.Cell(currentRow, 12).Value = rel.DuracaoPeca ?? " - ";
+                        worksheet.Cell(currentRow, 13).Value = rel.PeriodoVeiculacao ?? " - ";
+                        worksheet.Cell(currentRow, 14).Value = rel.TipoMidia ?? " - ";
+                        worksheet.Cell(currentRow, 15).Value = rel.PedidoProducao ?? " - ";
+                        worksheet.Cell(currentRow, 16).Value = rel.BonificacaoVeiculacao ?? 0;
+                        worksheet.Cell(currentRow, 17).Value = rel.TaxaLucro ?? 0;
+                        worksheet.Cell(currentRow, 18).Value = rel.TaxaImposto ?? 0;
+                        worksheet.Cell(currentRow, 19).Value = rel.TaxaComissao ?? 0;
+                        worksheet.Cell(currentRow, 20).Value = rel.Acrescimo ?? 0;
+                        worksheet.Cell(currentRow, 21).Value = rel.Desconto ?? 0;
+                        worksheet.Cell(currentRow, 22).Value = rel.TotalOrcamento.ToString("C") ?? "R$ 0,00";
                     }
 
                     using (var stream = new MemoryStream())
