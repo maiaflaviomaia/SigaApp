@@ -102,6 +102,9 @@ namespace SigaApp.Models.Entidades
         [StringLength(250, ErrorMessage = "Máximo de 250 caracteres")]
         public string Observacoes { get; set; }
 
+        [Display(Name = "Pedido de Produção")]
+        public string PedidoProducao { get; set; }
+
         [NotMapped]
         public string ServicosJSON { get; set; }
 

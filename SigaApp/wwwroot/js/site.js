@@ -422,6 +422,7 @@ function MontarLayout() {
         document.getElementById("statusOrc").style.display = 'none';
         document.getElementById("dataOrc").style.display = 'block';
         document.getElementById("dataVal").style.display = 'block';
+        document.getElementById("pedidoProducao").style.display = 'none';
         document.getElementById("cliente").style.display = 'block';
         document.getElementById("solicitante").style.display = 'block';
         document.getElementById("titulo").style.display = 'block';
@@ -442,6 +443,7 @@ function MontarLayout() {
         document.getElementById("statusOrc").style.display = 'none';
         document.getElementById("dataOrc").style.display = 'block';
         document.getElementById("dataVal").style.display = 'block';
+        document.getElementById("pedidoProducao").style.display = 'block';
         document.getElementById("cliente").style.display = 'block';
         document.getElementById("solicitante").style.display = 'block';
         document.getElementById("titulo").style.display = 'block';
@@ -462,6 +464,7 @@ function MontarLayout() {
         document.getElementById("statusOrc").style.display = 'none';
         document.getElementById("dataOrc").style.display = 'none';
         document.getElementById("dataVal").style.display = 'none';
+        document.getElementById("pedidoProducao").style.display = 'none';
         document.getElementById("cliente").style.display = 'none';
         document.getElementById("solicitante").style.display = 'none';
         document.getElementById("titulo").style.display = 'none';
