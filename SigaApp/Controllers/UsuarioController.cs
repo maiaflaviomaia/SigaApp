@@ -274,14 +274,26 @@ namespace SigaApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Master")]
         public ActionResult Details(int id)
         {
-            id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var usuario = _usuario.ObterPorId(id);
 
             if (usuario == null)
                 return NotFound();
             
+            return View(usuario);
+        }
+
+        [HttpGet]
+        public ActionResult Perfil()
+        {
+            var id = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var usuario = _usuario.ObterPorId(id);
+
+            if (usuario == null)
+                return NotFound();
+
             return View(usuario);
         }
 
@@ -293,7 +305,8 @@ namespace SigaApp.Controllers
             
             if (usuario == null)
                 return NotFound();
-            
+
+            CarregarEmpresas();
             return View(usuario);
         }
 
@@ -304,17 +317,15 @@ namespace SigaApp.Controllers
         public ActionResult Edit(int id, Usuario usuario)
         {
             if (id != usuario.UsuarioID)
-            {
                 return NotFound();
-            }
-
+            
             if (ModelState.IsValid)
             {
                 Criptografia crip = new Criptografia(SHA512.Create());
                 
                 usuario.Senha = crip.CriptografarSenha(usuario.Senha);
                 _usuario.Atualizar(usuario);
-                return Redirect("/Home/Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(usuario);
         }
@@ -355,7 +366,7 @@ namespace SigaApp.Controllers
 
                     EmailModel model = new EmailModel();
                     model.Destino = usuario.Email;
-                    model.Assunto = "Siga - Redefinição de senha";
+                    model.Assunto = "AppSiga - Redefinição de senha";
                     model.Mensagem = "Sua senha provisória é " + novaSenhaGerada + " Acesse seu perfil para redefinir sua senha";
 
                     EnvioDeEmail(model.Destino, model.Assunto, model.Mensagem).GetAwaiter();

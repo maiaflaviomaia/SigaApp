@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -72,7 +73,13 @@ namespace SigaApp
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
+            //Configurando para ser servido por meio de proxy reverso (em caso de hospedagem em Linux CentOS 7.x)
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
             app.UseStatusCodePagesWithReExecute("/Error/{0}");
             
             app.UseAuthentication();

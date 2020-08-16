@@ -43,7 +43,10 @@ namespace SigaApp.Repository
 
         public Usuario ObterPorId(int id)
         {
-            return _contexto.Usuarios.Find(id);
+            return _contexto.Usuarios
+                .Include(x => x.Empresa)
+                .AsNoTracking()
+                .FirstOrDefault(x => x.UsuarioID == id);
         }
 
         public IEnumerable<Usuario> ObterUsuario(Usuario usuario)
