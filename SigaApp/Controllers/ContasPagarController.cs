@@ -103,7 +103,7 @@ namespace SigaApp.Controllers
                 {
                     contasPagar.EmpresaID = Convert.ToInt32(User.FindFirst(ClaimTypes.GroupSid).Value);
 
-                    ContasReceberService service = new ContasReceberService();
+                    ContasPagarService service = new ContasPagarService();
                     service.PreencherCampos(contasPagar);
 
                     if(contasPagar.Recorrente == true)
@@ -206,7 +206,7 @@ namespace SigaApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    ContasReceberService service = new ContasReceberService();
+                    ContasPagarService service = new ContasPagarService();
                     service.ValidarCampos(contasPagar);
 
                     _contas.Atualizar(contasPagar);
@@ -274,7 +274,7 @@ namespace SigaApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    ContasReceberService service = new ContasReceberService();
+                    ContasPagarService service = new ContasPagarService();
                     service.Pagar(contasPagar);
                     _contas.Atualizar(contasPagar);
 

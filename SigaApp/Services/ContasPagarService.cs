@@ -4,7 +4,7 @@ using static SigaApp.Utils.Enums;
 
 namespace SigaApp.Servicos
 {
-    public class ContasReceberService
+    public class ContasPagarService
     {
         public void PreencherCampos(ContaPagar contasPagar)
         {
